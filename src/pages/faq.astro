@@ -1,0 +1,110 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faqs = [
+  {
+    question: "Can an employer rescind a job offer if I negotiate?",
+    answer:
+      "Rescinding an offer is extremely rare. Employers invest hundreds of hours and thousands of dollars in the vetting and hiring process to select the ideal candidate. If you negotiate politely, professionally, and ground your request in market data, they will either accept, make a counter-offer, or state that their budget is firm. Rescinding typically only occurs if a candidate behaves unprofessionally, behaves in bad faith, or issues aggressive ultimatums.",
+  },
+  {
+    question: "What if the employer says the salary is non-negotiable?",
+    answer:
+      "If the base salary is strictly capped due to corporate bands, pivot the discussion to non-salary rewards. You can ask for a sign-on bonus, an accelerated six-month salary review cycle, additional paid time off (PTO), professional development budgets, remote working stipends, or equity grants. Often, hiring managers have flexibility in these non-salary buckets even when base pay is frozen.",
+  },
+  {
+    question: "Should I tell a recruiter my current or past salary?",
+    answer:
+      "No. In fact, asking for salary history is illegal in many US states and cities. Disclosing a lower past salary can hurt your leverage. If asked, shift the focus to the market value of the role you are applying for: 'I prefer to focus on the responsibilities of this position and the value I plan to deliver, and my target is based on current market research for similar roles.'",
+  },
+  {
+    question: "Is it better to negotiate over email or phone?",
+    answer:
+      "Email is often preferred by candidates because it provides a written record, allows you to carefully review your metrics, prevents emotional reactions, and ensures you state your case exactly as planned. Phone calls can be faster and build rapport but require thinking on your feet under pressure. Using our email generator gives you a perfect written draft—which you can send directly, or read from during a call.",
+  },
+  {
+    question: "How much should I ask for above the initial offer?",
+    answer:
+      "A standard counter-offer is typically 10% to 15% above the initial offer. If the offer is exceptionally low compared to cost-of-labor indices in your area, you can counter higher (15% to 25%), but you must justify the gap with objective occupational market data, such as our Average Salaries lookup table.",
+  },
+];
+---
+
+<Layout
+  title="Salary Negotiation FAQ — Rescinding Offers, Tactics, and Rules"
+  description="Get answers to common salary negotiation questions, including rescind risks, past salary questions, and non-salary negotiation variables."
+  breadcrumbs={[
+    { name: "Home", path: "/" },
+    { name: "FAQ", path: "/faq" },
+  ]}
+>
+  <div class="max-w-3xl mx-auto w-full space-y-10">
+    <!-- Title / Header -->
+    <div class="space-y-4 text-center sm:text-left reveal">
+      <div
+        class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider bg-accent-blue/15 text-accent-blue border border-accent-blue/10"
+      >
+        Help & FAQ
+      </div>
+      <h1
+        class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-tight"
+      >
+        Salary Negotiation FAQ
+      </h1>
+      <p class="text-sm text-body">
+        Everything you need to know about the risks, boundaries, and best
+        practices of negotiating professional compensation packages in the US.
+      </p>
+    </div>
+
+    <!-- Accordion FAQ list -->
+    <div class="space-y-4 stagger-children reveal">
+      {
+        faqs.map((faq) => (
+          <details class="faq-item group border border-hairline bg-canvas rounded-md overflow-hidden transition-all duration-300 ease-out cursor-pointer">
+            <summary class="px-5 py-4 font-semibold text-ink text-sm flex items-center justify-between cursor-pointer list-none select-none hover:bg-canvas-soft-2 transition-colors duration-200 ripple-btn">
+              <span>{faq.question}</span>
+              <span class="text-mute group-open:rotate-180 transition-transform duration-300 ease-out">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </summary>
+            <div class="faq-answer border-t border-hairline bg-canvas-soft px-5 py-4 text-sm text-body leading-relaxed">
+              {faq.answer}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <!-- CTA Section -->
+    <div
+      class="border border-hairline rounded-lg p-6 flex flex-col sm:flex-row justify-between items-center gap-6 bg-canvas shadow-sm"
+    >
+      <div class="space-y-1 text-center sm:text-left">
+        <p class="font-semibold text-ink text-sm">
+          Have a lowball or standard offer ready?
+        </p>
+        <p class="text-xs text-mute">
+          Generate a professional counter email draft tailored to your metrics.
+        </p>
+      </div>
+      <a
+        href="/"
+        class="px-6 py-2.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-xs transition-colors shrink-0 ripple-btn btn-press"
+      >
+        Generate Draft Now
+      </a>
+    </div>
+  </div>
+</Layout>

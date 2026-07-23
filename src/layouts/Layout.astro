@@ -1,23 +1,598 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+	breadcrumbs?: { name: string; path: string }[];
+}
+
+const {
+	title = "Salary Pitcher — Free US Salary Negotiation Toolkit",
+	description = "Negotiate your salary with confidence. Get market-backed salary estimates and custom, human-sounding negotiation email drafts in minutes.",
+	breadcrumbs,
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<!-- SEO Meta Tags -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+
+		<!-- Breadcrumb Structured Data (JSON-LD) -->
+		{
+			breadcrumbs && breadcrumbs.length > 0 && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "BreadcrumbList",
+						itemListElement: breadcrumbs.map((crumb, i) => ({
+							"@type": "ListItem",
+							position: i + 1,
+							name: crumb.name,
+							item: `https://salarypitcher.com${crumb.path}`,
+						})),
+					})}
+				/>
+			)
+		}
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Theme Initialization to avoid FOUC -->
+		<script is:inline>
+			if (
+				localStorage.getItem("theme") === "dark" ||
+				(!localStorage.getItem("theme") &&
+					window.matchMedia("(prefers-color-scheme: dark)").matches)
+			) {
+				document.documentElement.classList.add("dark");
+			} else {
+				document.documentElement.classList.remove("dark");
+			}
+		</script>
 	</head>
-	<body>
-		<slot />
+	<body
+		class="selection:bg-primary selection:text-on-primary bg-canvas-soft text-body min-h-screen flex flex-col font-sans transition-colors duration-200"
+	>
+		<!-- Header Navigation -->
+		<header
+			class="sticky top-0 z-50 bg-canvas/80 backdrop-blur-md border-b border-hairline w-full"
+		>
+			<div
+				class="max-w-5xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between"
+			>
+				<!-- Brand Logo -->
+				<a
+					href="/"
+					class="flex items-center gap-2 text-ink font-semibold tracking-tight text-sm hover:opacity-80 transition-opacity"
+				>
+					<span
+						class="w-7 h-7 bg-ink text-canvas rounded-md flex items-center justify-center"
+					>
+						<svg
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<line x1="12" y1="1" x2="12" y2="23"></line>
+							<path
+								d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+							></path>
+						</svg>
+					</span>
+					<span>Salary Pitcher</span>
+				</a>
+
+				<!-- Desktop Menu -->
+				<nav class="hidden md:flex items-center gap-1 text-sm">
+					<a
+						href="/"
+						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
+						>Tool</a
+					>
+					<a
+						href="/salary-calculator"
+						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
+						>Salary Calculator</a
+					>
+					<a
+						href="/average-salary-by-role"
+						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
+						>Average Salaries</a
+					>
+					<a
+						href="/guides"
+						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
+						>Guides</a
+					>
+					<a
+						href="/faq"
+						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
+						>FAQ</a
+					>
+				</nav>
+
+				<!-- Right Area (Theme + Mobile Hamburger) -->
+				<div class="flex items-center gap-2">
+					<!-- Theme Toggle -->
+					<button
+						id="globalThemeToggle"
+						class="w-8 h-8 rounded-full border border-hairline bg-canvas hover:bg-canvas-soft-2 text-mute hover:text-ink flex items-center justify-center cursor-pointer transition-colors"
+						aria-label="Toggle dark mode"
+					>
+						<!-- Sun icon (visible in dark) -->
+						<svg
+							id="sunIcon"
+							class="hidden dark:block"
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<circle cx="12" cy="12" r="5"></circle><line
+								x1="12"
+								y1="1"
+								x2="12"
+								y2="3"></line><line
+								x1="12"
+								y1="21"
+								x2="12"
+								y2="23"></line><line
+								x1="4.22"
+								y1="4.22"
+								x2="5.64"
+								y2="5.64"></line><line
+								x1="18.36"
+								y1="18.36"
+								x2="19.78"
+								y2="19.78"></line><line
+								x1="1"
+								y1="12"
+								x2="3"
+								y2="12"></line><line
+								x1="21"
+								y1="12"
+								x2="23"
+								y2="12"></line><line
+								x1="4.22"
+								y1="19.78"
+								x2="5.64"
+								y2="18.36"></line><line
+								x1="18.36"
+								y1="5.64"
+								x2="19.78"
+								y2="4.22"></line>
+						</svg>
+						<!-- Moon icon (visible in light) -->
+						<svg
+							id="moonIcon"
+							class="block dark:hidden"
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path
+								d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+							></path>
+						</svg>
+					</button>
+
+					<!-- Mobile Toggle -->
+					<button
+						id="mobileMenuToggle"
+						class="md:hidden w-8 h-8 rounded-full border border-hairline bg-canvas hover:bg-canvas-soft-2 text-mute hover:text-ink flex items-center justify-center cursor-pointer transition-colors"
+						aria-label="Toggle menu"
+					>
+						<svg
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<line x1="3" y1="12" x2="21" y2="12"></line><line
+								x1="3"
+								y1="6"
+								x2="21"
+								y2="6"></line><line
+								x1="3"
+								y1="18"
+								x2="21"
+								y2="18"></line>
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			<!-- Mobile Menu Dropdown -->
+			<div
+				id="mobileMenu"
+				class="mobile-menu border-t border-hairline bg-canvas px-4 py-3 flex flex-col gap-2 text-sm md:hidden"
+			>
+				<a
+					href="/"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Tool</a
+				>
+				<a
+					href="/salary-calculator"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Salary Calculator</a
+				>
+				<a
+					href="/average-salary-by-role"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Average Salaries</a
+				>
+				<a
+					href="/guides"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Guides</a
+				>
+				<a
+					href="/faq"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>FAQ</a
+				>
+			</div>
+		</header>
+
+		<!-- Main Content Slot -->
+		<main
+			class="flex-grow w-full max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 z-10"
+		>
+			<slot />
+		</main>
+
+		<!-- Footer -->
+		<footer class="border-t border-hairline bg-canvas mt-auto py-12 px-4">
+			<div
+				class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+			>
+				<div class="text-center md:text-left">
+					<p class="font-semibold text-ink text-sm tracking-tight">
+						Salary Pitcher
+					</p>
+					<p class="text-xs text-mute mt-1 font-mono">
+						Free, no-login salary tools for US professionals.
+					</p>
+				</div>
+
+				<!-- Footer Links (SEO friendly links to glossary, etc) -->
+				<div
+					class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-mono text-mute"
+				>
+					<a href="/glossary" class="hover:text-ink transition-colors"
+						>Glossary Index</a
+					>
+					<span class="text-hairline">|</span>
+					<a
+						href="/glossary/what-is-salary"
+						class="hover:text-ink transition-colors"
+						>What is Salary?</a
+					>
+					<span class="text-hairline">|</span>
+					<a
+						href="/glossary/what-is-gross-salary"
+						class="hover:text-ink transition-colors"
+						>What is Gross Salary?</a
+					>
+					<span class="text-hairline">|</span>
+					<a
+						href="/glossary/what-does-salary-mean"
+						class="hover:text-ink transition-colors"
+						>What does Salary mean?</a
+					>
+					<span class="text-hairline">|</span>
+					<a
+						href="/glossary/how-does-salary-pay-work"
+						class="hover:text-ink transition-colors"
+						>How does Salary Pay work?</a
+					>
+				</div>
+			</div>
+
+			<div
+				class="max-w-5xl mx-auto border-t border-hairline mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-mono text-mute"
+			>
+				<div>
+					© 2026 Salary Pitcher. Data sourced from Bureau of Labor
+					Statistics.
+				</div>
+				<div class="flex gap-4">
+					<a
+						href="/how-to-answer-salary-expectations"
+						class="hover:text-ink transition-colors"
+						>Interview Guide</a
+					>
+					<a href="/faq" class="hover:text-ink transition-colors"
+						>FAQ</a
+					>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Global Scripts -->
+		<script>
+			(function () {
+				"use strict";
+
+				// ─── PAGE ENTER ANIMATION ────────────────────────────────────────
+				document.addEventListener("DOMContentLoaded", function () {
+					const main = document.querySelector("main");
+					if (main) main.classList.add("page-enter");
+				});
+
+				// ─── RIPPLE EFFECT ON BUTTONS ──────────────────────────────────
+				function initRipple() {
+					document.addEventListener("click", function (e) {
+						const btn = e.target.closest(".ripple-btn");
+						if (!btn) return;
+						const rect = btn.getBoundingClientRect();
+						const size = Math.max(rect.width, rect.height);
+						const x = e.clientX - rect.left - size / 2;
+						const y = e.clientY - rect.top - size / 2;
+						const ripple = document.createElement("span");
+						ripple.className = "ripple-effect";
+						ripple.style.width = ripple.style.height = size + "px";
+						ripple.style.left = x + "px";
+						ripple.style.top = y + "px";
+						btn.appendChild(ripple);
+						ripple.addEventListener("animationend", () =>
+							ripple.remove(),
+						);
+					});
+				}
+				initRipple();
+
+				// ─── DARK MODE TOGGLE ──────────────────────────────────────────
+				const themeToggle =
+					document.getElementById("globalThemeToggle");
+				if (themeToggle) {
+					themeToggle.addEventListener("click", () => {
+						const isDark =
+							document.documentElement.classList.contains("dark");
+						if (isDark) {
+							document.documentElement.classList.remove("dark");
+							localStorage.setItem("theme", "light");
+						} else {
+							document.documentElement.classList.add("dark");
+							localStorage.setItem("theme", "dark");
+						}
+					});
+				}
+
+				// ─── MOBILE MENU ────────────────────────────────────────────────
+				const mobileToggle =
+					document.getElementById("mobileMenuToggle");
+				const mobileMenu = document.getElementById("mobileMenu");
+				if (mobileToggle && mobileMenu) {
+					mobileToggle.addEventListener("click", () => {
+						const isOpen = mobileMenu.classList.contains("open");
+						if (isOpen) {
+							mobileMenu.classList.remove("open");
+						} else {
+							mobileMenu.classList.add("open");
+						}
+					});
+					// Close on link click
+					mobileMenu.querySelectorAll("a").forEach((link) => {
+						link.addEventListener("click", () => {
+							mobileMenu.classList.remove("open");
+						});
+					});
+				}
+
+				// ─── SMART STICKY HEADER ─────────────────────────────────────────
+				const header = document.querySelector("header");
+				if (header) {
+					let lastScrollY = window.scrollY;
+					const handleScroll = () => {
+						const currentScrollY = window.scrollY;
+						if (
+							currentScrollY > 150 &&
+							currentScrollY > lastScrollY
+						) {
+							header.style.transform = "translateY(-100%)";
+							header.style.transition = "transform 0.3s ease";
+						} else {
+							header.style.transform = "translateY(0)";
+						}
+						lastScrollY = currentScrollY;
+					};
+					window.addEventListener("scroll", handleScroll, {
+						passive: true,
+					});
+				}
+
+				// ─── ACTIVE NAV LINK ────────────────────────────────────────────
+				const currentPath =
+					window.location.pathname.replace(/\/$/, "") || "/";
+				const allNavLinks = document.querySelectorAll(
+					"header nav a, #mobileMenu a",
+				);
+				allNavLinks.forEach((link) => {
+					const href =
+						link.getAttribute("href").replace(/\/$/, "") || "/";
+					if (
+						href === currentPath ||
+						(href !== "/" && currentPath.startsWith(href))
+					) {
+						link.classList.add("bg-canvas-soft-2", "text-ink");
+						link.classList.remove("text-body");
+					}
+				});
+
+				// ─── SCROLL REVEAL (Intersection Observer) ─────────────────────
+				function initScrollReveal() {
+					const revealElements = document.querySelectorAll(
+						".reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children",
+					);
+					if (revealElements.length === 0) return;
+
+					const observer = new IntersectionObserver(
+						(entries) => {
+							entries.forEach((entry) => {
+								if (entry.isIntersecting) {
+									entry.target.classList.add(
+										"reveal-visible",
+									);
+									observer.unobserve(entry.target);
+								}
+							});
+						},
+						{
+							threshold: 0.1,
+							rootMargin: "0px 0px -40px 0px",
+						},
+					);
+
+					revealElements.forEach((el) => observer.observe(el));
+				}
+
+				// Run on load and after any dynamic content changes
+				if (document.readyState === "loading") {
+					document.addEventListener(
+						"DOMContentLoaded",
+						initScrollReveal,
+					);
+				} else {
+					initScrollReveal();
+				}
+
+				// ─── 3D CARD TILT ──────────────────────────────────────────────
+				function init3DTilt() {
+					const tiltCards = document.querySelectorAll(".tilt-card");
+					if (tiltCards.length === 0) return;
+
+					tiltCards.forEach((card) => {
+						card.addEventListener("mousemove", (e) => {
+							const rect = card.getBoundingClientRect();
+							const x = e.clientX - rect.left;
+							const y = e.clientY - rect.top;
+							const centerX = rect.width / 2;
+							const centerY = rect.height / 2;
+							const rotateX = ((y - centerY) / centerY) * -8;
+							const rotateY = ((x - centerX) / centerX) * 8;
+							card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+						});
+
+						card.addEventListener("mouseleave", () => {
+							card.style.transform =
+								"perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+						});
+					});
+				}
+
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", init3DTilt);
+				} else {
+					init3DTilt();
+				}
+
+				// ─── PARALLAX ON MESH GRADIENTS ────────────────────────────────
+				function initParallax() {
+					const meshes = document.querySelectorAll(
+						".mesh-gradient, .mesh-gradient-2",
+					);
+					if (meshes.length === 0 || window.innerWidth < 768) return;
+
+					let ticking = false;
+					window.addEventListener("scroll", () => {
+						if (!ticking) {
+							window.requestAnimationFrame(() => {
+								const scrollY = window.scrollY;
+								meshes.forEach((mesh, i) => {
+									const speed = i === 0 ? 0.03 : 0.05;
+									mesh.style.transform = `translateY(${scrollY * speed}px)`;
+								});
+								ticking = false;
+							});
+							ticking = true;
+						}
+					});
+				}
+
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", initParallax);
+				} else {
+					initParallax();
+				}
+
+				// ─── MAGNETIC CTA (Mouse Follow) ──────────────────────────────
+				function initMagneticButtons() {
+					const magnets = document.querySelectorAll(".magnetic-btn");
+					if (magnets.length === 0) return;
+
+					magnets.forEach((btn) => {
+						const inner =
+							btn.querySelector(".magnetic-inner") || btn;
+						btn.addEventListener("mousemove", (e) => {
+							const rect = btn.getBoundingClientRect();
+							const x = e.clientX - rect.left - rect.width / 2;
+							const y = e.clientY - rect.top - rect.height / 2;
+							const strength = 0.3;
+							inner.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+						});
+
+						btn.addEventListener("mouseleave", () => {
+							inner.style.transform = "translate(0, 0)";
+						});
+					});
+				}
+
+				if (document.readyState === "loading") {
+					document.addEventListener(
+						"DOMContentLoaded",
+						initMagneticButtons,
+					);
+				} else {
+					initMagneticButtons();
+				}
+			})();
+		</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

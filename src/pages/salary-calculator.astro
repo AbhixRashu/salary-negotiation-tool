@@ -1,0 +1,448 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Salary Calculator — Hourly to Annual Converter & Net Income Estimator"
+  description="Convert hourly wages to annual salary, and estimate your federal net take-home pay instantly. Free, simple, no login."
+  breadcrumbs={[
+    { name: "Home", path: "/" },
+    { name: "Salary Calculator", path: "/salary-calculator" },
+  ]}
+>
+  <div class="max-w-4xl mx-auto w-full space-y-12">
+    <!-- Header -->
+    <div class="text-center sm:text-left reveal">
+      <h1 class="text-3xl font-semibold tracking-tight text-ink mb-2">
+        Salary Calculator
+      </h1>
+      <p class="text-sm text-body">
+        Convert hourly wages, calculate annual equivalent rates, and estimate
+        federal take-home pay in real time.
+      </p>
+    </div>
+
+    <!-- Counter-up display for annual salary -->
+    <div class="text-center reveal">
+      <div
+        class="inline-block border border-hairline bg-canvas p-4 sm:p-6 rounded-lg shadow-sm"
+      >
+        <span
+          class="text-xs font-mono text-mute uppercase tracking-wider block mb-2"
+          >Your Annual Gross Salary</span
+        >
+        <span
+          id="heroSalaryDisplay"
+          class="text-4xl sm:text-5xl font-semibold tracking-tight text-ink font-mono"
+          >$0</span
+        >
+      </div>
+    </div>
+
+    <!-- Core Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 stagger-children reveal">
+      <!-- Card 1: Hourly ↔ Annual Converter -->
+      <div
+        class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm space-y-6 card-hover tilt-card"
+      >
+        <h2
+          class="text-lg font-semibold text-ink border-b border-hairline pb-3 flex items-center gap-2"
+        >
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-blue"></span>
+          Hourly ↔ Annual Converter
+        </h2>
+
+        <div class="space-y-4">
+          <!-- Hourly Rate Input -->
+          <div class="flex flex-col gap-1.5">
+            <label
+              for="hourlyRate"
+              class="text-xs font-semibold text-ink font-mono uppercase tracking-wider"
+              >Hourly Wage</label
+            >
+            <div class="relative">
+              <span
+                class="absolute left-3.5 top-1/2 -translate-y-1/2 text-mute text-sm font-mono"
+                >$</span
+              >
+              <input
+                type="number"
+                id="hourlyRate"
+                class="w-full pl-8 pr-4 py-2.5 border border-hairline rounded-md bg-canvas font-mono text-sm focus:border-accent-blue outline-none"
+                placeholder="e.g. 45"
+                value="50"
+                step="0.5"
+              />
+            </div>
+          </div>
+
+          <!-- Hours per Week -->
+          <div class="flex flex-col gap-1.5">
+            <label
+              for="hoursPerWeek"
+              class="text-xs font-semibold text-ink font-mono uppercase tracking-wider"
+              >Hours per Week</label
+            >
+            <input
+              type="number"
+              id="hoursPerWeek"
+              class="w-full px-3.5 py-2.5 border border-hairline rounded-md bg-canvas font-mono text-sm focus:border-accent-blue outline-none"
+              placeholder="e.g. 40"
+              value="40"
+              min="1"
+              max="168"
+            />
+          </div>
+
+          <!-- Weeks per Year -->
+          <div class="flex flex-col gap-1.5">
+            <label
+              for="weeksPerYear"
+              class="text-xs font-semibold text-ink font-mono uppercase tracking-wider"
+              >Weeks per Year</label
+            >
+            <input
+              type="number"
+              id="weeksPerYear"
+              class="w-full px-3.5 py-2.5 border border-hairline rounded-md bg-canvas font-mono text-sm focus:border-accent-blue outline-none"
+              placeholder="e.g. 52"
+              value="52"
+              min="1"
+              max="52"
+            />
+          </div>
+
+          <div class="border-t border-hairline pt-4 my-2"></div>
+
+          <!-- Annual Wage Input (Calculated / Editable) -->
+          <div class="flex flex-col gap-1.5">
+            <label
+              for="annualSalary"
+              class="text-xs font-semibold text-ink font-mono uppercase tracking-wider"
+              >Annual Equivalent Salary</label
+            >
+            <div class="relative">
+              <span
+                class="absolute left-3.5 top-1/2 -translate-y-1/2 text-mute text-sm font-mono"
+                >$</span
+              >
+              <input
+                type="text"
+                id="annualSalary"
+                class="w-full pl-8 pr-4 py-2.5 border border-hairline rounded-md bg-canvas font-mono text-sm focus:border-accent-blue outline-none"
+                placeholder="e.g. 104,000"
+              />
+            </div>
+            <p class="text-[10px] text-mute font-mono">
+              Calculated as: Hourly Wage × Hours × Weeks
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Gross ↔ Net Take-Home Pay Estimator -->
+      <div
+        class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm space-y-6 card-hover tilt-card"
+      >
+        <h2
+          class="text-lg font-semibold text-ink border-b border-hairline pb-3 flex items-center gap-2"
+        >
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-blue"></span>
+          US Federal Net Pay Estimator
+        </h2>
+
+        <!-- Disclaimer Badge -->
+        <div
+          class="p-3 bg-canvas-soft-2 border border-hairline rounded-md text-xs text-body leading-relaxed"
+        >
+          <span class="font-semibold text-accent-blue">Disclaimer:</span> This is
+          a state-agnostic federal tax estimation based on Single filing status standard
+          deductions. State taxes, local taxes, 401(k), health premiums, and filing
+          modifications are not included.
+        </div>
+
+        <!-- Output Breakdown Table -->
+        <div class="space-y-4 text-sm">
+          <div
+            class="flex justify-between py-1.5 border-b border-hairline font-mono text-xs text-mute uppercase tracking-wider"
+          >
+            <span>Pay Breakdown</span>
+            <span>Estimated Value</span>
+          </div>
+
+          <div class="flex justify-between py-1 text-body">
+            <span>Gross Annual Income:</span>
+            <span id="displayGross" class="font-mono font-semibold text-ink"
+              >$0</span
+            >
+          </div>
+
+          <div class="flex justify-between py-1 text-body">
+            <span>Standard Deduction (Single):</span>
+            <span id="displayDeduction" class="font-mono text-mute"
+              >-$15,000</span
+            >
+          </div>
+
+          <div class="flex justify-between py-1 text-body">
+            <span>Taxable Income:</span>
+            <span id="displayTaxable" class="font-mono text-ink">$0</span>
+          </div>
+
+          <div class="flex justify-between py-1 text-body">
+            <span>Federal Income Tax:</span>
+            <span
+              id="displayFedTax"
+              class="font-mono text-red-600 dark:text-red-400">-$0</span
+            >
+          </div>
+
+          <div class="flex justify-between py-1 text-body">
+            <span>FICA Taxes (SS + Medicare):</span>
+            <span
+              id="displayFicaTax"
+              class="font-mono text-red-600 dark:text-red-400">-$0</span
+            >
+          </div>
+
+          <div
+            class="border-t border-hairline pt-3 flex justify-between items-baseline"
+          >
+            <span class="font-semibold text-ink">Est. Net Take-Home:</span>
+            <div class="text-right">
+              <span
+                id="displayNet"
+                class="font-mono text-xl font-bold text-accent-blue">$0</span
+              >
+              <span class="block text-[10px] text-mute font-mono">/ year</span>
+            </div>
+          </div>
+
+          <!-- Micro-Periods Net -->
+          <div
+            class="grid grid-cols-2 gap-4 pt-3 border-t border-hairline text-xs font-mono text-mute"
+          >
+            <div>
+              <span>Est. Monthly Net</span>
+              <div
+                id="displayMonthlyNet"
+                class="text-sm font-semibold text-ink mt-0.5"
+              >
+                $0
+              </div>
+            </div>
+            <div>
+              <span>Est. Bi-Weekly Net</span>
+              <div
+                id="displayBiweeklyNet"
+                class="text-sm font-semibold text-ink mt-0.5"
+              >
+                $0
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  (function () {
+    "use strict";
+
+    // DOM Elements
+    const inputHourly = document.getElementById("hourlyRate");
+    const inputHours = document.getElementById("hoursPerWeek");
+    const inputWeeks = document.getElementById("weeksPerYear");
+    const inputAnnual = document.getElementById("annualSalary");
+    const heroSalaryDisplay = document.getElementById("heroSalaryDisplay");
+
+    // Outputs
+    const displayGross = document.getElementById("displayGross");
+    const displayDeduction = document.getElementById("displayDeduction");
+    const displayTaxable = document.getElementById("displayTaxable");
+    const displayFedTax = document.getElementById("displayFedTax");
+    const displayFicaTax = document.getElementById("displayFicaTax");
+    const displayNet = document.getElementById("displayNet");
+    const displayMonthlyNet = document.getElementById("displayMonthlyNet");
+    const displayBiweeklyNet = document.getElementById("displayBiweeklyNet");
+
+    const STD_DEDUCTION = 15000;
+
+    // Currency Formatter helper
+    const fmt = (v) =>
+      new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      }).format(v);
+
+    // Counter-Up Animation Helper
+    function animateValue(element, start, end, duration = 600) {
+      if (!element) return;
+      const startTime = performance.now();
+      const isCurrency =
+        element.id === "heroSalaryDisplay" ||
+        element.id === "displayNet" ||
+        element.id === "displayGross" ||
+        element.id === "displayMonthlyNet" ||
+        element.id === "displayBiweeklyNet";
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const current = Math.round(start + (end - start) * eased);
+        if (isCurrency) {
+          element.textContent = fmt(current);
+        } else if (element === displayDeduction) {
+          element.textContent = `-${fmt(current)}`;
+        } else if (element === displayFedTax || element === displayFicaTax) {
+          element.textContent = `-${fmt(current)}`;
+        } else {
+          element.textContent = fmt(current);
+        }
+        element.classList.add("counter-value", "animate");
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = isCurrency ? fmt(end) : fmt(end);
+          element.classList.remove("animate");
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // Progressive Tax Bracket Solver (Federal Single 2026 approximations)
+    function calculateFederalTax(taxableIncome) {
+      if (taxableIncome <= 0) return 0;
+
+      const brackets = [
+        { cap: 11600, rate: 0.1 },
+        { cap: 47150, rate: 0.12 },
+        { cap: 100525, rate: 0.22 },
+        { cap: 191950, rate: 0.24 },
+        { cap: 243725, rate: 0.32 },
+        { cap: 609350, rate: 0.35 },
+        { cap: Infinity, rate: 0.37 },
+      ];
+
+      let tax = 0;
+      let prevCap = 0;
+
+      for (let b of brackets) {
+        if (taxableIncome > b.cap) {
+          tax += (b.cap - prevCap) * b.rate;
+          prevCap = b.cap;
+        } else {
+          tax += (taxableIncome - prevCap) * b.rate;
+          break;
+        }
+      }
+      return tax;
+    }
+
+    // FICA calculation
+    function calculateFicaTax(grossIncome) {
+      const ssCap = 176100;
+      const ssTax = Math.min(grossIncome, ssCap) * 0.062;
+      let medTax = grossIncome * 0.0145;
+      if (grossIncome > 200000) {
+        medTax += (grossIncome - 200000) * 0.009;
+      }
+      return ssTax + medTax;
+    }
+
+    // Master Net calculation
+    function updateNetEstimations(annualGross) {
+      const taxable = Math.max(0, annualGross - STD_DEDUCTION);
+      const fedTax = calculateFederalTax(taxable);
+      const ficaTax = calculateFicaTax(annualGross);
+      const net = Math.max(0, annualGross - fedTax - ficaTax);
+
+      animateValue(displayGross, 0, annualGross, 500);
+      setTimeout(
+        () => animateValue(displayDeduction, 0, STD_DEDUCTION, 300),
+        100,
+      );
+      setTimeout(() => animateValue(displayTaxable, 0, taxable, 500), 200);
+      setTimeout(() => animateValue(displayFedTax, 0, fedTax, 500), 300);
+      setTimeout(() => animateValue(displayFicaTax, 0, ficaTax, 500), 400);
+      setTimeout(() => animateValue(displayNet, 0, net, 600), 500);
+      setTimeout(
+        () => animateValue(displayMonthlyNet, 0, Math.round(net / 12), 400),
+        600,
+      );
+      setTimeout(
+        () => animateValue(displayBiweeklyNet, 0, Math.round(net / 26), 400),
+        700,
+      );
+      setTimeout(() => animateValue(heroSalaryDisplay, 0, annualGross, 800), 0);
+    }
+
+    // Sync inputs
+    function syncHourlyToAnnual() {
+      const hr = parseFloat(inputHourly.value) || 0;
+      const hrs = parseFloat(inputHours.value) || 0;
+      const wks = parseFloat(inputWeeks.value) || 0;
+      const annual = hr * hrs * wks;
+      inputAnnual.value = new Intl.NumberFormat("en-US").format(
+        Math.round(annual),
+      );
+      updateNetEstimations(annual);
+    }
+
+    function syncAnnualToHourly() {
+      const val = inputAnnual.value.replace(/,/g, "").replace(/\D/g, "");
+      const annual = parseInt(val) || 0;
+      const hrs = parseFloat(inputHours.value) || 0;
+      const wks = parseFloat(inputWeeks.value) || 0;
+      if (hrs > 0 && wks > 0) {
+        inputHourly.value = (annual / (hrs * wks)).toFixed(2);
+      }
+      updateNetEstimations(annual);
+    }
+
+    // Event listeners
+    inputHourly.addEventListener("input", syncHourlyToAnnual);
+    inputHours.addEventListener("input", syncHourlyToAnnual);
+    inputWeeks.addEventListener("input", syncHourlyToAnnual);
+
+    inputAnnual.addEventListener("input", function () {
+      let val = this.value.replace(/,/g, "").replace(/\D/g, "");
+      if (val !== "") {
+        this.value = new Intl.NumberFormat("en-US").format(parseInt(val));
+      }
+      syncAnnualToHourly();
+    });
+
+    // Init values
+    syncHourlyToAnnual();
+
+    // ─── KEYBOARD SHORTCUTS ──────────────────────────────────────────
+    document.addEventListener("keydown", function (e) {
+      // Enter = trigger calculation (recalculate)
+      if (e.key === "Enter") {
+        const active = document.activeElement;
+        if (
+          active &&
+          (active.id === "hourlyRate" ||
+            active.id === "hoursPerWeek" ||
+            active.id === "weeksPerYear" ||
+            active.id === "annualSalary")
+        ) {
+          e.preventDefault();
+          syncHourlyToAnnual();
+        }
+      }
+      // Escape = reset all fields to defaults
+      if (e.key === "Escape") {
+        inputHourly.value = "50";
+        inputHours.value = "40";
+        inputWeeks.value = "52";
+        inputAnnual.value = "";
+        syncHourlyToAnnual();
+      }
+    });
+  })();
+</script>

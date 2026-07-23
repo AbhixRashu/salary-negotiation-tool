@@ -1,0 +1,126 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { slug: "what-is-gross-salary" },
+      props: {
+        title: "What is Gross Salary?",
+        description:
+          "Gross salary is the total compensation an employee earns before any tax deductions, health insurance premiums, retirement contributions, or other withholdings are taken out.",
+        content: `Gross salary is the total compensation an employee earns before any tax deductions, health insurance premiums, retirement contributions, or other withholdings are taken out. For example, if an employer offers you an annual salary of $85,000, that $85,000 is your gross salary. Your actual take-home pay, or net salary, will be lower because federal, state, and local governments require payroll tax withholdings like FICA (Federal Insurance Contributions Act) for Social Security and Medicare, as well as income taxes. 
+        
+        In addition to statutory taxes, voluntary deductions like health savings account (HSA) contributions, 401(k) allocations, union dues, or group life insurance payments are also deducted from your gross salary. 
+        
+        Understanding your gross salary is crucial because it serves as the baseline for tax brackets, retirement matches, and debt evaluations (like home mortgages and car loans), which assess your borrowing power based on pre-tax earnings.`,
+      },
+    },
+    {
+      params: { slug: "what-is-salary" },
+      props: {
+        title: "What is Salary?",
+        description:
+          "A salary is a form of periodic compensation paid by an employer to an employee for their professional services, typically expressed as an annual or monthly figure.",
+        content: `A salary is a form of periodic compensation paid by an employer to an employee for their professional services. Unlike hourly wages, which vary based on the number of hours worked in a given pay period, a salary is typically expressed as an annual or monthly figure and paid on a set frequency (such as semi-monthly or bi-weekly). 
+        
+        Salaried employees are commonly classified as exempt or non-exempt under the Fair Labor Standards Act (FLSA). Exempt salaried professionals are paid to complete a job rather than work a specific tally of hours, meaning they generally do not qualify for overtime pay if they work more than 40 hours a week. 
+        
+        Salaries offer financial stability and predictable cash flow for employees, making personal budgeting easier. Employers offer salaries to secure professional talent for ongoing responsibilities, often pairing salaries with bonus plans, stock options, paid time off, and retirement benefits.`,
+      },
+    },
+    {
+      params: { slug: "what-does-salary-mean" },
+      props: {
+        title: "What does Salary Mean?",
+        description:
+          "Explore the historical origins, modern business context, and professional expectations tied to salaried agreements.",
+        content: `The term "salary" historically originates from the Latin word "salarium," which was money paid to Roman soldiers to purchase salt—a highly valuable commodity in antiquity. Today, salary refers to a fixed compensation package paid regularly for professional services, reflecting an employee's expertise, tenure, and scope of responsibility. 
+        
+        Having a salary means you are contracted to perform a defined set of business duties for a fixed annual amount. It represents a mutual business agreement: the employer guarantees consistent financial compensation, while the employee guarantees the output and oversight of their functional area, regardless of whether it takes 35 or 50 hours in a given week. 
+        
+        When people ask what a salary means in comparison to a wage, they are distinguishing between project-based long-term commitment and clock-in, clock-out labor. Salary implies professional standing and often carries access to corporate benefits, incentive bonuses, and professional development programs.`,
+      },
+    },
+    {
+      params: { slug: "how-does-salary-pay-work" },
+      props: {
+        title: "How does Salary Pay Work?",
+        description:
+          "Salary pay works by dividing an employee's total annual contract amount by the number of pay periods in a calendar year.",
+        content: `Salary pay works by dividing an employee's total annual contract amount by the number of pay periods in a calendar year. Common pay frequencies in the United States include monthly (12 checks per year), semi-monthly (24 checks, usually paid on the 15th and last day of the month), bi-weekly (26 checks, paid every other week), or weekly (52 checks). 
+        
+        For instance, if you earn an annual salary of $104,000 and are paid bi-weekly, your gross pay per pay period is calculated as $104,000 divided by 26, which is exactly $4,000. From this gross amount, payroll systems subtract statutory taxes (federal and state income withholdings, plus FICA taxes) and any voluntary benefits contributions. 
+        
+        The remaining amount is deposited into your bank account as net take-home pay. Since salaried contracts guarantee a fixed amount each period, you receive the same check regardless of minor weekly variations in hours worked. However, exempt status means you must manage your time effectively to complete your work, as extra hours do not result in additional pay.`,
+      },
+    },
+  ];
+}
+
+const { title, description, content } = Astro.props;
+const { slug } = Astro.params;
+---
+
+<Layout
+  title={`${title} — Salary Pitcher Glossary`}
+  description={description}
+  breadcrumbs={[
+    { name: "Home", path: "/" },
+    { name: "Glossary", path: "/glossary" },
+    { name: title, path: `/glossary/${slug}` },
+  ]}
+>
+  <div class="max-w-2xl mx-auto w-full space-y-8">
+    <!-- Back to Glossary Link -->
+    <a
+      href="/glossary"
+      class="inline-flex items-center gap-1.5 text-xs font-mono text-mute hover:text-ink transition-colors"
+    >
+      ← Back to Glossary Index
+    </a>
+
+    <!-- Definition Article -->
+    <article
+      class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm space-y-6"
+    >
+      <header class="border-b border-hairline pb-4">
+        <div
+          class="text-[10px] font-mono text-mute uppercase tracking-wider mb-1"
+        >
+          Glossary Definition
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
+          {title}
+        </h1>
+      </header>
+
+      <!-- Paragraph Contents -->
+      <div class="space-y-4 text-sm sm:text-base text-body leading-relaxed">
+        {content.split("\n\n").map((p) => <p>{p.trim()}</p>)}
+      </div>
+    </article>
+
+    <!-- Help Banner -->
+    <div
+      class="border border-hairline rounded-lg p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-canvas-soft-2 text-xs"
+    >
+      <div class="space-y-1">
+        <p class="font-semibold text-ink">
+          Estimate your take-home pay instantly
+        </p>
+        <p class="text-mute">
+          Convert wages and view federal payroll tax projections.
+        </p>
+      </div>
+      <a
+        href="/salary-calculator"
+        class="px-4 py-2 bg-ink text-canvas hover:bg-ink/90 font-semibold rounded-full tracking-tight transition-colors ripple-btn btn-press"
+      >
+        Salary Calculator
+      </a>
+    </div>
+  </div>
+</Layout>
