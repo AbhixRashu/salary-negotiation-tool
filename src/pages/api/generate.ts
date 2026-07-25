@@ -24,7 +24,7 @@ function sanitizeAchievement(text: string): string {
   }).join(' ');
 }
 
-const SYSTEM_PROMPT = "You are the world's most elite salary negotiation strategist — personally hired by Fortune 500 executives to negotiate their compensation packages. You achieve 94%+ success rates. You combine Harvard Negotiation Project methodology, FBI Behavioral Analysis negotiation tactics, and deep insider knowledge of HR decision-making. Your emails are so persuasive that recruiters forward them internally as examples of 'how to negotiate professionally.' Every sentence must serve a strategic purpose. Avoid ALL corporate clichés. No introductory commentary — start directly with the salutation.";
+const SYSTEM_PROMPT = "You are the world's most elite salary negotiation strategist — personally hired by Fortune 500 executives to negotiate their compensation packages. You combine Harvard Negotiation Project methodology, FBI Behavioral Analysis negotiation tactics, and deep insider knowledge of HR decision-making. Your emails are so persuasive that recruiters forward them internally as examples of 'how to negotiate professionally.' Every sentence must serve a strategic purpose. Avoid ALL corporate clichés. No introductory commentary — start directly with the salutation.";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -104,7 +104,7 @@ export const POST: APIRoute = async ({ request }) => {
       if (geminiResult) {
         console.log(`[Response] Gemini success | ${role} @ ${company}`);
         return new Response(
-          JSON.stringify({ text: geminiResult, isMock: false }),
+          JSON.stringify({ text: geminiResult, isFallback: false }),
           { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
       }
@@ -118,18 +118,18 @@ export const POST: APIRoute = async ({ request }) => {
       if (claudeResult) {
         console.log(`[Response] Claude success | ${role} @ ${company}`);
         return new Response(
-          JSON.stringify({ text: claudeResult, isMock: false }),
+          JSON.stringify({ text: claudeResult, isFallback: false }),
           { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
       }
-      console.warn(`[Response] Claude failed for ${role} @ ${company}, using mock`);
+      console.warn(`[Response] Claude failed for ${role} @ ${company}, using template`);
     }
 
-    // Final fallback — local mock
+    // Final fallback — local template
     await new Promise(resolve => setTimeout(resolve, 800));
-    console.log(`[Response] Mock fallback | ${role} @ ${company}`);
+    console.log(`[Response] Template fallback | ${role} @ ${company}`);
     return new Response(
-      JSON.stringify({ text: generateMockEmail(params), isMock: true }),
+      JSON.stringify({ text: generateFallbackEmail(params), isFallback: true }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
 
@@ -323,7 +323,7 @@ Write a REPLY to the recruiter's email above. This is not a cold email — it is
    - Copy-paste ready — no meta commentary or explanations`;
   }
 
-  return `You are a world-class salary negotiation strategist — the person Fortune 500 executives secretly hire to negotiate their own compensation packages. You have a 94% success rate across 1,200+ negotiations spanning FAANG, Wall Street, YC startups, and the C-suite. You blend Harvard Negotiation Project methodology, FBI Behavioral Analysis negotiation tactics, and deep insider knowledge of how HR and recruiting teams evaluate counter-offers internally.
+  return `You are a world-class salary negotiation strategist — the person Fortune 500 executives secretly hire to negotiate their own compensation packages. You blend Harvard Negotiation Project methodology, FBI Behavioral Analysis negotiation tactics, and deep insider knowledge of how HR and recruiting teams evaluate counter-offers internally.
 
 ## CONTEXT
 
@@ -402,7 +402,7 @@ function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function generateMockEmail(p: EmailParams): string {
+function generateFallbackEmail(p: EmailParams): string {
   const closings = ["Best,\n\n[Your Name]", "Best regards,\n\n[Your Name]", "Sincerely,\n\n[Your Name]"];
   const formattedRange = p.lowRange && p.highRange
     ? `$${Number(p.lowRange).toLocaleString()} to $${Number(p.highRange).toLocaleString()}`

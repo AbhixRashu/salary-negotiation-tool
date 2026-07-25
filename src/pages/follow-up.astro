@@ -212,18 +212,18 @@ const rolesJson = JSON.stringify(ROLES);
         clearTimeout(timeoutId);
 
         let replyBody = "";
-        let isMock = true;
+        let isFallback = true;
 
         if (response.ok) {
           const data = await response.json();
           replyBody = data.text;
-          isMock = data.isMock || false;
+          isFallback = data.isFallback || false;
         } else {
           const msg = `I'm reviewing your latest conversation with the recruiter at ${company} regarding the ${role} role. Based on the discussion so far, here's my recommended reply.\n\nThank you for your response. I've carefully considered the details you've shared about the ${role} position. I remain very interested in joining ${company} and contributing to the team's success. Based on my market research and the experience I bring, I believe we're close to a mutually beneficial agreement.\n\nI was hoping we could look at ${target ? fmt(parseInt(target)) : "a market-aligned figure"} — I'm confident this reflects both the value I'll deliver and current market conditions for this role.\n\nI'd be happy to discuss this further on a call this week. Thank you again for your time and consideration.`;
           replyBody = msg;
         }
 
-        $("fuCaption").textContent = `${role} at ${company} · ${toneName} tone · ${isMock ? "Template-based" : "AI-generated"}`;
+        $("fuCaption").textContent = `${role} at ${company} · ${toneName} tone · ${isFallback ? "Template-based" : "AI-generated"}`;
 
         typewriterEffect($("fuResultText"), replyBody, 15, function () {
           isGenerating = false;

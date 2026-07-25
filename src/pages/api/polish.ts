@@ -95,7 +95,7 @@ Return ONLY the polished email. No explanations, no meta-commentary, no subject 
       if (result) {
         console.log(`[Polish Response] Gemini success | mode: ${mode}`);
         return new Response(
-          JSON.stringify({ text: result, isMock: false }),
+          JSON.stringify({ text: result, isFallback: false }),
           { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
       }
@@ -108,17 +108,17 @@ Return ONLY the polished email. No explanations, no meta-commentary, no subject 
       if (result) {
         console.log(`[Polish Response] Claude success | mode: ${mode}`);
         return new Response(
-          JSON.stringify({ text: result, isMock: false }),
+          JSON.stringify({ text: result, isFallback: false }),
           { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
       }
-      console.warn(`[Polish Response] Claude failed, using mock`);
+      console.warn(`[Polish Response] Claude failed, using template`);
     }
 
     await new Promise(resolve => setTimeout(resolve, 600));
-    console.log(`[Polish Response] Mock fallback | mode: ${mode}`);
+    console.log(`[Polish Response] Template fallback | mode: ${mode}`);
     return new Response(
-      JSON.stringify({ text: generateMockPolish(email, mode), isMock: true }),
+      JSON.stringify({ text: generateFallbackPolish(email, mode), isFallback: true }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
 
@@ -191,7 +191,7 @@ async function callClaude(prompt: string, apiKey: string): Promise<string | null
   }
 }
 
-function generateMockPolish(email: string, mode: string): string {
+function generateFallbackPolish(email: string, mode: string): string {
   const lines = email.split('\n').filter(l => l.trim());
   const closing = lines.pop() || 'Best,\n[Your Name]';
   const body = lines.slice(1).join('\n');
