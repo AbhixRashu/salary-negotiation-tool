@@ -1,0 +1,306 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { METRO_AREAS } from "../data/salaries";
+const metroJson = JSON.stringify(METRO_AREAS);
+---
+
+<Layout
+  title="Offer Comparison Tool — Compare Job Offers Side-by-Side | Salary Pitcher"
+  description="Compare multiple job offers side-by-side. Adjust for cost of living, see total compensation including equity and bonus, and find your best option."
+>
+  <div class="w-full space-y-8 max-w-5xl mx-auto">
+    <div class="reveal">
+      <h1 class="text-3xl font-semibold tracking-tight text-ink mb-2">Offer Comparison Tool</h1>
+      <p class="text-sm text-body">Add up to 5 job offers and compare them side-by-side — base salary, equity, bonus, cost-of-living adjusted, and more.</p>
+    </div>
+
+    <!-- Offer Form -->
+    <div id="offerFormContainer" class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm reveal card-glow" style="position:relative;z-index:1">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-ink tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent-blue"></span>
+          Add an Offer
+        </h2>
+        <span id="offerCount" class="text-xs font-mono text-mute">0 / 5 offers</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <input type="text" id="offerCompany" class="w-full px-3 py-2 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none" placeholder="Company name" />
+        <input type="text" id="offerRole" class="w-full px-3 py-2 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none" placeholder="Job title" />
+        <input type="number" id="offerBase" class="w-full px-3 py-2 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none font-mono" placeholder="Base salary ($)" min="0" />
+        <input type="number" id="offerBonus" class="w-full px-3 py-2 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none font-mono" placeholder="Annual bonus ($)" min="0" value="0" />
+        <input type="number" id="offerEquity" class="w-full px-3 py-2 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none font-mono" placeholder="Equity / yr ($)" min="0" value="0" />
+        <input type="number" id="offerSigning" class="w-full px-3 py-2 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none font-mono" placeholder="Signing bonus ($)" min="0" value="0" />
+        <div class="flex gap-2 sm:col-span-2 lg:col-span-3">
+          <select id="offerLocation" class="flex-1 px-3 py-2 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none">
+            <option value="national">Remote / National Average</option>
+            <option value="nyc">NYC Metro Area</option>
+            <option value="sf">SF Bay Area</option>
+            <option value="la">Los Angeles Area</option>
+            <option value="chicago">Chicago Area</option>
+            <option value="austin">Austin Area</option>
+            <option value="seattle">Seattle Area</option>
+            <option value="boston">Boston Area</option>
+            <option value="denver">Denver Area</option>
+            <option value="atlanta">Atlanta Area</option>
+            <option value="dallas">Dallas-Fort Worth Area</option>
+            <option value="miami">Miami Area</option>
+          </select>
+          <button id="btnAddOffer" class="px-5 py-2 bg-accent-blue text-white hover:bg-accent-blue-deep font-medium rounded-full text-sm transition-colors cursor-pointer shrink-0 ripple-btn btn-press">+ Add</button>
+        </div>
+      </div>
+      <p id="formError" class="hidden text-xs text-red-600 bg-red-50 dark:bg-red-950/20 dark:text-red-400 p-3 rounded-md mt-3 font-mono"></p>
+    </div>
+
+    <!-- Offer Cards -->
+    <div id="offersList" class="space-y-4"></div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="text-center py-16 border border-dashed border-hairline rounded-lg reveal">
+      <p class="text-lg font-semibold text-ink mb-1">No offers yet</p>
+      <p class="text-sm text-mute">Add at least 2 offers above to see a comparison.</p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div id="comparisonSection" class="hidden reveal">
+      <div class="border border-hairline bg-canvas rounded-lg shadow-sm overflow-hidden">
+        <div class="p-4 sm:p-5 border-b border-hairline bg-canvas-soft-2">
+          <h2 class="text-sm font-semibold text-ink flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-accent-blue"></span>
+            Side-by-Side Comparison
+          </h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table id="comparisonTable" class="w-full text-left text-sm">
+            <thead>
+              <tr class="bg-canvas-soft border-b border-hairline text-[10px] font-mono text-mute uppercase tracking-wider">
+                <th class="px-4 py-3 font-semibold sticky left-0 bg-canvas-soft z-10">Metric</th>
+              </tr>
+            </thead>
+            <tbody id="comparisonBody" class="divide-y divide-hairline"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Rank Section -->
+      <div class="border border-hairline bg-canvas p-5 rounded-lg shadow-sm">
+        <h2 class="text-sm font-semibold text-ink mb-4 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent-blue"></span>
+          Offer Ranking by Total Comp
+        </h2>
+        <div id="rankList" class="space-y-3"></div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script set:html={`window.__METRO_DATA__ = ${metroJson};`} />
+<script is:inline>
+  (function () {
+    const METRO = window.__METRO_DATA__ || [];
+    const COLORS = ["#0070f3", "#7928ca", "#ff0080", "#50e3c2", "#f5a623"];
+
+    let offers = [];
+    let editingIndex = -1;
+
+    const $ = (id) => document.getElementById(id);
+
+    function getMult(loc) {
+      const m = METRO.find(x => x.id === loc);
+      return m ? m.multiplier : 1.0;
+    }
+
+    function getLocLabel(loc) {
+      const m = METRO.find(x => x.id === loc);
+      return m ? m.name : "National";
+    }
+
+    function fmt(v) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(v);
+    }
+
+    function calcScore(offer) {
+      const total = offer.base + offer.bonus + offer.equity;
+      const colAdj = total / getMult(offer.location);
+      return Math.round(colAdj / 1000);
+    }
+
+    function render() {
+      $("offerCount").textContent = offers.length + " / 5 offers";
+      $("emptyState").classList.toggle("hidden", offers.length >= 2);
+      $("comparisonSection").classList.toggle("hidden", offers.length < 2);
+      renderCards();
+      if (offers.length >= 2) {
+        renderComparison();
+        renderRanking();
+      }
+    }
+
+    function renderCards() {
+      const list = $("offersList");
+      if (offers.length === 0) {
+        list.innerHTML = "";
+        return;
+      }
+      list.innerHTML = offers.map((o, i) => `
+        <div class="border border-hairline bg-canvas rounded-lg shadow-sm p-4 sm:p-5 reveal" style="border-left: 4px solid ${COLORS[i % COLORS.length]}">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs font-mono text-mute">#${i + 1}</span>
+                <h3 class="text-base font-semibold text-ink tracking-tight truncate">${o.company}</h3>
+                <span class="text-xs text-body">${o.role}</span>
+                <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-mono bg-accent-blue/10 text-accent-blue border border-accent-blue/20">${getLocLabel(o.location)}</span>
+              </div>
+              <div class="flex flex-wrap gap-x-5 gap-y-1 mt-2 text-xs font-mono">
+                <span class="text-body">Base: <strong class="text-ink">${fmt(o.base)}</strong></span>
+                <span class="text-body">Bonus: <strong class="text-ink">${fmt(o.bonus)}</strong></span>
+                <span class="text-body">Equity/yr: <strong class="text-ink">${fmt(o.equity)}</strong></span>
+                <span class="text-body">Signing: <strong class="text-ink">${fmt(o.signing)}</strong></span>
+              </div>
+              <div class="flex gap-2 mt-2">
+                <span class="text-xs font-mono text-body">Total: <strong class="text-accent-blue">${fmt(o.base + o.bonus + o.equity + o.signing)}</strong></span>
+                <span class="text-xs font-mono text-mute">·</span>
+                <span class="text-xs font-mono text-body">COL-Adjusted Total: <strong class="text-ink">${fmt(Math.round((o.base + o.bonus + o.equity + o.signing) / getMult(o.location)))}</strong></span>
+              </div>
+            </div>
+            <div class="flex gap-1.5 shrink-0">
+              <button class="edit-offer px-2.5 py-1.5 text-[10px] font-mono text-accent-blue hover:bg-accent-blue/5 rounded-md border border-accent-blue/20 transition-colors cursor-pointer" data-index="${i}">Edit</button>
+              <button class="remove-offer px-2.5 py-1.5 text-[10px] font-mono text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-md border border-red-200 dark:border-red-900 transition-colors cursor-pointer" data-index="${i}">×</button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      document.querySelectorAll(".remove-offer").forEach(btn => {
+        btn.addEventListener("click", function () {
+          const idx = parseInt(this.dataset.index);
+          offers.splice(idx, 1);
+          render();
+        });
+      });
+
+      document.querySelectorAll(".edit-offer").forEach(btn => {
+        btn.addEventListener("click", function () {
+          const idx = parseInt(this.dataset.index);
+          const o = offers[idx];
+          $("offerCompany").value = o.company;
+          $("offerRole").value = o.role;
+          $("offerBase").value = o.base;
+          $("offerBonus").value = o.bonus;
+          $("offerEquity").value = o.equity;
+          $("offerSigning").value = o.signing;
+          $("offerLocation").value = o.location;
+          editingIndex = idx;
+          $("btnAddOffer").textContent = "Update";
+          $("offerFormContainer").scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      });
+    }
+
+    function renderComparison() {
+      const body = $("comparisonBody");
+      const allBase = offers.map(o => o.base);
+      const allTotal = offers.map(o => o.base + o.bonus + o.equity + o.signing);
+      const allColAdj = offers.map(o => Math.round(allTotal[offers.indexOf(o)] / getMult(o.location)));
+      const maxBase = Math.max(...allBase);
+      const maxTotal = Math.max(...allTotal);
+
+      const rows = [
+        { label: "Base Salary", vals: allBase, fmt: true, max: maxBase },
+        { label: "Annual Bonus", vals: offers.map(o => o.bonus), fmt: true, max: Math.max(...offers.map(o => o.bonus)) },
+        { label: "Equity / Year", vals: offers.map(o => o.equity), fmt: true, max: Math.max(...offers.map(o => o.equity)) },
+        { label: "Signing Bonus", vals: offers.map(o => o.signing), fmt: true, max: Math.max(...offers.map(o => o.signing)) },
+        { label: "Total Comp", vals: allTotal, fmt: true, max: maxTotal, bold: true },
+        { label: "Location", vals: offers.map(o => getLocLabel(o.location)), fmt: false },
+        { label: "COL Multiplier", vals: offers.map(o => `${getMult(o.location).toFixed(2)}x`), fmt: false },
+        { label: "COL-Adjusted Total", vals: allColAdj, fmt: true, max: Math.max(...allColAdj), bold: true, accent: true },
+      ];
+
+      const thead = document.querySelector("#comparisonTable thead tr");
+      thead.innerHTML = `<th class="px-4 py-3 font-semibold sticky left-0 bg-canvas-soft z-10">Metric</th>` +
+        offers.map((o, i) => `<th class="px-4 py-3 font-semibold text-right" style="color:${COLORS[i % COLORS.length]}">${o.company}</th>`).join("");
+
+      body.innerHTML = rows.map(row => {
+        const bestVal = row.fmt ? Math.max(...row.vals.filter(v => typeof v === "number")) : null;
+        return `<tr class="hover:bg-canvas-soft/40 transition-colors">
+          <td class="px-4 py-3 sticky left-0 bg-canvas z-10 text-xs text-body font-medium ${row.bold ? 'font-semibold text-ink' : ''}">${row.label}</td>
+          ${row.vals.map((v, i) => {
+            const isBest = row.fmt && typeof v === "number" && v === bestVal && v > 0;
+            const cls = row.bold ? "font-semibold text-ink" : row.accent && isBest ? "font-semibold text-accent-blue" : "text-body";
+            const h = isBest && row.fmt ? ' <span class="text-[9px] text-emerald-500 font-mono">BEST</span>' : "";
+            return `<td class="px-4 py-3 text-right font-mono text-sm ${cls}">${row.fmt ? fmt(v) : v}${h}</td>`;
+          }).join("")}
+        </tr>`;
+      }).join("");
+    }
+
+    function renderRanking() {
+      const ranked = offers.map((o, i) => ({
+        index: i,
+        company: o.company,
+        total: o.base + o.bonus + o.equity + o.signing,
+        colAdj: Math.round((o.base + o.bonus + o.equity + o.signing) / getMult(o.location)),
+        score: calcScore(o),
+      })).sort((a, b) => b.score - a.score);
+
+      $("rankList").innerHTML = ranked.map((r, rank) => {
+        const medal = rank === 0 ? "🥇" : rank === 1 ? "🥈" : rank === 2 ? "🥉" : `#${rank + 1}`;
+        return `<div class="flex items-center justify-between p-3 rounded-lg border border-hairline bg-canvas-soft/50">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="text-sm shrink-0">${medal}</span>
+            <div class="min-w-0">
+              <span class="text-sm font-semibold text-ink" style="color:${COLORS[r.index % COLORS.length]}">${r.company}</span>
+              <span class="text-xs text-mute ml-2">${fmt(r.total)} total</span>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="text-sm font-semibold text-accent-blue font-mono">${fmt(r.colAdj)}</span>
+            <span class="text-[10px] text-mute font-mono ml-1">COL-adj</span>
+          </div>
+        </div>`;
+      }).join("");
+    }
+
+    function showFormError(msg) {
+      const el = $("formError");
+      el.textContent = msg;
+      el.classList.remove("hidden");
+      setTimeout(() => el.classList.add("hidden"), 3000);
+    }
+
+    $("btnAddOffer").addEventListener("click", function () {
+      const company = $("offerCompany").value.trim();
+      const role = $("offerRole").value.trim();
+      const base = parseInt($("offerBase").value) || 0;
+      const bonus = parseInt($("offerBonus").value) || 0;
+      const equity = parseInt($("offerEquity").value) || 0;
+      const signing = parseInt($("offerSigning").value) || 0;
+      const location = $("offerLocation").value;
+
+      if (!company) return showFormError("Please enter a company name.");
+      if (!role) return showFormError("Please enter a job title.");
+      if (base < 10000) return showFormError("Please enter a valid base salary.");
+      if (!location) return showFormError("Please select a location.");
+
+      const offer = { company, role, base, bonus, equity, signing, location };
+
+      if (editingIndex >= 0) {
+        offers[editingIndex] = offer;
+        editingIndex = -1;
+        this.textContent = "+ Add";
+      } else {
+        if (offers.length >= 5) return showFormError("Maximum 5 offers allowed. Remove one to add another.");
+        offers.push(offer);
+      }
+
+      $("offerCompany").value = "";
+      $("offerRole").value = "";
+      $("offerBase").value = "";
+      $("offerBonus").value = "0";
+      $("offerEquity").value = "0";
+      $("offerSigning").value = "0";
+      $("offerLocation").value = "national";
+      render();
+    });
+  })();
+</script>

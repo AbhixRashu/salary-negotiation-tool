@@ -32,7 +32,7 @@ const guides = [
   },
   {
     title: "How to Answer Salary Expectations in Interviews",
-    slug: "../how-to-answer-salary-expectations",
+    slug: "how-to-answer-salary-expectations",
     description:
       "Get the exact scripts to defer giving numbers during initial recruiter screening calls and maintain maximum leverage.",
     readTime: "3 min read",
@@ -65,13 +65,7 @@ const guides = [
       {
         guides.map((g, i) => {
           const icons = ["📝", "🛡️", "💰", "❌", "🎯"];
-          const gradients = [
-            "linear-gradient(135deg, #0070f322, #7928ca22)",
-            "linear-gradient(135deg, #ff008022, #f5a62322)",
-            "linear-gradient(135deg, #50e3c222, #0070f322)",
-            "linear-gradient(135deg, #ff4d4d22, #7928ca22)",
-            "linear-gradient(135deg, #f9cb2822, #0070f322)",
-          ];
+          const iconLabels = ["Guide", "Guide", "Guide", "Guide", "Guide"];
           const colors = [
             "#0070f3",
             "#ff0080",
@@ -82,8 +76,7 @@ const guides = [
           const isPopular = i < 2;
           return (
             <div
-              class="border border-hairline bg-canvas rounded-lg shadow-sm transition-all duration-300 card-hover tilt-card overflow-hidden relative"
-              style="background: {gradients[i]};"
+              class="border border-hairline bg-canvas rounded-lg shadow-sm transition-all duration-300 card-hover tilt-card glow-border overflow-hidden relative lift-on-hover"
             >
               {isPopular && (
                 <span class="absolute top-3 right-3 badge-pop text-[10px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-accent-blue text-white">
@@ -93,18 +86,14 @@ const guides = [
               <div class="p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div class="space-y-2 max-w-xl flex-1">
                   <div class="flex items-center gap-2">
-                    <span class="text-lg">{icons[i]}</span>
+                    <span class="text-lg" role="img" aria-label={iconLabels[i]}>{icons[i]}</span>
                     <span class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider">
                       {g.readTime}
                     </span>
                   </div>
                   <h2 class="text-lg font-semibold text-ink">
                     <a
-                      href={
-                        g.slug.startsWith("..")
-                          ? "/how-to-answer-salary-expectations"
-                          : `/guides/${g.slug}`
-                      }
+                      href={`/guides/${g.slug}`}
                       class="hover:text-accent-blue transition-colors"
                     >
                       {g.title}
@@ -132,11 +121,7 @@ const guides = [
                   </div>
                 </div>
                 <a
-                  href={
-                    g.slug.startsWith("..")
-                      ? "/how-to-answer-salary-expectations"
-                      : `/guides/${g.slug}`
-                  }
+                  href={`/guides/${g.slug}`}
                   class="shrink-0 px-5 py-2.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-xs transition-colors ripple-btn btn-press magnetic-btn"
                 >
                   <span class="magnetic-inner">Read Guide →</span>

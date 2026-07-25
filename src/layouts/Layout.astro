@@ -80,6 +80,8 @@ const {
 	<body
 		class="selection:bg-primary selection:text-on-primary bg-canvas-soft text-body min-h-screen flex flex-col font-sans transition-colors duration-200"
 	>
+		<a href="#main-content" class="skip-to-content">Skip to content</a>
+
 		<!-- Header Navigation -->
 		<header
 			class="sticky top-0 z-50 bg-canvas/80 backdrop-blur-md border-b border-hairline w-full"
@@ -118,28 +120,43 @@ const {
 				<nav class="hidden md:flex items-center gap-1 text-sm">
 					<a
 						href="/"
-						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
 						>Tool</a
 					>
 					<a
 						href="/salary-calculator"
-						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
-						>Salary Calculator</a
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
+						>Calculator</a
 					>
 					<a
 						href="/average-salary-by-role"
-						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
-						>Average Salaries</a
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
+						>Salaries</a
+					>
+					<a
+						href="/company-salaries"
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
+						>Companies</a
+					>
+					<a
+						href="/offer-comparison"
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
+						>Compare</a
+					>
+					<a
+						href="/negotiation-strategy"
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
+						>Strategy</a
+					>
+					<a
+						href="/follow-up"
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
+						>Follow-Up</a
 					>
 					<a
 						href="/guides"
-						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
+						class="nav-link px-3 py-1.5 rounded-full text-body hover:text-ink transition-colors"
 						>Guides</a
-					>
-					<a
-						href="/faq"
-						class="px-3 py-1.5 rounded-full text-body hover:text-ink hover:bg-canvas-soft-2 transition-colors"
-						>FAQ</a
 					>
 				</nav>
 
@@ -260,28 +277,43 @@ const {
 				<a
 					href="/salary-calculator"
 					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
-					>Salary Calculator</a
+					>Calculator</a
 				>
 				<a
 					href="/average-salary-by-role"
 					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
-					>Average Salaries</a
+					>Salaries</a
+				>
+				<a
+					href="/company-salaries"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Companies</a
+				>
+				<a
+					href="/offer-comparison"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Compare Offers</a
+				>
+				<a
+					href="/negotiation-strategy"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Strategy</a
+				>
+				<a
+					href="/follow-up"
+					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
+					>Follow-Up</a
 				>
 				<a
 					href="/guides"
 					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
 					>Guides</a
 				>
-				<a
-					href="/faq"
-					class="px-3 py-2 rounded-md hover:bg-canvas-soft text-body hover:text-ink transition-colors"
-					>FAQ</a
-				>
 			</div>
 		</header>
 
 		<!-- Main Content Slot -->
-		<main
+		<main id="main-content"
 			class="flex-grow w-full max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 z-10"
 		>
 			<slot />
@@ -296,37 +328,37 @@ const {
 					<p class="font-semibold text-ink text-sm tracking-tight">
 						Salary Pitcher
 					</p>
-					<p class="text-xs text-mute mt-1 font-mono">
+					<p class="text-xs text-body mt-1 font-sans">
 						Free, no-login salary tools for US professionals.
 					</p>
 				</div>
 
 				<!-- Footer Links (SEO friendly links to glossary, etc) -->
 				<div
-					class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-mono text-mute"
+					class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-sans text-body"
 				>
 					<a href="/glossary" class="hover:text-ink transition-colors"
 						>Glossary Index</a
 					>
-					<span class="text-hairline">|</span>
+					<span class="text-hairline-strong">|</span>
 					<a
 						href="/glossary/what-is-salary"
 						class="hover:text-ink transition-colors"
 						>What is Salary?</a
 					>
-					<span class="text-hairline">|</span>
+					<span class="text-hairline-strong">|</span>
 					<a
 						href="/glossary/what-is-gross-salary"
 						class="hover:text-ink transition-colors"
 						>What is Gross Salary?</a
 					>
-					<span class="text-hairline">|</span>
+					<span class="text-hairline-strong">|</span>
 					<a
 						href="/glossary/what-does-salary-mean"
 						class="hover:text-ink transition-colors"
 						>What does Salary mean?</a
 					>
-					<span class="text-hairline">|</span>
+					<span class="text-hairline-strong">|</span>
 					<a
 						href="/glossary/how-does-salary-pay-work"
 						class="hover:text-ink transition-colors"
@@ -336,7 +368,7 @@ const {
 			</div>
 
 			<div
-				class="max-w-5xl mx-auto border-t border-hairline mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-mono text-mute"
+				class="max-w-5xl mx-auto border-t border-hairline mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-sans text-body"
 			>
 				<div>
 					© 2026 Salary Pitcher. Data sourced from Bureau of Labor
@@ -344,7 +376,7 @@ const {
 				</div>
 				<div class="flex gap-4">
 					<a
-						href="/how-to-answer-salary-expectations"
+						href="/guides/how-to-answer-salary-expectations"
 						class="hover:text-ink transition-colors"
 						>Interview Guide</a
 					>
@@ -461,33 +493,34 @@ const {
 						href === currentPath ||
 						(href !== "/" && currentPath.startsWith(href))
 					) {
-						link.classList.add("bg-canvas-soft-2", "text-ink");
+						link.classList.add("active", "text-ink");
 						link.classList.remove("text-body");
 					}
 				});
 
 				// ─── SCROLL REVEAL (Intersection Observer) ─────────────────────
 				function initScrollReveal() {
-					const revealElements = document.querySelectorAll(
-						".reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children",
-					);
+					const selectors = ".reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-up-fast, .stagger-children";
+					const revealElements = document.querySelectorAll(selectors);
 					if (revealElements.length === 0) return;
 
 					const observer = new IntersectionObserver(
 						(entries) => {
 							entries.forEach((entry) => {
 								if (entry.isIntersecting) {
-									entry.target.classList.add(
-										"reveal-visible",
-									);
+									entry.target.classList.add("reveal-visible");
+									if (entry.target.classList.contains("stagger-children")) {
+										const children = entry.target.children;
+										Array.from(children).forEach((child, i) => {
+											child.style.transitionDelay = `${(i * 0.06)}s`;
+											child.classList.add("reveal-visible");
+										});
+									}
 									observer.unobserve(entry.target);
 								}
 							});
 						},
-						{
-							threshold: 0.1,
-							rootMargin: "0px 0px -40px 0px",
-						},
+						{ threshold: 0.08, rootMargin: "0px 0px -48px 0px" },
 					);
 
 					revealElements.forEach((el) => observer.observe(el));
@@ -495,13 +528,12 @@ const {
 
 				// Run on load and after any dynamic content changes
 				if (document.readyState === "loading") {
-					document.addEventListener(
-						"DOMContentLoaded",
-						initScrollReveal,
-					);
+					document.addEventListener("DOMContentLoaded", initScrollReveal);
 				} else {
 					initScrollReveal();
 				}
+				// Expose for dynamic content
+				window.__reinitScrollReveal = initScrollReveal;
 
 				// ─── 3D CARD TILT ──────────────────────────────────────────────
 				function init3DTilt() {

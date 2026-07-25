@@ -1,0 +1,337 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { COMPANIES } from "../data/company-salaries";
+const companiesJson = JSON.stringify(COMPANIES);
+const totalRoles = COMPANIES.reduce((sum, c) => sum + c.roles.length, 0);
+const highestMedian = Math.max(...COMPANIES.flatMap(c => c.roles.map(r => r.median)));
+const highestCompany = COMPANIES.find(c => c.roles.some(r => r.median === highestMedian));
+
+const industryColors = {
+  "Technology": { bg: "#0070f3", light: "#d3e5ff", border: "rgba(0,112,243,0.25)" },
+  "Finance & Banking": { bg: "#f5a623", light: "#ffefcf", border: "rgba(245,166,35,0.3)" },
+  "Consulting": { bg: "#7928ca", light: "#e9d5ff", border: "rgba(121,40,202,0.25)" },
+  "Healthcare": { bg: "#00a86b", light: "#d1fae5", border: "rgba(0,168,107,0.25)" },
+  "Retail": { bg: "#ff6f00", light: "#ffe4cc", border: "rgba(255,111,0,0.25)" },
+  "Manufacturing / Automotive": { bg: "#e65100", light: "#ffe0b2", border: "rgba(230,81,0,0.25)" },
+};
+
+function getCompanyColor(industry: string) {
+  return industryColors[industry as keyof typeof industryColors] || { bg: "#0070f3", light: "#d3e5ff", border: "rgba(0,112,243,0.25)" };
+}
+const allMedians = COMPANIES.flatMap(c => c.roles.map(r => r.median));
+const maxMedianGlobal = Math.max(...allMedians);
+const minMedianGlobal = Math.min(...allMedians);
+function barWidth(median: number) {
+  return ((median - minMedianGlobal) / (maxMedianGlobal - minMedianGlobal)) * 100;
+}
+function barColor(median: number) {
+  const ratio = (median - minMedianGlobal) / (maxMedianGlobal - minMedianGlobal);
+  if (ratio > 0.7) return "#0070f3";
+  if (ratio > 0.4) return "#00a86b";
+  if (ratio > 0.2) return "#f5a623";
+  return "#888888";
+}
+---
+
+<Layout
+  title="Company Salary Data — Compensation by Company | Salary Pitcher"
+  description="Browse compensation packages at top companies including Google, Meta, Amazon, Apple, and more. See base salary, equity, bonus, and perks for each role."
+>
+  <style>
+  .role-chip:hover {
+    background: var(--chip-hover-bg, #d3e5ff) !important;
+    color: var(--chip-hover-color, #0070f3) !important;
+    border-color: color-mix(in srgb, var(--chip-hover-color, #0070f3) 30%, transparent) !important;
+  }
+</style>
+<div class="w-full space-y-8">
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 reveal">
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight text-ink mb-2">
+          Company Salary Explorer
+        </h1>
+        <p class="text-sm text-body">
+          Browse compensation at <strong class="text-ink">{COMPANIES.length} companies</strong>.
+          Click a company to see role-level pay, equity, bonus, and perks.
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 reveal">
+      <div class="border border-hairline bg-canvas rounded-lg p-4 text-center" style="border-top: 3px solid #0070f3">
+        <span class="text-xl font-semibold text-ink font-mono">{COMPANIES.length}</span>
+        <span class="text-[10px] font-mono text-mute uppercase tracking-wider block mt-1">Companies</span>
+      </div>
+      <div class="border border-hairline bg-canvas rounded-lg p-4 text-center" style="border-top: 3px solid #00a86b">
+        <span class="text-xl font-semibold text-ink font-mono">{totalRoles}</span>
+        <span class="text-[10px] font-mono text-mute uppercase tracking-wider block mt-1">Roles Tracked</span>
+      </div>
+      <div class="border border-hairline bg-canvas rounded-lg p-4 text-center" style="border-top: 3px solid #f5a623">
+        <span class="text-xl font-semibold text-ink font-mono">${(highestMedian / 1000).toFixed(0)}K</span>
+        <span class="text-[10px] font-mono text-mute uppercase tracking-wider block mt-1">Highest Median</span>
+      </div>
+      <div class="border border-hairline bg-canvas rounded-lg p-4 text-center" style="border-top: 3px solid #7928ca">
+        <span class="text-xl font-semibold text-ink font-mono">{highestCompany?.name || "—"}</span>
+        <span class="text-[10px] font-mono text-mute uppercase tracking-wider block mt-1">Top Payer</span>
+      </div>
+    </div>
+
+    <!-- Search + Filters -->
+    <div class="border border-hairline bg-canvas p-5 rounded-lg shadow-sm reveal">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="flex-1">
+          <input type="text" id="companySearch" class="w-full px-3.5 py-2.5 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none" placeholder="Search company or role..." autocomplete="off" />
+        </div>
+        <select id="industryFilter" class="w-full sm:w-48 px-3.5 py-2.5 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none">
+          <option value="">All Industries</option>
+          <option value="Technology">Technology</option>
+          <option value="Finance & Banking">Finance & Banking</option>
+          <option value="Consulting">Consulting</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Retail">Retail</option>
+          <option value="Manufacturing / Automotive">Manufacturing / Automotive</option>
+        </select>
+        <select id="sortFilter" class="w-full sm:w-44 px-3.5 py-2.5 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none">
+          <option value="name">Sort: Name</option>
+          <option value="roles">Sort: Most Roles</option>
+          <option value="median">Sort: Highest Median</option>
+          <option value="industry">Sort: Industry</option>
+        </select>
+      </div>
+      <div id="activeFilters" class="hidden mt-3 flex flex-wrap gap-2"></div>
+    </div>
+
+    <!-- Company Cards -->
+    <div id="companyGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {COMPANIES.map((company, idx) => {
+        const cc = getCompanyColor(company.industry);
+        const companyMax = Math.max(...company.roles.map(r => r.median));
+        return (
+        <div
+          class="company-card border border-hairline bg-canvas rounded-lg shadow-sm hover:shadow-elevated transition-all duration-200 overflow-hidden reveal"
+          data-industry={company.industry}
+          data-company={company.name.toLowerCase()}
+          data-roles={company.roles.length}
+          data-median={companyMax}
+          data-index={idx}
+          style={`border-top: 3px solid ${cc.bg}`}
+        >
+          <button
+            class="w-full text-left p-5 cursor-pointer expand-btn"
+            data-index={idx}
+          >
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0 flex-1">
+                <h2 class="text-lg font-semibold text-ink tracking-tight truncate">{company.name}</h2>
+                <div class="flex flex-wrap gap-2 mt-1.5">
+                  <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-mono font-medium uppercase tracking-wider" style={`background:${cc.light};color:${cc.bg};border:1px solid ${cc.border}`}>{company.industry}</span>
+                  <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-mono font-medium text-mute border border-hairline">{company.location}</span>
+                </div>
+              </div>
+              <div class="shrink-0 flex flex-col items-end gap-1">
+                <div class="flex items-center gap-1 text-xs text-mute font-mono">
+                  <span class="role-count" style={`color:${cc.bg}`}>{company.roles.length}</span>
+                  <span>roles</span>
+                </div>
+                <svg class="chevron w-4 h-4 text-mute transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </div>
+            </div>
+            <div class="mt-3 flex gap-2 overflow-x-auto role-chips">
+              {company.roles.slice(0, 4).map((r) => (
+                <span class="role-chip shrink-0 px-2 py-0.5 rounded text-[10px] font-mono bg-canvas-soft-2 text-body border border-hairline cursor-pointer transition-all" style={`--chip-hover-bg:${cc.light};--chip-hover-color:${cc.bg}`}>{r.title}</span>
+              ))}
+              {company.roles.length > 4 && (
+                <span class="shrink-0 px-2 py-0.5 rounded text-[10px] font-mono bg-canvas-soft text-mute">+{company.roles.length - 4}</span>
+              )}
+            </div>
+          </button>
+          <div class="company-details border-t border-hairline" style="display:none">
+            <div class="p-5 space-y-4">
+              <div class="flex items-center gap-2 mb-2">
+                <input type="text" class="role-search flex-1 px-3 py-1.5 border border-hairline rounded-md bg-canvas text-xs focus:border-accent-blue outline-none" placeholder="Filter roles..." />
+                <span class="text-[10px] font-mono text-mute role-match-count"></span>
+              </div>
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="text-[10px] font-mono text-mute uppercase tracking-wider border-b border-hairline">
+                    <th class="pb-2 pr-3 font-semibold">Role</th>
+                    <th class="pb-2 pr-3 font-semibold text-right">Base Median</th>
+                    <th class="pb-2 pr-3 font-semibold text-right hidden sm:table-cell">Range</th>
+                    <th class="pb-2 pr-3 font-semibold text-right hidden md:table-cell">Equity</th>
+                    <th class="pb-2 font-semibold text-right hidden md:table-cell">Bonus</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-hairline text-sm">
+                  {company.roles.map((role) => {
+                    const bw = barWidth(role.median);
+                    const bc = barColor(role.median);
+                    return (
+                    <tr class="role-row hover:bg-canvas-soft/50 transition-colors" data-title={role.title.toLowerCase()}>
+                      <td class="py-2.5 pr-3 text-ink font-medium">{role.title}</td>
+                      <td class="py-2.5 pr-3 text-right">
+                        <div class="flex items-center gap-2 justify-end">
+                          <span class="font-mono text-ink font-semibold">${(role.median / 1000).toFixed(0)}K</span>
+                          <div class="w-12 h-1.5 rounded-full bg-hairline shrink-0 hidden sm:block">
+                            <div class="h-full rounded-full transition-all" style={`width:${bw}%;background:${bc}`}></div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-2.5 pr-3 text-right font-mono text-body text-xs hidden sm:table-cell">
+                        ${(role.low / 1000).toFixed(0)}K - ${(role.high / 1000).toFixed(0)}K
+                      </td>
+                      <td class="py-2.5 pr-3 text-right font-mono text-body text-xs hidden md:table-cell" style="color:#7928ca">{role.equity || "—"}</td>
+                      <td class="py-2.5 text-right font-mono text-body text-xs hidden md:table-cell" style="color:#00a86b">{role.bonus || "—"}</td>
+                    </tr>
+                  )})}
+                </tbody>
+              </table>
+              <div>
+                <span class="text-xs font-mono text-mute uppercase tracking-wider block mb-2">Perks & Benefits</span>
+                <div class="flex flex-wrap gap-1.5">
+                  {company.perks.map((perk) => (
+                    <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-mono bg-canvas-soft-2 text-body border border-hairline">{perk}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )})}
+    </div>
+
+    <div id="noResults" class="hidden text-center py-16 border border-dashed border-hairline rounded-lg">
+      <p class="text-sm text-mute">No companies match your search.</p>
+    </div>
+
+    <div class="p-4 border border-hairline rounded-lg bg-canvas text-xs text-body leading-relaxed">
+      <p class="font-semibold text-ink mb-1">Data Notes</p>
+      <p>Compensation data sourced from employee self-reports, public disclosures, and industry surveys. Figures represent estimated total cash compensation (base + typical bonus) plus equity at current grant value. Actual packages vary by level, location, and negotiation outcome. Updated 2026.</p>
+    </div>
+  </div>
+</Layout>
+
+<!-- Data injection -->
+<script set:html={`window.__COMPANIES_DATA__ = ${companiesJson};`} />
+
+<script is:inline>
+  (function () {
+    const searchInput = document.getElementById("companySearch");
+    const industryFilter = document.getElementById("industryFilter");
+    const sortFilter = document.getElementById("sortFilter");
+    const activeFilters = document.getElementById("activeFilters");
+    const grid = document.getElementById("companyGrid");
+
+    let activeRoleFilter = "";
+
+    function addFilterBadge(label, onRemove) {
+      const badge = document.createElement("span");
+      badge.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-accent-blue/10 text-accent-blue border border-accent-blue/20";
+      badge.innerHTML = `${label} <button class="hover:text-accent-blue-deep cursor-pointer">&times;</button>`;
+      badge.querySelector("button").addEventListener("click", onRemove);
+      activeFilters.classList.remove("hidden");
+      activeFilters.appendChild(badge);
+    }
+
+    function clearFilters() {
+      activeFilters.innerHTML = "";
+      activeFilters.classList.add("hidden");
+      activeRoleFilter = "";
+    }
+
+    function sortCards(method) {
+      const cards = Array.from(document.querySelectorAll(".company-card:not(.hidden)"));
+      const parent = grid;
+      cards.sort((a, b) => {
+        switch (method) {
+          case "roles": return parseInt(b.dataset.roles) - parseInt(a.dataset.roles);
+          case "median": return parseInt(b.dataset.median) - parseInt(a.dataset.median);
+          case "industry": return a.dataset.industry.localeCompare(b.dataset.industry);
+          default: return a.dataset.company.localeCompare(b.dataset.company);
+        }
+      });
+      cards.forEach(c => parent.appendChild(c));
+    }
+
+    function filterCards() {
+      const q = searchInput.value.toLowerCase().trim();
+      const ind = industryFilter.value;
+      const cards = document.querySelectorAll(".company-card");
+      let visible = 0;
+      cards.forEach((card) => {
+        const company = card.dataset.company;
+        const industry = card.dataset.industry;
+        const chips = Array.from(card.querySelectorAll(".role-chip")).map(s => s.textContent.toLowerCase());
+        const matchQuery = !q || company.includes(q) || chips.some(r => r.includes(q));
+        const matchIndustry = !ind || industry === ind;
+        const matchRole = !activeRoleFilter || chips.some(r => r === activeRoleFilter);
+        const show = matchQuery && matchIndustry && matchRole;
+        card.classList.toggle("hidden", !show);
+        if (show) visible++;
+      });
+      document.getElementById("noResults").classList.toggle("hidden", visible > 0);
+      sortCards(sortFilter.value);
+    }
+
+    searchInput.addEventListener("input", filterCards);
+    industryFilter.addEventListener("change", filterCards);
+    sortFilter.addEventListener("change", function () { sortCards(this.value); });
+
+    // Role chip click → filter
+    document.querySelectorAll(".role-chip").forEach(chip => {
+      chip.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const role = this.textContent.trim();
+        if (activeRoleFilter === role) { clearFilters(); filterCards(); return; }
+        clearFilters();
+        activeRoleFilter = role;
+        addFilterBadge(`Role: ${role}`, function () { clearFilters(); filterCards(); });
+        filterCards();
+      });
+    });
+
+    // Expand/collapse with smooth animation
+    document.querySelectorAll(".expand-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const card = this.closest(".company-card");
+        const details = card.querySelector(".company-details");
+        const chevron = this.querySelector(".chevron");
+        const isOpen = details.style.display !== "none";
+
+        if (isOpen) {
+          details.style.display = "none";
+          card.classList.remove("shadow-elevated");
+          chevron.style.transform = "rotate(0deg)";
+        } else {
+          details.style.display = "block";
+          details.style.animation = "fadeInDown 0.3s ease forwards";
+          card.classList.add("shadow-elevated");
+          chevron.style.transform = "rotate(180deg)";
+          const input = details.querySelector(".role-search");
+          if (input) { input.value = ""; filterRoles(card, ""); setTimeout(() => input.focus(), 350); }
+        }
+      });
+    });
+
+    // Role search within a company
+    function filterRoles(card, q) {
+      const rows = card.querySelectorAll(".role-row");
+      const count = card.querySelector(".role-match-count");
+      let visible = 0;
+      rows.forEach(row => {
+        const match = !q || row.dataset.title.includes(q);
+        row.style.display = match ? "" : "none";
+        if (match) visible++;
+      });
+      if (count) count.textContent = `${visible} of ${rows.length}`;
+    }
+
+    document.querySelectorAll(".role-search").forEach(input => {
+      const card = input.closest(".company-card");
+      const count = card.querySelector(".role-match-count");
+      const rows = card.querySelectorAll(".role-row");
+      if (count) count.textContent = `${rows.length} of ${rows.length}`;
+      input.addEventListener("input", function () { filterRoles(card, this.value.toLowerCase().trim()); });
+    });
+  })();
+</script>

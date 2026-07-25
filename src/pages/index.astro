@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { ROLES } from "../data/salaries";
+const rolesJson = JSON.stringify(ROLES);
 ---
 
 <Layout
@@ -12,41 +14,6 @@ import Layout from "../layouts/Layout.astro";
       id="screenHero"
       class="text-center py-12 sm:py-16 relative overflow-hidden"
     >
-      <div class="mesh-gradient-container">
-        <div class="mesh-gradient"></div>
-        <div class="mesh-gradient-2"></div>
-        <!-- Floating particles -->
-        <div
-          class="floating-particle"
-          style="width:8px;height:8px;background:#0070f3;top:20%;left:10%;--drift-duration:18s;--drift-delay:0s;opacity:0.12"
-        >
-        </div>
-        <div
-          class="floating-particle"
-          style="width:12px;height:12px;background:#7928ca;top:60%;left:80%;--drift-duration:22s;--drift-delay:2s;opacity:0.1"
-        >
-        </div>
-        <div
-          class="floating-particle"
-          style="width:6px;height:6px;background:#50e3c2;top:30%;left:70%;--drift-duration:15s;--drift-delay:4s;opacity:0.15"
-        >
-        </div>
-        <div
-          class="floating-particle"
-          style="width:10px;height:10px;background:#ff0080;top:70%;left:15%;--drift-duration:25s;--drift-delay:1s;opacity:0.08"
-        >
-        </div>
-        <div
-          class="floating-particle"
-          style="width:5px;height:5px;background:#f9cb28;top:15%;left:50%;--drift-duration:20s;--drift-delay:3s;opacity:0.12"
-        >
-        </div>
-        <div
-          class="floating-particle"
-          style="width:14px;height:14px;background:#007cf0;top:80%;left:55%;--drift-duration:28s;--drift-delay:5s;opacity:0.06"
-        >
-        </div>
-      </div>
       <div class="relative z-10">
         <div
           class="reveal reveal-visible animate-fade-in-down inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas text-xs font-mono text-mute mb-6"
@@ -56,7 +23,7 @@ import Layout from "../layouts/Layout.astro";
           Smart US Negotiation Assistant
         </div>
         <h1
-          class="reveal reveal-visible animate-fade-in-up text-4xl sm:text-5xl font-semibold tracking-tight text-ink mb-6 leading-tight"
+          class="reveal reveal-visible animate-fade-in-up text-4xl sm:text-5xl font-semibold tracking-tight mb-6 leading-tight text-ink"
           style="animation-delay:0.15s"
         >
           Negotiate what you're actually worth.
@@ -69,35 +36,37 @@ import Layout from "../layouts/Layout.astro";
           persuasive salary counter-offer draft in under two minutes.
         </p>
         <div
-          class="flex justify-center reveal reveal-visible animate-fade-in-up mb-4"
-          style="animation-delay:0.4s"
+          class="flex justify-center mb-6"
         >
-          <div
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-hairline bg-canvas text-sm font-mono text-mute"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#10b981"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-              ></path></svg
+          <div class="flex gap-3 flex-wrap justify-center reveal reveal-visible animate-fade-in-up" style="animation-delay:0.4s">
+            <div
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-hairline bg-canvas text-sm font-mono text-mute"
             >
-            <span>No login required — 100% free</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00a86b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>No login required</span>
+            </div>
+            <div
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-hairline bg-canvas text-sm font-mono text-mute"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0070f3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>Takes 2 minutes</span>
+            </div>
+            <div
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-hairline bg-canvas text-sm font-mono text-mute"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7928ca" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>AI-powered</span>
+            </div>
           </div>
         </div>
         <div
           class="flex justify-center reveal reveal-visible animate-fade-in-up"
-          style="animation-delay:0.5s"
+          style="animation-delay:0.55s"
         >
           <button
             id="btnStart"
-            class="px-8 py-3.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-base transition-all cursor-pointer card-hover tilt-card animate-glow-pulse ripple-btn btn-press magnetic-btn"
-            ><span class="magnetic-inner">Start Pitch Assistant →</span></button
+            class="group px-8 py-3.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-base transition-all duration-300 cursor-pointer card-hover tilt-card glow-border ripple-btn btn-press magnetic-btn"
+            ><span class="magnetic-inner flex items-center gap-2">Start Pitch Assistant <span class="group-hover:translate-x-0.5 transition-transform">→</span></span></button
           >
         </div>
       </div>
@@ -111,8 +80,8 @@ import Layout from "../layouts/Layout.astro";
       <div class="text-center">
         <div
           class="text-xl sm:text-2xl font-bold font-mono text-accent-blue tabular-nums trust-counter"
-          data-target="10000"
-          data-suffix="+"
+          data-target="9539"
+          data-suffix=""
         >
           0
         </div>
@@ -139,7 +108,7 @@ import Layout from "../layouts/Layout.astro";
       <div class="text-center">
         <div
           class="text-xl sm:text-2xl font-bold font-mono text-accent-blue tabular-nums trust-counter"
-          data-target="100"
+          data-target="512"
           data-suffix="+"
         >
           0
@@ -154,30 +123,36 @@ import Layout from "../layouts/Layout.astro";
 
     <!-- SCREEN 2: Conversational Flow -->
     <div id="screenConvo" class="hidden">
-      <div class="mb-8">
+      <div class="mb-6">
         <div
           class="flex justify-between items-center text-xs font-mono text-mute mb-2"
         >
-          <span id="progressStep">Step 1 of 9</span>
+          <span id="progressStep">Step 1 of 12</span>
           <span id="progressPct">0%</span>
         </div>
-        <div class="h-1 bg-hairline rounded-full overflow-hidden">
+        <div class="h-2 bg-hairline rounded-full overflow-hidden shadow-inner">
           <div
             id="progressFill"
-            class="h-full bg-accent-blue transition-all duration-300"
+            class="h-full rounded-full transition-all duration-500 ease-out"
             style="width:0%"
           >
           </div>
         </div>
+        <div class="flex justify-between mt-1.5 px-0.5" id="stepDots">
+        </div>
       </div>
       <div
-        class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm"
+        class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm transition-all duration-300 hover:shadow-elevated"
+        id="stepCard"
       >
-        <h2
-          id="stepQuestion"
-          class="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-2 leading-snug"
-        >
-        </h2>
+        <div class="flex items-center gap-3 mb-1">
+          <span id="stepIcon" class="text-lg hidden"></span>
+          <h2
+            id="stepQuestion"
+            class="text-xl sm:text-2xl font-semibold text-ink tracking-tight leading-snug"
+          >
+          </h2>
+        </div>
         <p id="stepHint" class="text-xs sm:text-sm text-mute mb-6"></p>
         <div id="stepInputSlot" class="mb-6"></div>
         <div
@@ -212,24 +187,38 @@ import Layout from "../layouts/Layout.astro";
     </div>
 
     <!-- SCREEN 3: Generating -->
-    <div id="screenLoading" class="hidden text-center py-16">
-      <div
-        class="w-8 h-8 border-2 border-hairline border-t-accent-blue rounded-full animate-spin mx-auto mb-6"
-      >
+    <div id="screenLoading" class="hidden text-center py-16 result-enter">
+      <div class="relative w-16 h-16 mx-auto mb-6">
+        <div class="absolute inset-0 border-3 border-hairline rounded-full"></div>
+        <div class="absolute inset-0 border-3 border-transparent border-t-accent-blue rounded-full animate-spin"></div>
+        <div class="absolute inset-2 border-3 border-transparent border-t-[#7928ca] rounded-full animate-spin" style="animation-duration:0.8s;animation-direction:reverse"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-xl animate-pulse">⚡</span>
+        </div>
       </div>
       <h3 class="text-lg font-semibold text-ink mb-1">Crafting your pitch…</h3>
       <p class="text-sm text-mute">
-        Analyzing market standards and structuring your achievements.
+        Weaving market data with your achievements for maximum impact.
       </p>
+      <div class="mt-6 flex justify-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-accent-blue animate-bounce" style="animation-delay:0s"></span>
+        <span class="w-2.5 h-2.5 rounded-full" style="background:#7928ca;animation-delay:0.15s;animation-name:bounce;animation-duration:1s;animation-iteration-count:infinite"></span>
+        <span class="w-2.5 h-2.5 rounded-full" style="background:#ff0080;animation-delay:0.3s;animation-name:bounce;animation-duration:1s;animation-iteration-count:infinite"></span>
+      </div>
+      <div class="mt-8 max-w-xs mx-auto">
+        <div class="shimmer-line w-3/4 mx-auto mb-2"></div>
+        <div class="shimmer-line w-1/2 mx-auto"></div>
+      </div>
     </div>
 
     <!-- SCREEN 4: Result -->
-    <div id="screenResult" class="hidden">
+    <div id="screenResult" class="hidden result-enter">
       <div
-        class="border border-hairline bg-canvas rounded-lg shadow-sm overflow-hidden"
+        class="border border-hairline bg-canvas rounded-lg shadow-sm overflow-hidden card-glow"
+        style="position:relative;z-index:1"
       >
         <div
-          class="p-6 border-b border-hairline flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-canvas-soft-2"
+          class="p-6 border-b border-hairline flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-canvas"
         >
           <div>
             <h2 class="text-lg font-semibold text-ink">
@@ -244,6 +233,24 @@ import Layout from "../layouts/Layout.astro";
                 id="badgeTone"
                 class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-accent-blue/15 text-accent-blue border border-accent-blue/10"
               ></span>
+              <span
+                id="badgeDifficulty"
+                class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider hidden"
+              ></span>
+            </div>
+          </div>
+          <div class="hidden sm:flex items-center gap-3 px-3 py-1.5 rounded-md border border-hairline bg-canvas/50" id="difficultyDetail">
+            <div class="flex items-center gap-1.5 text-xs font-mono text-mute">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500" id="diffDot"></span>
+              <span id="diffLabel">Easy</span>
+            </div>
+            <div class="w-px h-4 bg-hairline"></div>
+            <div class="text-[10px] font-mono text-mute">
+              Gap: <span id="diffGap">0%</span>
+            </div>
+            <div class="w-px h-4 bg-hairline"></div>
+            <div class="text-[10px] font-mono text-mute">
+              Leverage: <span id="diffLeverage">Neutral</span>
             </div>
           </div>
           <div class="flex gap-2 w-full sm:w-auto">
@@ -281,6 +288,43 @@ import Layout from "../layouts/Layout.astro";
               >
               Regenerate
             </button>
+            <div class="relative" id="polishContainer">
+              <button
+                id="btnPolish"
+                class="flex-1 sm:flex-none px-4 py-2 bg-canvas hover:bg-canvas-soft-2 text-ink border border-hairline font-semibold rounded-full text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer ripple-btn btn-press"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M8 16l4 4 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                <span>Polish</span>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <div id="polishDropdown" class="polish-dropdown hidden" role="menu" aria-label="Polish options">
+                <button class="polish-option" data-mode="more-assertive" role="menuitem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                  More Assertive
+                </button>
+                <button class="polish-option" data-mode="warmer-tone" role="menuitem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  Warmer Tone
+                </button>
+                <button class="polish-option" data-mode="shorten" role="menuitem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 13H5"></path><path d="M19 7H5"></path><path d="M19 19H5"></path></svg>
+                  Shorten (150 words)
+                </button>
+                <button class="polish-option" data-mode="expand-details" role="menuitem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                  Lengthen with Details
+                </button>
+                <div class="polish-divider"></div>
+                <button class="polish-option" data-mode="add-market-data" role="menuitem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                  Add Market Data
+                </button>
+                <button class="polish-option" data-mode="fix-grammar" role="menuitem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 7H8"></path><path d="M10 11H8"></path><path d="M10 15H8"></path></svg>
+                  Fix Grammar & Flow
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="p-6">
@@ -288,6 +332,21 @@ import Layout from "../layouts/Layout.astro";
             id="resultText"
             class="w-full h-80 p-4 border border-hairline rounded-md bg-canvas-soft font-sans text-sm text-ink leading-relaxed focus:border-accent-blue focus:ring-1 focus:ring-accent-blue resize-y outline-none"
             spellcheck="false"></textarea>
+          <!-- Mobile difficulty detail -->
+          <div class="mt-3 sm:hidden flex items-center justify-center gap-4 px-3 py-2 rounded-md border border-hairline bg-canvas-soft/50" id="difficultyDetailMobile">
+            <div class="flex items-center gap-1.5 text-[10px] font-mono text-mute">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500" id="diffDotMobile"></span>
+              <span id="diffLabelMobile">Easy</span>
+            </div>
+            <div class="w-px h-3 bg-hairline"></div>
+            <div class="text-[10px] font-mono text-mute">
+              Gap: <span id="diffGapMobile">0%</span>
+            </div>
+            <div class="w-px h-3 bg-hairline"></div>
+            <div class="text-[10px] font-mono text-mute">
+              Leverage: <span id="diffLeverageMobile">Neutral</span>
+            </div>
+          </div>
           <div
             class="mt-4 flex flex-col sm:flex-row justify-between items-center gap-3"
           >
@@ -305,243 +364,12 @@ import Layout from "../layouts/Layout.astro";
   </div>
 </Layout>
 
-<script is:inline>
+<script define:vars={{ ROLES_DATA: ROLES }} is:inline>
   (function () {
     "use strict";
 
     // ─── DATA ──────────────────────────────────────────────────────────────
-    const ROLES_DATA = [
-      { role: "Software Engineer", median: 120000, low: 95000, high: 155000 },
-      { role: "Frontend Developer", median: 110000, low: 88000, high: 140000 },
-      { role: "Backend Developer", median: 125000, low: 98000, high: 160000 },
-      {
-        role: "Full Stack Developer",
-        median: 118000,
-        low: 92000,
-        high: 150000,
-      },
-      { role: "DevOps Engineer", median: 130000, low: 105000, high: 165000 },
-      { role: "Data Scientist", median: 135000, low: 108000, high: 170000 },
-      { role: "Data Engineer", median: 128000, low: 100000, high: 162000 },
-      {
-        role: "Cybersecurity Analyst",
-        median: 115000,
-        low: 90000,
-        high: 145000,
-      },
-      { role: "System Administrator", median: 85000, low: 68000, high: 108000 },
-      { role: "Network Engineer", median: 92000, low: 74000, high: 118000 },
-      { role: "QA Engineer", median: 90000, low: 72000, high: 112000 },
-      { role: "Product Manager", median: 130000, low: 102000, high: 168000 },
-      { role: "UX/UI Designer", median: 95000, low: 75000, high: 122000 },
-      { role: "Scrum Master", median: 105000, low: 84000, high: 130000 },
-      {
-        role: "Database Administrator",
-        median: 100000,
-        low: 80000,
-        high: 128000,
-      },
-      {
-        role: "Solutions Architect",
-        median: 155000,
-        low: 125000,
-        high: 195000,
-      },
-      { role: "Mobile Developer", median: 120000, low: 95000, high: 152000 },
-      { role: "Technical Writer", median: 80000, low: 64000, high: 102000 },
-      { role: "IT Support Specialist", median: 60000, low: 48000, high: 75000 },
-      { role: "AI Engineer", median: 160000, low: 130000, high: 200000 },
-      { role: "Registered Nurse", median: 85000, low: 72000, high: 105000 },
-      { role: "Nurse Practitioner", median: 120000, low: 102000, high: 142000 },
-      { role: "Physician Assistant", median: 115000, low: 98000, high: 135000 },
-      { role: "Physical Therapist", median: 92000, low: 78000, high: 108000 },
-      {
-        role: "Occupational Therapist",
-        median: 90000,
-        low: 76000,
-        high: 105000,
-      },
-      { role: "Pharmacist", median: 130000, low: 115000, high: 150000 },
-      { role: "Dental Hygienist", median: 80000, low: 68000, high: 95000 },
-      { role: "Dentist", median: 165000, low: 130000, high: 210000 },
-      { role: "Physician", median: 210000, low: 175000, high: 275000 },
-      { role: "Pediatrician", median: 190000, low: 160000, high: 230000 },
-      { role: "Surgeon", median: 350000, low: 280000, high: 450000 },
-      { role: "Medical Assistant", median: 38000, low: 32000, high: 46000 },
-      {
-        role: "Radiologic Technologist",
-        median: 65000,
-        low: 54000,
-        high: 78000,
-      },
-      { role: "Phlebotomist", median: 37000, low: 31000, high: 44000 },
-      { role: "Veterinarian", median: 105000, low: 85000, high: 135000 },
-      { role: "Optometrist", median: 125000, low: 105000, high: 155000 },
-      { role: "Chiropractor", median: 85000, low: 65000, high: 115000 },
-      {
-        role: "Speech-Language Pathologist",
-        median: 82000,
-        low: 68000,
-        high: 100000,
-      },
-      {
-        role: "Clinical Psychologist",
-        median: 90000,
-        low: 72000,
-        high: 115000,
-      },
-      { role: "Dietitian", median: 64000, low: 53000, high: 77000 },
-      { role: "Accountant", median: 78000, low: 62000, high: 98000 },
-      { role: "Financial Analyst", median: 88000, low: 70000, high: 112000 },
-      { role: "Actuary", median: 115000, low: 90000, high: 150000 },
-      { role: "Auditor", median: 79000, low: 63000, high: 99000 },
-      { role: "Budget Analyst", median: 82000, low: 66000, high: 104000 },
-      { role: "Tax Specialist", median: 84000, low: 66000, high: 108000 },
-      { role: "Business Analyst", median: 86000, low: 69000, high: 108000 },
-      { role: "Investment Banker", median: 150000, low: 110000, high: 220000 },
-      { role: "Portfolio Manager", median: 130000, low: 98000, high: 180000 },
-      { role: "Loan Officer", median: 68000, low: 48000, high: 95000 },
-      { role: "Underwriter", median: 76000, low: 60000, high: 98000 },
-      { role: "HR Specialist", median: 66000, low: 52000, high: 82000 },
-      {
-        role: "Recruiting Coordinator",
-        median: 55000,
-        low: 45000,
-        high: 68000,
-      },
-      { role: "Operations Manager", median: 102000, low: 78000, high: 138000 },
-      {
-        role: "Administrative Assistant",
-        median: 45000,
-        low: 36000,
-        high: 56000,
-      },
-      { role: "Executive Assistant", median: 70000, low: 56000, high: 90000 },
-      { role: "Office Manager", median: 58000, low: 46000, high: 74000 },
-      {
-        role: "Procurement Specialist",
-        median: 72000,
-        low: 58000,
-        high: 90000,
-      },
-      { role: "Risk Analyst", median: 86000, low: 68000, high: 110000 },
-      { role: "Economist", median: 108000, low: 80000, high: 150000 },
-      { role: "Marketing Manager", median: 98000, low: 75000, high: 130000 },
-      { role: "Social Media Manager", median: 62000, low: 48000, high: 80000 },
-      { role: "SEO Specialist", median: 68000, low: 52000, high: 88000 },
-      { role: "Content Writer", median: 58000, low: 45000, high: 75000 },
-      { role: "Copywriter", median: 65000, low: 50000, high: 85000 },
-      { role: "PR Specialist", median: 66000, low: 50000, high: 88000 },
-      { role: "Art Director", median: 98000, low: 74000, high: 135000 },
-      { role: "Graphic Designer", median: 55000, low: 42000, high: 72000 },
-      { role: "Brand Manager", median: 105000, low: 80000, high: 140000 },
-      { role: "Sales Representative", median: 65000, low: 45000, high: 98000 },
-      { role: "Account Executive", median: 82000, low: 58000, high: 115000 },
-      {
-        role: "Customer Success Manager",
-        median: 78000,
-        low: 60000,
-        high: 102000,
-      },
-      {
-        role: "Business Development Manager",
-        median: 92000,
-        low: 68000,
-        high: 125000,
-      },
-      { role: "Sales Manager", median: 110000, low: 80000, high: 155000 },
-      { role: "Media Buyer", median: 68000, low: 52000, high: 88000 },
-      { role: "Event Planner", median: 54000, low: 42000, high: 68000 },
-      {
-        role: "Market Research Analyst",
-        median: 68000,
-        low: 52000,
-        high: 90000,
-      },
-      { role: "Email Marketer", median: 70000, low: 54000, high: 92000 },
-      {
-        role: "Product Marketing Manager",
-        median: 115000,
-        low: 90000,
-        high: 145000,
-      },
-      { role: "Retail Store Manager", median: 52000, low: 40000, high: 68000 },
-      { role: "High School Teacher", median: 65000, low: 53000, high: 82000 },
-      { role: "Middle School Teacher", median: 62000, low: 51000, high: 78000 },
-      {
-        role: "Elementary School Teacher",
-        median: 60000,
-        low: 49000,
-        high: 75000,
-      },
-      {
-        role: "Special Education Teacher",
-        median: 66000,
-        low: 54000,
-        high: 84000,
-      },
-      { role: "School Counselor", median: 60000, low: 49000, high: 75000 },
-      { role: "School Principal", median: 98000, low: 82000, high: 120000 },
-      { role: "Librarian", median: 61000, low: 49000, high: 76000 },
-      { role: "College Professor", median: 85000, low: 62000, high: 122000 },
-      { role: "Tutor", median: 45000, low: 35000, high: 58000 },
-      { role: "ESL Teacher", median: 56000, low: 45000, high: 70000 },
-      { role: "Social Worker", median: 55000, low: 44000, high: 68000 },
-      { role: "Case Manager", median: 52000, low: 42000, high: 65000 },
-      { role: "Therapist", median: 68000, low: 54000, high: 86000 },
-      { role: "Childcare Worker", median: 30000, low: 25000, high: 36000 },
-      { role: "Non-Profit Director", median: 85000, low: 62000, high: 118000 },
-      { role: "Career Counselor", median: 58000, low: 46000, high: 72000 },
-      {
-        role: "Instructional Designer",
-        median: 78000,
-        low: 62000,
-        high: 96000,
-      },
-      { role: "Architect", median: 86000, low: 68000, high: 112000 },
-      { role: "Civil Engineer", median: 90000, low: 72000, high: 115000 },
-      { role: "Mechanical Engineer", median: 95000, low: 76000, high: 120000 },
-      { role: "Electrical Engineer", median: 100000, low: 80000, high: 128000 },
-      { role: "Chemical Engineer", median: 108000, low: 85000, high: 138000 },
-      {
-        role: "Environmental Engineer",
-        median: 96000,
-        low: 75000,
-        high: 120000,
-      },
-      { role: "Industrial Designer", median: 76000, low: 58000, high: 98000 },
-      { role: "Construction Manager", median: 98000, low: 78000, high: 128000 },
-      { role: "Electrician", median: 61000, low: 48000, high: 80000 },
-      { role: "Plumber", median: 60000, low: 46000, high: 78000 },
-      { role: "HVAC Technician", median: 54000, low: 42000, high: 68000 },
-      { role: "Carpenter", median: 52000, low: 40000, high: 68000 },
-      { role: "Welder", median: 48000, low: 38000, high: 60000 },
-      { role: "Estimator", median: 72000, low: 56000, high: 92000 },
-      { role: "Attorney / Lawyer", median: 135000, low: 95000, high: 200000 },
-      { role: "Paralegal", median: 58000, low: 46000, high: 74000 },
-      { role: "Legal Assistant", median: 48000, low: 38000, high: 60000 },
-      { role: "Compliance Officer", median: 75000, low: 58000, high: 98000 },
-      {
-        role: "Contract Administrator",
-        median: 72000,
-        low: 56000,
-        high: 90000,
-      },
-      { role: "Flight Attendant", median: 62000, low: 48000, high: 82000 },
-      { role: "Chef / Head Cook", median: 54000, low: 42000, high: 70000 },
-      { role: "Hospitality Manager", median: 58000, low: 45000, high: 78000 },
-      { role: "Real Estate Agent", median: 65000, low: 40000, high: 110000 },
-      { role: "Property Manager", median: 60000, low: 46000, high: 78000 },
-      { role: "Logistics Coordinator", median: 56000, low: 44000, high: 70000 },
-      { role: "Supply Chain Analyst", median: 74000, low: 59000, high: 92000 },
-      { role: "Photographer", median: 48000, low: 36000, high: 68000 },
-      {
-        role: "Customer Service Agent",
-        median: 38000,
-        low: 31000,
-        high: 47000,
-      },
-    ];
+    // ROLES_DATA injected from server (500+ roles including CFO, CMO, Medical Director, etc.)
 
     const METRO_DATA = [
       { id: "nyc", name: "NYC Metro Area", multiplier: 1.2 },
@@ -563,6 +391,29 @@ import Layout from "../layouts/Layout.astro";
       { id: "mid", name: "Mid-level (2-5 yrs)", multiplier: 1.0 },
       { id: "senior", name: "Senior (5-8 yrs)", multiplier: 1.3 },
       { id: "lead", name: "Lead / Manager (8+ yrs)", multiplier: 1.6 },
+    ];
+
+    const INDUSTRY_DATA = [
+      { id: "tech", name: "Technology / SaaS", icon: "💻" },
+      { id: "finance", name: "Finance & Banking", icon: "🏦" },
+      { id: "healthcare", name: "Healthcare & Pharma", icon: "🏥" },
+      { id: "consulting", name: "Consulting & Professional Services", icon: "📊" },
+      { id: "manufacturing", name: "Manufacturing & Industrial", icon: "🏭" },
+      { id: "retail", name: "Retail & E-commerce", icon: "🛒" },
+      { id: "education", name: "Education & Research", icon: "🎓" },
+      { id: "media", name: "Media & Entertainment", icon: "🎬" },
+      { id: "realestate", name: "Real Estate & Construction", icon: "🏗️" },
+      { id: "nonprofit", name: "Nonprofit & Government", icon: "🏛️" },
+      { id: "energy", name: "Energy & Utilities", icon: "⚡" },
+      { id: "other", name: "Other Industry", icon: "🔧" },
+    ];
+
+    const COMPANY_SIZE_DATA = [
+      { id: "startup", name: "Startup (1-50 employees)", icon: "🚀", badge: "High Risk / High Reward" },
+      { id: "small", name: "Small Business (51-200)", icon: "🏢", badge: "Flexible Culture" },
+      { id: "mid", name: "Mid-Market (201-1,000)", icon: "🏬", badge: "Established Process" },
+      { id: "large", name: "Large Enterprise (1,001-10,000)", icon: "🏛️", badge: "Standardized Bands" },
+      { id: "mega", name: "Mega Corp (10,000+)", icon: "🌐", badge: "Rigid Bands / Stock" },
     ];
 
     const TONES = [
@@ -604,6 +455,12 @@ import Layout from "../layouts/Layout.astro";
         type: "experience-select",
       },
       {
+        id: "industry",
+        question: "Which industry is this role in?",
+        hint: "Context shapes salary norms and negotiation room.",
+        type: "industry-select",
+      },
+      {
         id: "salaryRange",
         question: "Confirm your target salary range",
         hint: "Adjust the slider below.",
@@ -615,6 +472,12 @@ import Layout from "../layouts/Layout.astro";
         hint: "For personalizing the email.",
         type: "text",
         placeholder: "e.g. Stripe",
+      },
+      {
+        id: "companySize",
+        question: "How big is the company?",
+        hint: "Size affects negotiation flexibility and compensation structure.",
+        type: "company-size-select",
       },
       {
         id: "offers",
@@ -629,12 +492,18 @@ import Layout from "../layouts/Layout.astro";
         type: "toggle-competing",
       },
       {
+        id: "hrReply",
+        question: "Did the recruiter or HR reply? Paste their email here",
+        hint: "We'll craft your response based on what they said. Leave blank for a fresh pitch.",
+        type: "hr-reply-textarea",
+      },
+      {
         id: "achievement",
-        question: "What is a key achievement?",
-        hint: "Be specific with metrics.",
+        question: "Describe your biggest career achievement",
+        hint: "Minimum 30 words required. Include metrics, impact, team size, and revenue/outcome.",
         type: "textarea",
         placeholder:
-          "e.g. Led a team of 5 engineers to deliver a platform migration that reduced deployment time by 40%.",
+          "Describe your most impressive achievement in detail. Include: what the situation was, what action you took, the measurable impact (revenue, time saved, % growth), team size you led, technologies used, and recognition received...",
       },
       {
         id: "tone",
@@ -651,6 +520,10 @@ import Layout from "../layouts/Layout.astro";
       locationLabel: "",
       experience: "",
       experienceLabel: "",
+      industry: "",
+      industryLabel: "",
+      companySize: "",
+      companySizeLabel: "",
       suggestedMedian: 0,
       adjustedMedian: 0,
       lowRange: 0,
@@ -659,12 +532,14 @@ import Layout from "../layouts/Layout.astro";
       currentOffer: "",
       targetSalary: "",
       competingOffer: "no",
+      hrReplyEmail: "",
       achievement: "",
       tone: "",
     };
 
     let currentStepIndex = 0;
     let isGenerating = false;
+    let lastGeneratedEmail = "";
 
     // ─── DOM REFS ──────────────────────────────────────────────────────────
     const $ = (id) => document.getElementById(id);
@@ -692,12 +567,47 @@ import Layout from "../layouts/Layout.astro";
     const resultCaptionNote = $("resultCaptionNote");
 
     // ─── HELPERS ───────────────────────────────────────────────────────────
+    const INAPPROPRIATE_WORDS = [
+      "fuck", "fck", "fuk", "shit", "asshole", "bitch", "bastard", "dick",
+      "cock", "pussy", "cunt", "whore", "slut", "damn", "chutiya", "madarchod",
+      "bhosdike", "laude", "lund", "gand", "bhenchod", "bc", "mc", "suck my",
+      "suck ur", "fuck u", "fuck you", "dickhead"
+    ];
+
+    function containsInappropriateContent(text) {
+      const lower = text.toLowerCase();
+      return INAPPROPRIATE_WORDS.some(word => {
+        const regex = new RegExp('\\b' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+        return regex.test(lower);
+      });
+    }
+
+    function sanitizeAchievement(text) {
+      if (!text) return '';
+      return text.split(/\s+/).filter(w => {
+        const lower = w.toLowerCase().replace(/[^a-z]/g, '');
+        return !INAPPROPRIATE_WORDS.some(bad => lower.includes(bad));
+      }).join(' ');
+    }
+
     const fmt = (v) =>
       new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
         maximumFractionDigits: 0,
       }).format(v);
+
+    const STEP_ICONS = {
+      role: '💼', location: '📍', experience: '📈', industry: '🏭',
+      salaryRange: '💰', company: '🏢', companySize: '📏', offers: '💵',
+      competing: '⚔️', hrReply: '📧', achievement: '🏆', tone: '🎯',
+    };
+
+    const PROGRESS_COLORS = [
+      '#0070f3', '#2563eb', '#6366f1', '#8b5cf6',
+      '#a855f7', '#d946ef', '#ec4899', '#f43f5e',
+      '#f97316', '#eab308', '#22c55e', '#14b8a6',
+    ];
 
     function showScreen(screen) {
       [screenHero, screenConvo, screenLoading, screenResult].forEach((s) =>
@@ -712,6 +622,47 @@ import Layout from "../layouts/Layout.astro";
       progressStep.textContent = `Step ${currentStepIndex + 1} of ${total}`;
       progressPct.textContent = `${pct}%`;
       progressFill.style.width = `${pct}%`;
+      const color = PROGRESS_COLORS[currentStepIndex] || '#0070f3';
+      progressFill.style.background = `linear-gradient(90deg, ${color}, ${PROGRESS_COLORS[Math.min(currentStepIndex + 1, PROGRESS_COLORS.length - 1)]})`;
+
+      // Step dots with animation
+      const dotsContainer = document.getElementById('stepDots');
+      if (dotsContainer) {
+        const newDots = steps.map((s, i) =>
+          `<span class="step-dot inline-block w-1.5 h-1.5 rounded-full ${i <= currentStepIndex ? 'opacity-100' : 'opacity-20'}" style="background:${i <= currentStepIndex ? (PROGRESS_COLORS[i] || '#0070f3') : 'var(--mute)'}"></span>`
+        ).join('');
+        if (dotsContainer.innerHTML !== newDots) {
+          dotsContainer.innerHTML = newDots;
+          // Animate active dot
+          const activeDot = dotsContainer.querySelector('.step-dot.opacity-100:last-child');
+          if (activeDot) {
+            activeDot.classList.add('step-dot-activating');
+            setTimeout(() => activeDot.classList.remove('step-dot-activating'), 500);
+          }
+        }
+      }
+
+      // Step icon with pop animation
+      const stepIcon = document.getElementById('stepIcon');
+      if (stepIcon) {
+        const icon = STEP_ICONS[steps[currentStepIndex]?.id];
+        if (icon) {
+          stepIcon.textContent = icon;
+          stepIcon.classList.remove('hidden');
+          stepIcon.classList.add('step-icon-pop');
+          setTimeout(() => stepIcon.classList.remove('step-icon-pop'), 400);
+        } else {
+          stepIcon.classList.add('hidden');
+        }
+      }
+
+      // Animate progress counter numbers
+      progressStep.classList.add('progress-counter-animating');
+      progressPct.classList.add('progress-counter-animating');
+      setTimeout(() => {
+        progressStep.classList.remove('progress-counter-animating');
+        progressPct.classList.remove('progress-counter-animating');
+      }, 300);
     }
 
     function showError(msg) {
@@ -728,17 +679,32 @@ import Layout from "../layouts/Layout.astro";
       const step = steps[index];
       if (!step) return;
 
+      const card = document.getElementById('stepCard');
+      if (card) {
+        // Exit animation if coming from another step
+        if (card.dataset.lastIndex !== undefined) {
+          card.classList.add('step-card-exiting');
+          card.addEventListener('animationend', function onExit() {
+            card.classList.remove('step-card-exiting');
+            card.removeEventListener('animationend', onExit);
+            enterCard(card, index);
+          }, { once: true });
+        } else {
+          enterCard(card, index);
+        }
+        card.dataset.lastIndex = index;
+      }
+
       hideError();
       stepQuestion.textContent = step.question;
       stepHint.textContent = step.hint;
+      stepQuestion.classList.add('question-animating');
+      stepHint.classList.add('question-animating');
 
-      // Show/hide back button
       btnBack.classList.toggle("hidden", index === 0);
 
-      // Show reassure line on specific steps
       reassureLine.classList.toggle("hidden", index < 5);
 
-      // Update button text on last step
       btnContinue.textContent =
         index === steps.length - 1 ? "Generate Pitch →" : "Continue";
 
@@ -755,6 +721,12 @@ import Layout from "../layouts/Layout.astro";
         case "experience-select":
           renderExperienceSelect();
           break;
+        case "industry-select":
+          renderIndustrySelect();
+          break;
+        case "company-size-select":
+          renderCompanySizeSelect();
+          break;
         case "salary-slider":
           renderSalarySlider();
           break;
@@ -770,6 +742,9 @@ import Layout from "../layouts/Layout.astro";
         case "textarea":
           renderTextarea(step.placeholder || "");
           break;
+        case "hr-reply-textarea":
+          renderHrReplyTextarea();
+          break;
         case "tone-select":
           renderToneSelect();
           break;
@@ -778,9 +753,30 @@ import Layout from "../layouts/Layout.astro";
           break;
       }
 
-      // Scroll to top of question card
-      const card = stepInputSlot.closest(".border");
-      if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Trigger input animations
+      setTimeout(() => {
+        stepInputSlot.querySelectorAll('input, select, textarea, button[class*="option"]').forEach((el, i) => {
+          el.style.animationDelay = `${0.15 + i * 0.04}s`;
+          el.classList.add('input-animating');
+        });
+        // Auto-focus first input
+        const firstInput = stepInputSlot.querySelector('input:not([type="hidden"]), textarea, select');
+        if (firstInput && !firstInput.matches('[type="checkbox"], [type="radio"]')) {
+          firstInput.classList.add('auto-focus-ring');
+          setTimeout(() => firstInput.focus(), 100);
+        }
+      }, 50);
+
+      const stepCardContainer = stepInputSlot.closest(".border");
+      if (stepCardContainer) stepCardContainer.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function enterCard(card, index) {
+      card.classList.add('step-card-animating');
+      card.addEventListener('animationend', function onEnter() {
+        card.classList.remove('step-card-animating');
+        card.removeEventListener('animationend', onEnter);
+      }, { once: true });
     }
 
     // ─── ROLE SEARCH ───────────────────────────────────────────────────────
@@ -919,6 +915,73 @@ import Layout from "../layouts/Layout.astro";
       });
     }
 
+    // ─── INDUSTRY SELECT ──────────────────────────────────────────────────
+    function renderIndustrySelect() {
+      stepInputSlot.innerHTML = `
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        ${INDUSTRY_DATA.map(
+          (ind) => `
+          <button type="button" class="ind-option px-3.5 py-3 border ${answers.industry === ind.id ? "border-accent-blue bg-accent-blue/5 ring-1 ring-accent-blue/20" : "border-hairline"} rounded-md text-left hover:border-accent-blue/50 hover:bg-canvas-soft-2 transition-all cursor-pointer flex items-center gap-3" data-id="${ind.id}">
+            <span class="text-lg">${ind.icon}</span>
+            <span class="text-sm text-ink font-medium">${ind.name}</span>
+          </button>
+        `,
+        ).join("")}
+      </div>
+    `;
+
+      stepInputSlot.querySelectorAll(".ind-option").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          stepInputSlot.querySelectorAll(".ind-option").forEach((b) => {
+            b.classList.remove("border-accent-blue", "bg-accent-blue/5", "ring-1", "ring-accent-blue/20");
+            b.classList.add("border-hairline");
+          });
+          this.classList.add("border-accent-blue", "bg-accent-blue/5", "ring-1", "ring-accent-blue/20");
+          this.classList.remove("border-hairline");
+          const data = INDUSTRY_DATA.find((ind) => ind.id === this.dataset.id);
+          if (data) {
+            answers.industry = data.id;
+            answers.industryLabel = data.name;
+          }
+        });
+      });
+    }
+
+    // ─── COMPANY SIZE SELECT ──────────────────────────────────────────────
+    function renderCompanySizeSelect() {
+      stepInputSlot.innerHTML = `
+      <div class="grid grid-cols-1 gap-2.5">
+        ${COMPANY_SIZE_DATA.map(
+          (cs) => `
+          <button type="button" class="cs-option px-4 py-3 border ${answers.companySize === cs.id ? "border-accent-blue bg-accent-blue/5 ring-1 ring-accent-blue/20" : "border-hairline"} rounded-md text-left hover:border-accent-blue/50 hover:bg-canvas-soft-2 transition-all cursor-pointer flex items-center gap-3" data-id="${cs.id}">
+            <span class="text-lg">${cs.icon}</span>
+            <div class="flex-1">
+              <div class="text-sm text-ink font-medium">${cs.name}</div>
+              <div class="text-[10px] text-mute font-mono mt-0.5">${cs.badge}</div>
+            </div>
+          </button>
+        `,
+        ).join("")}
+      </div>
+    `;
+
+      stepInputSlot.querySelectorAll(".cs-option").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          stepInputSlot.querySelectorAll(".cs-option").forEach((b) => {
+            b.classList.remove("border-accent-blue", "bg-accent-blue/5", "ring-1", "ring-accent-blue/20");
+            b.classList.add("border-hairline");
+          });
+          this.classList.add("border-accent-blue", "bg-accent-blue/5", "ring-1", "ring-accent-blue/20");
+          this.classList.remove("border-hairline");
+          const data = COMPANY_SIZE_DATA.find((cs) => cs.id === this.dataset.id);
+          if (data) {
+            answers.companySize = data.id;
+            answers.companySizeLabel = data.name;
+          }
+        });
+      });
+    }
+
     // ─── SALARY SLIDER ─────────────────────────────────────────────────────
     function renderSalarySlider() {
       const baseMedian =
@@ -1033,13 +1096,112 @@ import Layout from "../layouts/Layout.astro";
       });
     }
 
+    // ─── AUTO ACHIEVEMENT GENERATOR ──────────────────────────────────────
+    function generateAutoAchievement(roleName) {
+      const roleData = ROLES_DATA.find(r => r.role.toLowerCase() === roleName.toLowerCase());
+      if (!roleData) return '';
+      const skills = roleData.skills || [];
+      const desc = roleData.description || '';
+      const cat = roleData.category || '';
+
+      const sk1 = skills[0] || 'specialized tools';
+      const sk2 = skills[1] || 'analytical methods';
+      const sk3 = skills[2] || 'industry best practices';
+      const teamSize = cat === 'Healthcare' ? '12' : cat === 'Finance & Business' ? '8' : '10';
+      const pctImprovement = cat === 'Technology' ? '40' : cat === 'Healthcare' ? '35' : '30';
+      const revenueImpact = cat === 'Finance & Business' ? '$2.5M' : cat === 'Technology' ? '$1.8M' : '$1.2M';
+
+      const templates = [
+        `In my current role, I led a critical initiative using ${sk1} and ${sk2} that improved team efficiency by ${pctImprovement}% within six months. I collaborated across ${teamSize} cross-functional stakeholders to deliver the project ahead of schedule, resulting in approximately ${revenueImpact} in annual value creation for the organization.`,
+        `As a ${roleName}, I spearheaded the implementation of ${sk1} and ${sk2} across our ${desc.toLowerCase().includes('team') || desc.toLowerCase().includes('manage') ? 'team' : 'department'}, directly improving key performance metrics by ${pctImprovement}% year-over-year. This involved coordinating with ${teamSize} team members and external partners, ultimately driving ${revenueImpact} in measurable business impact.`,
+        `I led a cross-functional effort to redesign our approach to ${sk3}, leveraging expertise in ${sk1} and ${sk2} to deliver a ${pctImprovement}% improvement in operational efficiency. Managing stakeholder relationships across ${teamSize} departments, I delivered results that contributed ${revenueImpact} to the bottom line while enhancing team productivity.`
+      ];
+
+      return templates[Math.floor(Math.random() * templates.length)];
+    }
+
     // ─── TEXTAREA ──────────────────────────────────────────────────────────
+    function setAchievementValue(val) {
+      answers.achievement = val;
+      const input = document.getElementById('achievementInput');
+      if (input) {
+        input.value = val;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      const wc = val ? val.split(/\s+/).filter(Boolean).length : 0;
+      updateWordCountUI(wc, false);
+    }
+
+    function updateWordCountUI(wc, bad) {
+      const numEl = $('wordCountNum');
+      const displayEl = $('wordCountDisplay');
+      const statusEl = $('wordCountStatus');
+      if (numEl) numEl.textContent = wc;
+      if (displayEl) {
+        displayEl.className = wc >= 30 && !bad ? 'text-xs font-mono text-emerald-600' : 'text-xs font-mono text-mute';
+      }
+      if (statusEl) {
+        statusEl.textContent = bad ? '✗ Inappropriate content' : wc >= 30 ? '✓ Ready' : wc > 0 ? `${30 - wc} more words needed` : '';
+        statusEl.className = bad ? 'text-xs font-mono text-red-600' : wc >= 30 ? 'text-xs font-mono text-emerald-600' : 'text-xs font-mono text-amber-600';
+      }
+    }
+
     function renderTextarea(placeholder) {
+      const wordCount = answers.achievement ? answers.achievement.split(/\s+/).filter(Boolean).length : 0;
+      const hasProfanity = containsInappropriateContent(answers.achievement || '');
       stepInputSlot.innerHTML = `
-      <textarea id="achievementInput" class="w-full h-28 px-3.5 py-2.5 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none resize-y" placeholder="${placeholder}">${answers.achievement || ""}</textarea>
+      <textarea id="achievementInput" class="w-full h-32 px-3.5 py-2.5 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none resize-y ${hasProfanity ? 'border-red-500 ring-1 ring-red-500' : ''}" placeholder="${placeholder}">${answers.achievement || ""}</textarea>
+      ${hasProfanity ? '<div id="profanityWarning" class="mt-2 p-2 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-md"><p class="text-xs text-red-600 dark:text-red-400 font-medium">⚠ Inappropriate language detected. Please rewrite professionally — focus on measurable impact, metrics, and outcomes.</p></div>' : ''}
+      <div class="flex justify-between items-center mt-2">
+        <div id="wordCountDisplay" class="text-xs font-mono ${wordCount >= 30 && !hasProfanity ? 'text-emerald-600' : 'text-mute'}">
+          <span id="wordCountNum">${wordCount}</span> / 30 words minimum
+        </div>
+        <div id="wordCountStatus" class="text-xs font-mono ${hasProfanity ? 'text-red-600' : wordCount >= 30 ? 'text-emerald-600' : 'text-amber-600'}">
+          ${hasProfanity ? '✗ Inappropriate content' : wordCount >= 30 ? '✓ Ready' : wordCount > 0 ? `${30 - wordCount} more words needed` : ''}
+        </div>
+      </div>
+      <button id="btnAutoAchievement" type="button" class="mt-3 w-full px-4 py-2.5 border border-dashed border-accent-blue/40 text-accent-blue hover:bg-accent-blue/5 hover:border-accent-blue rounded-md text-sm font-medium transition-all cursor-pointer flex items-center justify-center gap-2" ${answers.role ? '' : 'disabled style="opacity:0.4;cursor:not-allowed;" title="Select a role first"'}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        Auto-fill Achievement for ${answers.role || 'selected role'}
+      </button>
     `;
-      $("achievementInput").addEventListener("input", function () {
+      const input = $("achievementInput");
+      input.addEventListener("input", function () {
         answers.achievement = this.value.trim();
+        const val = this.value.trim();
+        const wc = val ? val.split(/\s+/).filter(Boolean).length : 0;
+        const bad = containsInappropriateContent(val);
+        const warningEl = $("profanityWarning");
+        if (bad && !warningEl) {
+          const warn = document.createElement("div");
+          warn.id = "profanityWarning";
+          warn.className = "mt-2 p-2 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-md";
+          warn.innerHTML = '<p class="text-xs text-red-600 dark:text-red-400 font-medium">⚠ Inappropriate language detected. Please rewrite professionally — focus on measurable impact, metrics, and outcomes.</p>';
+          this.parentNode.insertBefore(warn, this.nextSibling);
+          this.classList.add("border-red-500", "ring-1", "ring-red-500");
+        } else if (!bad && warningEl) {
+          warningEl.remove();
+          this.classList.remove("border-red-500", "ring-1", "ring-red-500");
+        }
+        updateWordCountUI(wc, bad);
+      });
+      $("btnAutoAchievement").addEventListener("click", function () {
+        if (!answers.role) return;
+        const autoText = generateAutoAchievement(answers.role);
+        if (autoText) setAchievementValue(autoText);
+      });
+    }
+
+    // ─── HR REPLY TEXTAREA ────────────────────────────────────────────────
+    function renderHrReplyTextarea() {
+      stepInputSlot.innerHTML = `
+      <div class="space-y-3">
+        <textarea id="hrReplyInput" class="w-full h-36 px-3.5 py-2.5 border border-hairline rounded-md bg-canvas text-sm focus:border-accent-blue outline-none resize-y" placeholder="Paste the email you received from the recruiter or HR here. For example:&#10;&#10;'Thank you for your interest. We are pleased to offer you the position at a base salary of $120,000...'">${answers.hrReplyEmail || ""}</textarea>
+        <p class="text-[10px] text-mute font-mono leading-relaxed">We'll analyze their message and craft a direct response. If you leave this blank, we'll generate a fresh negotiation email from scratch.</p>
+      </div>
+    `;
+      $("hrReplyInput").addEventListener("input", function () {
+        answers.hrReplyEmail = this.value.trim();
       });
     }
 
@@ -1095,6 +1257,12 @@ import Layout from "../layouts/Layout.astro";
             return false;
           }
           return true;
+        case "industry":
+          if (!answers.industry) {
+            showError("Please select the industry.");
+            return false;
+          }
+          return true;
         case "salaryRange":
           if (!answers.targetSalary || parseInt(answers.targetSalary) <= 0) {
             showError("Please adjust the salary slider.");
@@ -1104,6 +1272,12 @@ import Layout from "../layouts/Layout.astro";
         case "company":
           if (!answers.company.trim()) {
             showError("Please enter the company name.");
+            return false;
+          }
+          return true;
+        case "companySize":
+          if (!answers.companySize) {
+            showError("Please select the company size.");
             return false;
           }
           return true;
@@ -1120,6 +1294,15 @@ import Layout from "../layouts/Layout.astro";
             showError("Please describe a key achievement.");
             return false;
           }
+          const wc = answers.achievement.split(/\s+/).filter(Boolean).length;
+          if (wc < 30) {
+            showError(`Please write at least 30 words (you've written ${wc}). Detailed achievements with metrics create the strongest negotiation leverage.`);
+            return false;
+          }
+          if (containsInappropriateContent(answers.achievement)) {
+            showError("Your achievement contains inappropriate language. Please rewrite it professionally — focus on measurable impact, metrics, and outcomes.");
+            return false;
+          }
           return true;
         case "tone":
           if (!answers.tone) {
@@ -1132,74 +1315,238 @@ import Layout from "../layouts/Layout.astro";
       }
     }
 
-    // ─── CLIENT-SIDE MOCK EMAIL GENERATOR ─────────────────────────────────
-    function generateMockEmail() {
-      const greeting = "Hi [Hiring Manager Name],";
-      const closing = "Best,\n\n[Your Name]";
+    // ─── NEGOTIATION DIFFICULTY CALCULATOR ─────────────────────────────────
+    const DIFFICULTY_LEVELS = {
+      easy: { label: 'Easy', color: 'bg-emerald-500', badgeClass: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20' },
+      moderate: { label: 'Moderate', color: 'bg-amber-500', badgeClass: 'bg-amber-500/10 text-amber-600 border-amber-500/20' },
+      hard: { label: 'Hard', color: 'bg-orange-500', badgeClass: 'bg-orange-500/10 text-orange-600 border-orange-500/20' },
+      veryHard: { label: 'Very Hard', color: 'bg-red-500', badgeClass: 'bg-red-500/10 text-red-600 border-red-500/20' },
+    };
 
-      const formattedLow = fmt(answers.lowRange).replace("$", "");
-      const formattedHigh = fmt(answers.highRange).replace("$", "");
-      const formattedRange =
-        answers.lowRange && answers.highRange
-          ? `$${formattedLow} to $${formattedHigh}`
-          : "typical bands for this role";
+    function calculateDifficulty() {
+      const currentOffer = parseFloat(answers.currentOffer) || 0;
+      const targetSalary = parseFloat(answers.targetSalary) || 0;
+      const hasCompeting = answers.competingOffer === 'yes';
+      const expId = answers.experience || 'mid';
+      const indId = answers.industry || '';
+      const csId = answers.companySize || '';
 
-      const locationText = (answers.locationLabel || "")
-        .toLowerCase()
-        .includes("remote")
-        ? "for national average roles"
-        : `in the ${answers.locationLabel || "your area"}`;
-
-      const achievementSentence =
-        answers.achievement.length > 5
-          ? `particularly my work in ${answers.achievement.replace(/\.$/, "")}`
-          : "my background and technical skills";
-
-      const formattedTarget = answers.targetSalary
-        ? `$${parseInt(answers.targetSalary).toLocaleString()}`
-        : "$125,000";
-
-      let body = "";
-
-      if (answers.tone === "confident-polite") {
-        body = `Thanks for extending the offer to join ${answers.company} as a ${answers.role}. I am excited about the team's vision and the chance to contribute.
-
-Before finalizing, I wanted to discuss the base salary. Typical market ranges for a ${answers.role} ${locationText} run between ${formattedRange}. Considering this data alongside the specific value I plan to bring—${achievementSentence}—I would like to request a base salary of ${formattedTarget}.
-
-${
-  answers.competingOffer === "yes"
-    ? `I have a competing offer at a comparable level, but ${answers.company} is my clear first choice. If we can close this gap, I'm ready to sign this week.`
-    : `I believe this target represents a fair alignment with my qualifications and will allow me to fully focus on delivering results from day one.`
-}
-
-Are you open to discussing this? I am happy to hop on a call this week to align.`;
-      } else if (answers.tone === "assertive") {
-        body = `I appreciate the offer to join ${answers.company} as a ${answers.role}. I am very interested in the project roadmap.
-
-Regarding the base salary, I have evaluated the initial offer against market rates. Typical compensation for comparable ${answers.role} positions ${locationText} sits between ${formattedRange}. In light of my background—especially ${achievementSentence}—I am looking for a base salary of ${formattedTarget} to finalize our agreement.
-
-${
-  answers.competingOffer === "yes"
-    ? `I have another active offer at this level, but because ${answers.company} is my top choice, I prefer to sign here if we can meet this baseline.`
-    : `This compensation reflects both my track record of delivery and the responsibilities of the role.`
-}
-
-Let me know if we can connect briefly to finalize this. I am happy to hop on a call this week.`;
-      } else {
-        body = `Thank you so much for the offer to join ${answers.company} as a ${answers.role}! I have really enjoyed our conversations and am very enthusiastic about working together.
-
-I wanted to check if there is some flexibility around the base salary. Based on market standards for a ${answers.role} ${locationText} (typically ${formattedRange}) and reflecting my background—especially ${achievementSentence}—I was hoping we could look closer to ${formattedTarget}.
-
-${
-  answers.competingOffer === "yes"
-    ? `I do have another active offer at the moment, but my preference is strongly for this team. I want to find a package that works well for both of us.`
-    : `I am very open to discussing how we can structure this to reach a mutually beneficial agreement.`
-}
-
-Let me know if you have some time. I am happy to hop on a call this week to talk through the details.`;
+      let gapPct = 0;
+      if (currentOffer > 0 && targetSalary > 0) {
+        gapPct = ((targetSalary - currentOffer) / currentOffer) * 100;
       }
 
-      return `${greeting}\n\n${body}\n\n${closing}`;
+      // Base score 0-100 (higher = harder)
+      let score = 50;
+
+      // Gap factor (0-40 points)
+      if (gapPct <= 0) score -= 15;
+      else if (gapPct <= 5) score -= 10;
+      else if (gapPct <= 10) score -= 5;
+      else if (gapPct <= 15) score += 5;
+      else if (gapPct <= 25) score += 15;
+      else if (gapPct <= 40) score += 25;
+      else score += 35;
+
+      // Competing offer factor (-20 to 0)
+      if (hasCompeting) score -= 20;
+
+      // Experience factor
+      if (expId === 'entry') score += 15;
+      else if (expId === 'senior') score -= 10;
+      else if (expId === 'lead') score -= 20;
+
+      // Industry factor
+      const hardIndustries = ['nonprofit', 'education', 'manufacturing'];
+      const easyIndustries = ['tech', 'finance', 'consulting'];
+      if (hardIndustries.includes(indId)) score += 10;
+      else if (easyIndustries.includes(indId)) score -= 8;
+
+      // Company size factor
+      if (csId === 'startup') score += 12;
+      else if (csId === 'small') score += 5;
+      else if (csId === 'large' || csId === 'mega') score -= 8;
+
+      score = Math.max(0, Math.min(100, score));
+
+      let level, leverageLabel;
+      if (score <= 25) {
+        level = 'easy';
+        leverageLabel = 'Strong';
+      } else if (score <= 50) {
+        level = 'moderate';
+        leverageLabel = 'Balanced';
+      } else if (score <= 75) {
+        level = 'hard';
+        leverageLabel = 'Weak';
+      } else {
+        level = 'veryHard';
+        leverageLabel = 'Minimal';
+      }
+
+      return {
+        score,
+        gapPct: Math.round(gapPct),
+        level,
+        leverageLabel,
+        details: DIFFICULTY_LEVELS[level],
+      };
+    }
+
+    function updateDifficultyUI() {
+      const diff = calculateDifficulty();
+
+      const updateEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+      // Badge
+      const badge = document.getElementById('badgeDifficulty');
+      if (badge) {
+        badge.textContent = diff.details.label;
+        badge.className = `inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider ${diff.details.badgeClass}`;
+        badge.classList.remove('hidden');
+      }
+
+      // Desktop detail
+      const dot = document.getElementById('diffDot');
+      const label = document.getElementById('diffLabel');
+      if (dot) dot.className = `w-1.5 h-1.5 rounded-full ${diff.details.color}`;
+      updateEl('diffLabel', diff.details.label);
+      updateEl('diffGap', diff.gapPct > 0 ? `+${diff.gapPct}%` : `${diff.gapPct}%`);
+      updateEl('diffLeverage', diff.leverageLabel);
+      document.getElementById('difficultyDetail')?.classList.remove('hidden');
+
+      // Mobile detail
+      const dotM = document.getElementById('diffDotMobile');
+      if (dotM) dotM.className = `w-1.5 h-1.5 rounded-full ${diff.details.color}`;
+      updateEl('diffLabelMobile', diff.details.label);
+      updateEl('diffGapMobile', diff.gapPct > 0 ? `+${diff.gapPct}%` : `${diff.gapPct}%`);
+      updateEl('diffLeverageMobile', diff.leverageLabel);
+    }
+
+    // ─── CLIENT-SIDE MOCK EMAIL GENERATOR ─────────────────────────────────
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    function generateMockEmail() {
+      const closings = ["Best,\n\n[Your Name]", "Best regards,\n\n[Your Name]", "Sincerely,\n\n[Your Name]"];
+      const fRangeLow = answers.lowRange ? fmt(answers.lowRange) : "$80,000";
+      const fRangeHigh = answers.highRange ? fmt(answers.highRange) : "$130,000";
+      const fRange = fRangeLow + " to " + fRangeHigh;
+      const loc = (answers.locationLabel || "").toLowerCase().includes("remote")
+        ? "nationally"
+        : "in " + (answers.locationLabel || "your area");
+      const rawAchievement = answers.achievement || "";
+      const isGarbage = containsInappropriateContent(rawAchievement) || rawAchievement.split(/\s+/).filter(Boolean).length < 5;
+      const achievement = isGarbage ? "my track record of driving measurable business impact" : rawAchievement;
+      const fTarget = answers.targetSalary
+        ? fmt(parseInt(answers.targetSalary))
+        : "$125,000";
+      const achievementHook = achievement.length > 20
+        ? achievement.replace(/\.$/, "")
+        : "my track record of delivering consistent results";
+
+      const toneVariants = {
+        "confident-polite": {
+          opening: [
+            "Thank you for the offer to join " + answers.company + " as a " + answers.role + ". I've been following the team's work closely, and I'm excited about the problems you're solving.",
+            "I'm grateful for the offer to join " + answers.company + " as a " + answers.role + ". The conversation reaffirmed my excitement about the work your team is doing.",
+            "Thank you for extending this offer for the " + answers.role + " position at " + answers.company + ". I've been impressed by your team's vision and the impact you're creating."
+          ],
+          value: [
+            "Based on my background \u2014 " + achievementHook + " \u2014 and market data showing comparable " + answers.role + " roles " + loc + " range at " + fRange + ",",
+            "With " + achievementHook + " and industry benchmarks placing this role " + loc + " at " + fRange + ",",
+            "Given my experience \u2014 " + achievementHook + " \u2014 and the market range for " + answers.role + " roles " + loc + " of " + fRange + ","
+          ],
+          ask: [
+            "I believe " + fTarget + " is a fair reflection of the value I'll bring from day one.",
+            "I'm confident that " + fTarget + " aligns with the impact I can deliver.",
+            "I think " + fTarget + " appropriately reflects the experience and results I bring."
+          ],
+          close: [
+            "I'm eager to move forward if we can align here. Happy to connect briefly this week.",
+            "I'd love to find a path forward at that level. Let me know if you're open to a quick call.",
+            "I'm excited about the opportunity and hope we can settle at " + fTarget + ". Happy to discuss further."
+          ]
+        },
+        "assertive": {
+          opening: [
+            "I appreciate the offer to join " + answers.company + " as a " + answers.role + ". I've evaluated it carefully against my criteria and the market.",
+            "Thank you for the " + answers.role + " offer at " + answers.company + ". I've reviewed the terms against current market conditions.",
+            "I've received and reviewed the offer for the " + answers.role + " position at " + answers.company + ". Here are my thoughts."
+          ],
+          value: [
+            "Given my track record \u2014 " + achievementHook + " \u2014 and market data placing comparable " + answers.role + " roles " + loc + " at " + fRange + ",",
+            "Based on " + achievementHook + " and the standard range for " + answers.role + " roles " + loc + " of " + fRange + ",",
+            "With clear evidence of " + achievementHook + " and market rates " + loc + " at " + fRange + ","
+          ],
+          ask: [
+            "my baseline to move forward is " + fTarget + ".",
+            "my requirement is " + fTarget + " to proceed.",
+            "I require " + fTarget + " to align with market value."
+          ],
+          close: [
+            "I'm ready to commit once we align here. Let me know if you'd like to connect to finalize.",
+            "I'm prepared to sign at " + fTarget + ". Let me know your thoughts this week.",
+            "Let me know if you can meet at " + fTarget + " — I'm ready to move forward."
+          ]
+        },
+        "warm-collaborative": {
+          opening: [
+            "Thank you so much for the offer to join " + answers.company + " as a " + answers.role + "! I've really enjoyed our conversations and would love to be part of what you're building.",
+            "I was so happy to receive the offer for the " + answers.role + " role at " + answers.company + ". I truly admire the culture and mission you're building.",
+            "Thank you for this wonderful opportunity to join " + answers.company + " as a " + answers.role + ". I've been thinking about how I can contribute meaningfully to the team."
+          ],
+          value: [
+            "Reflecting on my experience \u2014 especially " + achievementHook + " \u2014 and looking at market standards for " + answers.role + " roles " + loc + " (typically " + fRange + "),",
+            "Considering " + achievementHook + " and the typical range for " + answers.role + " roles " + loc + " of " + fRange + ",",
+            "When I look at " + achievementHook + " alongside the market data for " + answers.role + " positions " + loc + " showing " + fRange + ","
+          ],
+          ask: [
+            "I was hoping we could look toward " + fTarget + " to make this work well for both of us.",
+            "I'd love to find a way to get to " + fTarget + " — I think that's where we both win.",
+            "Would it be possible to align around " + fTarget + "? I believe that's a great starting point for us."
+          ],
+          close: [
+            "I'm very open to discussing how we get there. Let me know if you have time to chat this week!",
+            "I'd really love to make this work. Happy to jump on a call to explore how we can get to " + fTarget + ".",
+            "Looking forward to your thoughts! I'm confident we can find something that works for everyone."
+          ]
+        }
+      };
+
+      const tv = toneVariants[answers.tone] || toneVariants["confident-polite"];
+      const t = {
+        opening: pick(tv.opening),
+        value: pick(tv.value),
+        ask: pick(tv.ask),
+        close: pick(tv.close)
+      };
+
+      const competeVariants = answers.competingOffer === "yes"
+        ? [
+            "I have another offer at a comparable level, but " + answers.company + " is my strong preference. If we can meet at " + fTarget + ", I'm ready to commit immediately.",
+            "I'm currently considering a competing offer at a similar level. That said, " + answers.company + " is my top choice. At " + fTarget + ", I'd accept right away.",
+            "Another company has put forward a competitive offer. I'd much rather join " + answers.company + " though \u2014 if we can settle at " + fTarget + ", I'm in."
+          ]
+        : [
+            answers.company + " is where I want to be, and I'm confident this is the right place for me to do my best work.",
+            "I've been intentional about where I want to take my career next, and " + answers.company + " is the clear frontrunner.",
+            "I'm genuinely excited about the direction of " + answers.company + " and the impact I can have in this role."
+          ];
+
+      const competingLine = pick(competeVariants);
+
+      // If user pasted HR reply, generate a tailored reply
+      if (answers.hrReplyEmail && answers.hrReplyEmail.length > 10) {
+        const hrOpenings = [
+          "Hi there,\n\nThank you for getting back to me regarding the " + answers.role + " position. I really appreciate the detailed response.",
+          "Hello,\n\nThanks for your thoughtful response about the " + answers.role + " opportunity. I value the transparency.",
+          "Hi,\n\nI appreciate you taking the time to share more details about the " + answers.role + " role."
+        ];
+        return pick(hrOpenings) + "\n\n" + t.value + " " + t.ask + " " + competingLine + "\n\nI'd love to continue the conversation and find a path forward that works for both of us. Happy to discuss further on a brief call this week.\n\n" + pick(closings);
+      }
+
+      const signoff = pick(closings);
+      return "Hi [Hiring Manager Name],\n\n" + t.opening + "\n\n" + t.value + " " + t.ask + " " + competingLine + "\n\n" + t.close + "\n\n" + signoff;
     }
 
     // ─── CLIENT-SIDE EMAIL GENERATION ─────────────────────────────────────
@@ -1223,12 +1570,15 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
           tone: answers.tone,
           achievement: answers.achievement,
           achievementDetail: "",
+          hrReplyEmail: answers.hrReplyEmail || "",
           lowRange: String(answers.lowRange),
           highRange: String(answers.highRange),
+          industry: answers.industry || "",
+          companySize: answers.companySize || "",
         };
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
 
         const response = await fetch("/api/generate", {
           method: "POST",
@@ -1251,7 +1601,6 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
       // Client-side generation (always works)
       const mockEmail = generateMockEmail();
       displayResult(mockEmail, true);
-      isGenerating = false;
     }
 
     // ─── CONFETTI CELEBRATION ────────────────────────────────────────────
@@ -1288,7 +1637,12 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
     }
 
     // ─── TYPEWRITER EFFECT ──────────────────────────────────────────────
-    function typewriterEffect(element, text, speed = 15) {
+    let typewriterTimer = null;
+    function typewriterEffect(element, text, speed = 15, onComplete) {
+      if (typewriterTimer) {
+        clearTimeout(typewriterTimer);
+        typewriterTimer = null;
+      }
       element.value = "";
       element.classList.add("typewriter");
       let i = 0;
@@ -1296,9 +1650,11 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
         if (i < text.length) {
           element.value += text.charAt(i);
           i++;
-          setTimeout(type, speed);
+          typewriterTimer = setTimeout(type, speed);
         } else {
           element.classList.remove("typewriter");
+          typewriterTimer = null;
+          if (onComplete) onComplete();
         }
       }
       type();
@@ -1306,18 +1662,26 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
 
     // ─── DISPLAY RESULT ───────────────────────────────────────────────────
     function displayResult(text, isMock) {
+      // Store for polish feature
+      lastGeneratedEmail = text;
+
       // Fire confetti celebration
       fireConfetti();
 
-      // Typewriter effect for the email
-      typewriterEffect(resultText, text);
+      // Update difficulty UI
+      updateDifficultyUI();
+
+      // Typewriter effect for the email — unblock isGenerating when done
+      typewriterEffect(resultText, text, 15, function () {
+        isGenerating = false;
+      });
 
       badgeSource.textContent = isMock
         ? "📊 Market Estimate"
         : "🤖 AI Generated";
       badgeTone.textContent =
         TONES.find((t) => t.id === answers.tone)?.name || answers.tone;
-      resultCaptionNote.textContent = `Based on ${answers.role} in ${answers.locationLabel || "Remote"} • ${answers.experienceLabel || "Mid-level"}`;
+      resultCaptionNote.textContent = `${answers.role} at ${answers.company} • ${answers.industryLabel || ""} • ${answers.companySizeLabel || ""} • ${answers.locationLabel || "Remote"}`;
       showScreen(screenResult);
     }
 
@@ -1377,6 +1741,137 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
     // ─── REGENERATE ────────────────────────────────────────────────────────
     btnRegen.addEventListener("click", generateEmail);
 
+    // ─── AI POLISH ───────────────────────────────────────────────────────────
+    lastGeneratedEmail = '';
+    let lastPolishMode = '';
+
+    function showPolishMenu() {
+      const dropdown = $('polishDropdown');
+      const isHidden = dropdown.classList.contains('hidden');
+      if (isHidden) {
+        dropdown.classList.remove('hidden');
+        dropdown.classList.remove('closing');
+      } else {
+        dropdown.classList.add('closing');
+        setTimeout(() => dropdown.classList.add('hidden'), 150);
+      }
+    }
+
+    function hidePolishMenu() {
+      const dropdown = $('polishDropdown');
+      if (!dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('closing');
+        setTimeout(() => dropdown.classList.add('hidden'), 150);
+      }
+    }
+
+    async function polishEmail(mode) {
+      const currentEmail = resultText.value.trim();
+      if (!currentEmail || isGenerating) return;
+
+      lastPolishMode = mode;
+      const polishBtn = $('btnPolish');
+      const btnText = polishBtn.querySelector('span') || polishBtn;
+      const originalHtml = polishBtn.innerHTML;
+      polishBtn.disabled = true;
+      polishBtn.innerHTML = '<span class="spinner"></span><span>Polishing...</span>';
+      polishBtn.classList.add('polish-loading');
+
+      try {
+        const response = await fetch('/api/polish', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: currentEmail,
+            mode: mode,
+            context: `Role: ${answers.role}, Company: ${answers.company}, Target: $${parseInt(answers.targetSalary).toLocaleString()}, Tone: ${answers.tone}`
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          lastGeneratedEmail = data.text;
+          resultText.classList.add('polish-updating');
+          typewriterEffect(resultText, data.text, 12, () => {
+            resultText.classList.remove('polish-updating');
+            isGenerating = false;
+            badgeSource.textContent = data.isMock ? '🤖 AI Polished (Mock)' : '🤖 AI Polished';
+          });
+        } else {
+          throw new Error('Polish failed');
+        }
+      } catch (err) {
+        // Fallback to mock polish
+        const polished = generateMockPolish(currentEmail, mode);
+        lastGeneratedEmail = polished;
+        resultText.classList.add('polish-updating');
+        typewriterEffect(resultText, polished, 12, () => {
+          resultText.classList.remove('polish-updating');
+          isGenerating = false;
+          badgeSource.textContent = '🤖 AI Polished (Mock)';
+        });
+      } finally {
+        polishBtn.disabled = false;
+        polishBtn.innerHTML = originalHtml;
+        hidePolishMenu();
+      }
+    }
+
+    function generateMockPolish(email, mode) {
+      const lines = email.split('\n').filter(l => l.trim());
+      const closing = lines.pop() || 'Best,\n[Your Name]';
+      const body = lines.slice(1).join('\n');
+
+      const transforms = {
+        'more-assertive': (b) => b
+          .replace(/I (think|believe|would like to|hope to)/gi, '')
+          .replace(/I am (confident|sure) that/gi, 'My baseline is')
+          .replace(/would (love|like) to/gi, 'need to')
+          .replace(/could we/gi, 'we need to')
+          .replace(/I was hoping/gi, 'I require')
+          + '\n\nI\'m ready to sign once we align here.',
+        'warmer-tone': (b) => 'I truly appreciate the offer and have enjoyed our conversations.\n\n' + b
+          .replace(/I (require|need)/gi, 'I\'d love to')
+          .replace(/my baseline is/gi, 'I was hoping we could')
+          .replace(/I require/gi, 'would it be possible to')
+          + '\n\nI\'m confident we can find something that works for both of us.',
+        'shorten': (b) => {
+          const sentences = b.split('. ').filter(s => s.trim());
+          return sentences.slice(0, 4).join('. ') + '.';
+        },
+        'expand-details': (b) => b + '\n\nThis impact was achieved while leading a cross-functional team of 8 and delivering 3 weeks ahead of schedule — the kind of execution I\'ll bring to this role from day one.',
+        'add-market-data': (b) => b + '\n\nBased on current market data for this role in this metro, the 75th percentile aligns with my target — this isn\'t a request, it\'s market reality.',
+        'fix-grammar': (b) => b
+          .replace(/\s+/g, ' ')
+          .replace(/\.\s*\./g, '.')
+          .replace(/,\s*,/g, ',')
+          .replace(/I\s+I/gi, 'I')
+          .trim()
+      };
+
+      const transform = transforms[mode] || transforms['fix-grammar'];
+      return 'Hi [Hiring Manager Name],\n\n' + transform(body) + '\n\n' + closing;
+    }
+
+    // Polished dropdown event listeners
+    document.addEventListener('click', function (e) {
+      const polishBtn = $('btnPolish');
+      const dropdown = $('polishDropdown');
+      if (polishBtn && dropdown) {
+        if (polishBtn.contains(e.target)) {
+          e.stopPropagation();
+          showPolishMenu();
+        } else if (!dropdown.contains(e.target)) {
+          hidePolishMenu();
+        }
+      }
+      // Polished option clicks
+      if (e.target.closest('.polish-option')) {
+        const mode = e.target.closest('.polish-option').dataset.mode;
+        if (mode) polishEmail(mode);
+      }
+    });
+
     // ─── START OVER ────────────────────────────────────────────────────────
     btnStartOver.addEventListener("click", function () {
       // Reset answers
@@ -1387,6 +1882,10 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
         locationLabel: "",
         experience: "",
         experienceLabel: "",
+        industry: "",
+        industryLabel: "",
+        companySize: "",
+        companySizeLabel: "",
         suggestedMedian: 0,
         adjustedMedian: 0,
         lowRange: 0,
@@ -1395,6 +1894,7 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
         currentOffer: "",
         targetSalary: "",
         competingOffer: "no",
+        hrReplyEmail: "",
         achievement: "",
         tone: "",
       });
@@ -1460,7 +1960,8 @@ Let me know if you have some time. I am happy to hop on a call this week to talk
           (active.tagName === "TEXTAREA" || active.tagName === "INPUT")
         ) {
           // Don't submit on enter in textarea or multi-line inputs
-          if (active.id === "achievementInput") return;
+          if (active.id === "achievementInput" || active.id === "hrReplyInput")
+            return;
         }
         e.preventDefault();
         goNext();

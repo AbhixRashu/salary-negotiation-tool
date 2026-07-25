@@ -17,6 +17,12 @@
   --color-accent-blue-deep: #0761d1;
   --color-accent-blue-soft: #d3e5ff;
 
+  /* Functional status colors (for messages, not decoration) */
+  --color-warning: #f5a623;
+  --color-warning-soft: #ffefcf;
+  --color-error: #ee0000;
+  --color-error-soft: #f7d4d6;
+
   /* Gradient brand colors for mesh backgrounds */
   --color-gradient-dev-start: #007cf0;
   --color-gradient-dev-end: #00dfd8;
@@ -40,7 +46,7 @@
   --on-primary: #ffffff;
   --ink: #171717;
   --body: #4d4d4d;
-  --mute: #888888;
+  --mute: #666666;
   --hairline: #ebebeb;
   --hairline-strong: #a1a1a1;
   --canvas: #ffffff;
@@ -70,6 +76,45 @@ body {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
   scroll-behavior: smooth;
+}
+
+/* ─── REDUCED MOTION ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale,
+  .stagger-children > *, .bar-fill, .card-stack-enter,
+  .modal-backdrop, .compare-panel, .floating-particle,
+  .mesh-gradient, .mesh-gradient-2 {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─── SKIP TO CONTENT ─────────────────────────────────────────── */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--ink);
+  color: var(--on-primary);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: top 150ms ease;
+}
+.skip-to-content:focus {
+  top: 8px;
+}
+.skip-to-content:not(:focus) {
+  position: absolute;
 }
 
 /* ─── ANIMATION KEYFRAMES ────────────────────────────────────────────── */
@@ -232,9 +277,9 @@ body {
 /* ─── SCROLL REVEAL SYSTEM ───────────────────────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-visible {
@@ -244,9 +289,9 @@ body {
 
 .reveal-left {
   opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-left.reveal-visible {
@@ -256,9 +301,9 @@ body {
 
 .reveal-right {
   opacity: 0;
-  transform: translateX(30px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-right.reveal-visible {
@@ -268,14 +313,26 @@ body {
 
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.92);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-scale.reveal-visible {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Additional reveal variants */
+.reveal-up-fast {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-up-fast.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─── 3D PERSPECTIVE UTILITIES ───────────────────────────────────────── */
@@ -425,12 +482,11 @@ select:focus {
 
 /* ─── TABLE ROW HOVER ────────────────────────────────────────────────── */
 .table-row {
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .table-row:hover {
   background-color: var(--canvas-soft-2);
-  transform: scale(1.002);
 }
 
 /* ─── RIPPLE EFFECT ─────────────────────────────────────────────────── */
@@ -747,24 +803,24 @@ select:focus {
 @keyframes modalContentIn {
   from {
     opacity: 0;
-    transform: scale(0.92) translateY(20px);
+    transform: rotateX(5deg) scale(0.92) translateY(30px);
   }
 
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: rotateX(0deg) scale(1) translateY(0);
   }
 }
 
 @keyframes modalContentOut {
   from {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: rotateX(0deg) scale(1) translateY(0);
   }
 
   to {
     opacity: 0;
-    transform: scale(0.92) translateY(20px);
+    transform: rotateX(5deg) scale(0.92) translateY(30px);
   }
 }
 
@@ -789,7 +845,7 @@ select:focus {
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
-  animation: modalContentIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: modalContentIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
@@ -799,6 +855,355 @@ select:focus {
 
 .dark .modal-backdrop {
   background: rgba(0, 0, 0, 0.7);
+}
+
+/* ─── COMPARISON CHECKBOX ──────────────────────────────────────────── */
+.compare-checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid var(--hairline-strong);
+  background: var(--canvas);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.compare-checkbox:checked {
+  background: #0070f3;
+  border-color: #0070f3;
+}
+
+.compare-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.compare-checkbox:hover {
+  border-color: #0070f3;
+}
+
+/* ─── COMPARE FLOATING BUTTON ──────────────────────────────────────── */
+@keyframes compareBtnIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.compare-float-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 900;
+  animation: compareBtnIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 8px 24px rgba(0, 112, 243, 0.3);
+}
+
+.compare-float-btn:hover {
+  box-shadow: 0 12px 32px rgba(0, 112, 243, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ─── COMPARISON PANEL (CENTERED MODAL) ──────────────────────────────── */
+@keyframes compareModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes compareModalOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+}
+
+.compare-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 950;
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.compare-panel {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  max-height: 85vh;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  z-index: 960;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  animation: compareModalIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow: hidden;
+}
+
+.compare-panel.closing {
+  animation: compareModalOut 0.25s ease forwards;
+}
+
+.compare-panel::-webkit-scrollbar {
+  width: 6px;
+}
+.compare-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.compare-panel::-webkit-scrollbar-thumb {
+  background: var(--hairline-strong);
+  border-radius: 3px;
+}
+
+.compare-panel-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.compare-panel-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ─── COMPARE CARDS ────────────────────────────────────────────────── */
+.compare-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.compare-card {
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.compare-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.compare-card-header {
+  padding: 1rem 1.25rem;
+  text-align: center;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.compare-card-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.compare-card-header span {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.compare-card-body {
+  padding: 1rem 1.25rem;
+}
+
+.compare-stat-row {
+  margin-bottom: 1rem;
+}
+
+.compare-stat-label {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--mute);
+  margin-bottom: 0.35rem;
+}
+
+.compare-stat-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  line-height: 1.2;
+}
+
+.compare-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: var(--canvas-soft-2);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.compare-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.compare-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.compare-skill-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+/* ─── COMPARE RANGE SECTION ────────────────────────────────────────── */
+.compare-range-section {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.compare-range-section h4 {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mute);
+  margin-bottom: 1rem;
+}
+
+.compare-range-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.compare-range-card {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--hairline);
+  background: var(--canvas-soft);
+}
+
+.compare-range-bar {
+  position: relative;
+  height: 8px;
+  border-radius: 99px;
+  margin-bottom: 0.4rem;
+  overflow: hidden;
+}
+
+.compare-range-median-marker {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+.compare-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--mute);
+}
+
+.compare-range-mid {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+/* ─── SKILL BADGE 3D HOVER ──────────────────────────────────────────── */
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  transform-style: preserve-3d;
+  perspective: 600px;
+  will-change: transform;
+  border: 1px solid transparent;
+}
+
+.skill-badge:hover {
+  transform: translateY(-3px) scale(1.05) rotateX(5deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 5;
+  position: relative;
+}
+
+.dark .skill-badge:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── SPARKLINE MINI CHART ──────────────────────────────────────────── */
+.sparkline-container {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.sparkline-bar {
+  width: 3px;
+  border-radius: 1px;
+  transition: height 0.4s ease;
+}
+
+/* ─── TABLE ROW COMPARE CHECKBOX AREA ───────────────────────────────── */
+.table-row-checkbox {
+  width: 32px;
+  padding: 0.75rem 0 0.75rem 0.75rem;
+  vertical-align: middle;
 }
 
 /* ─── MODAL SCROLLBAR ──────────────────────────────────────────── */
@@ -903,6 +1308,28 @@ select:focus {
   50% {
     background-color: rgba(0, 112, 243, 0.08);
   }
+}
+
+/* ─── COMPARE GROWTH INDICATOR ──────────────────────────────────────── */
+.compare-growth-positive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.compare-growth-negative {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* ─── COMPARE EMPTY STATE ───────────────────────────────────────────── */
+.compare-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--mute);
 }
 
 .highlight-pulse {
@@ -1063,4 +1490,393 @@ select:focus {
   border-radius: 8px;
   padding: 0.75rem;
   text-align: center;
+}
+
+/* ─── CARD GLOW EFFECT ─────────────────────────────────────────── */
+.card-glow {
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(0,112,243,0.2), rgba(121,40,202,0.15), rgba(0,112,243,0.1));
+  filter: blur(4px);
+}
+.card-glow:hover::before {
+  opacity: 1;
+}
+.card-glow:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── GRADIENT TEXT ACCENT ─────────────────────────────────────── */
+.gradient-text-accent {
+  background: linear-gradient(135deg, #0070f3, #7928ca, #0070f3);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientText 4s ease infinite;
+}
+
+/* ─── NAV LINK INDICATOR ───────────────────────────────────────── */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #0070f3;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+.nav-link:hover::after {
+  width: 60%;
+}
+.nav-link.active::after {
+  width: 80%;
+}
+
+/* ─── CARD GLOW BORDER ─────────────────────────────────────────── */
+.glow-border {
+  position: relative;
+  overflow: hidden;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, rgba(0,112,243,0.1), transparent, rgba(121,40,202,0.08), transparent);
+  animation: glowRotate 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+@keyframes glowRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ─── SCALE ON HOVER ───────────────────────────────────────────── */
+.hover-scale {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+/* ─── STEP PROGRESS DOTS ───────────────────────────────────────── */
+.step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--hairline);
+  transition: all 0.3s ease;
+  position: relative;
+}
+.step-dot.active {
+  background: #0070f3;
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(0,112,243,0.15);
+}
+.step-dot.done {
+  background: #0070f3;
+  opacity: 0.5;
+}
+
+/* ─── FLOATING LABEL INPUT ─────────────────────────────────────── */
+.input-float {
+  position: relative;
+}
+.input-float input:focus + label,
+.input-float input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 10px;
+  color: #0070f3;
+}
+
+/* ─── SMOOTH PAGE TRANSITION ───────────────────────────────────── */
+body.page-transitioning main {
+  animation: pageOut 0.2s ease forwards;
+}
+@keyframes pageOut {
+  to { opacity: 0; transform: translateY(8px); }
+}
+
+/* ─── COUNTER UP ───────────────────────────────────────────────── */
+.counter-up {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* ─── LIST STAGGER ─────────────────────────────────────────────── */
+.list-stagger > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: staggerFadeIn 0.4s ease forwards;
+}
+.list-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.list-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.list-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.list-stagger > *:nth-child(4) { animation-delay: 0.2s; }
+.list-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.list-stagger > *:nth-child(6) { animation-delay: 0.3s; }
+.list-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+.list-stagger > *:nth-child(8) { animation-delay: 0.4s; }
+.list-stagger > *:nth-child(9) { animation-delay: 0.45s; }
+.list-stagger > *:nth-child(10) { animation-delay: 0.5s; }
+
+@keyframes staggerFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SUCCESS GREEN DOT PULSE ──────────────────────────────────── */
+.dot-success {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00a86b;
+  animation: dotPulse 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,168,107,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(0,168,107,0); }
+}
+
+/* ─── SHIMMER LOADING ──────────────────────────────────────────── */
+.shimmer-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--canvas-soft) 0px, var(--canvas-soft-2) 40px, var(--canvas-soft) 80px);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ─── CARD LIFT ────────────────────────────────────────────────── */
+.lift-on-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.lift-on-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.1), 0 4px 8px -4px rgba(0,0,0,0.05);
+}
+.dark .lift-on-hover:hover {
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.4), 0 4px 8px -4px rgba(0,0,0,0.2);
+}
+
+/* ─── BORDER GRADIENT ACCENT ───────────────────────────────────── */
+.border-gradient-bottom {
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, #0070f3, #7928ca, #ff0080);
+  border-image-slice: 1;
+}
+
+/* ─── NUMBER TICKER ────────────────────────────────────────────── */
+@keyframes tickerPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+.ticker-pop {
+  animation: tickerPop 0.3s ease;
+}
+
+/* ─── RESULT CARD ENTRANCE ─────────────────────────────────────── */
+@keyframes resultSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.result-enter {
+  animation: resultSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── POLISH DROPDOWN ───────────────────────────────────────────── */
+@keyframes dropdownSlideIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes dropdownSlideOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-8px) scale(0.98); }
+}
+
+.polish-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  box-shadow: var(--shadow-elevated);
+  padding: 6px;
+  z-index: 50;
+  animation: dropdownSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.polish-dropdown.closing {
+  animation: dropdownSlideOut 0.15s ease forwards;
+}
+.polish-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.polish-option:hover {
+  background: var(--canvas-soft);
+}
+.polish-option:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: -2px;
+}
+.polish-option svg {
+  flex-shrink: 0;
+  color: var(--mute);
+}
+.polish-option:hover svg {
+  color: var(--accent-blue);
+}
+.polish-divider {
+  height: 1px;
+  background: var(--hairline);
+  margin: 4px 8px;
+}
+.polish-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--mute);
+}
+.polish-loading .spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--hairline);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── FORM STEP ANIMATIONS ──────────────────────────────────────── */
+@keyframes stepCardEnter {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes stepCardExit {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-16px) scale(0.98); }
+}
+@keyframes questionReveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes inputReveal {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes progressFill {
+  from { width: 0%; }
+}
+@keyframes dotPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes stepCounterTick {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.step-card-animating {
+  animation: stepCardEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.step-card-exiting {
+  animation: stepCardExit 0.25s ease-in forwards;
+}
+.question-animating {
+  animation: questionReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.08s;
+}
+.input-animating {
+  animation: inputReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.15s;
+}
+.progress-fill-animating {
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.step-dot-animating {
+  animation: dotPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.step-counter-tick {
+  animation: stepCounterTick 0.3s ease;
+}
+
+/* ─── TOGGLE BUTTON ANIMATION ───────────────────────────────────── */
+.toggle-btn {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toggle-btn::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.toggle-btn.active::before {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px var(--accent-blue-soft);
+}
+
+/* ─── AUTO-FOCUS RING ───────────────────────────────────────────── */
+.auto-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-blue-soft), 0 0 0 1px var(--accent-blue) !important;
+  border-color: var(--accent-blue) !important;
+}
+
+/* ─── POLISH RESULT TRANSITION ──────────────────────────────────── */
+@keyframes textCrossFade {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.polish-updating {
+  animation: textCrossFade 0.4s ease;
 }

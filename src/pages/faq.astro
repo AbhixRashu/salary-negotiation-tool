@@ -39,6 +39,56 @@ const faqs = [
   ]}
 >
   <div class="max-w-3xl mx-auto w-full space-y-10">
+    <!-- FAQPage Schema JSON-LD -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can an employer rescind a job offer if I negotiate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rescinding an offer is extremely rare. Employers invest hundreds of hours and thousands of dollars in the vetting and hiring process to select the ideal candidate. If you negotiate politely, professionally, and ground your request in market data, they will either accept, make a counter-offer, or state that their budget is firm."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if the employer says the salary is non-negotiable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If the base salary is strictly capped due to corporate bands, pivot the discussion to non-salary rewards. You can ask for a sign-on bonus, an accelerated six-month salary review cycle, additional paid time off, professional development budgets, remote working stipends, or equity grants."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I tell a recruiter my current or past salary?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. In fact, asking for salary history is illegal in many US states and cities. Disclosing a lower past salary can hurt your leverage. If asked, shift the focus to the market value of the role you are applying for."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it better to negotiate over email or phone?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Email is often preferred by candidates because it provides a written record, allows you to carefully review your metrics, prevents emotional reactions, and ensures you state your case exactly as planned. Phone calls can be faster and build rapport but require thinking on your feet under pressure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much should I ask for above the initial offer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A standard counter-offer is typically 10% to 15% above the initial offer. If the offer is exceptionally low compared to cost-of-labor indices in your area, you can counter higher (15% to 25%), but you must justify the gap with objective occupational market data."
+            }
+          }
+        ]
+      }
+    </script>
+
     <!-- Title / Header -->
     <div class="space-y-4 text-center sm:text-left reveal">
       <div
@@ -61,7 +111,7 @@ const faqs = [
     <div class="space-y-4 stagger-children reveal">
       {
         faqs.map((faq) => (
-          <details class="faq-item group border border-hairline bg-canvas rounded-md overflow-hidden transition-all duration-300 ease-out cursor-pointer">
+          <details class="faq-item group border border-hairline bg-canvas rounded-md overflow-hidden transition-all duration-300 ease-out cursor-pointer card-glow" style="position:relative;z-index:1">
             <summary class="px-5 py-4 font-semibold text-ink text-sm flex items-center justify-between cursor-pointer list-none select-none hover:bg-canvas-soft-2 transition-colors duration-200 ripple-btn">
               <span>{faq.question}</span>
               <span class="text-mute group-open:rotate-180 transition-transform duration-300 ease-out">
@@ -89,7 +139,7 @@ const faqs = [
 
     <!-- CTA Section -->
     <div
-      class="border border-hairline rounded-lg p-6 flex flex-col sm:flex-row justify-between items-center gap-6 bg-canvas shadow-sm"
+      class="border border-hairline rounded-lg p-6 flex flex-col sm:flex-row justify-between items-center gap-6 bg-canvas shadow-sm lift-on-hover reveal"
     >
       <div class="space-y-1 text-center sm:text-left">
         <p class="font-semibold text-ink text-sm">
