@@ -156,7 +156,7 @@ const rolesJson = JSON.stringify(ROLES);
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         <!-- Follow-Up Email Generator -->
         <a
           href="/follow-up"
@@ -244,6 +244,63 @@ const rolesJson = JSON.stringify(ROLES);
             class="mt-2 text-xs font-mono text-accent-blue group-hover:underline"
           >
             Compare offers →
+          </div>
+        </a>
+
+        <!-- Salary Calculator -->
+        <a
+          href="/salary-calculator"
+          class="group block border border-hairline bg-canvas rounded-lg p-4 sm:p-5 hover:border-accent-blue/40 hover:shadow-sm transition-all duration-200 cursor-pointer"
+        >
+          <div class="flex items-center gap-2 mb-2">
+            <span
+              class="w-8 h-8 rounded-lg bg-accent-blue/10 flex items-center justify-center text-base"
+              >🧮</span
+            >
+          </div>
+          <h3
+            class="text-sm font-semibold text-ink mb-1 group-hover:text-accent-blue transition-colors"
+          >
+            Salary Calculator
+          </h3>
+          <p class="text-xs text-body leading-relaxed">
+            Convert hourly wage to annual salary instantly, estimate your
+            <strong class="text-ink">federal net take-home pay</strong>, and
+            visualize tax brackets. Real-time counter-up animations.
+          </p>
+          <div
+            class="mt-2 text-xs font-mono text-accent-blue group-hover:underline"
+          >
+            Calculate your pay →
+          </div>
+        </a>
+
+        <!-- Company Salary Explorer -->
+        <a
+          href="/company-salaries"
+          class="group block border border-hairline bg-canvas rounded-lg p-4 sm:p-5 hover:border-accent-blue/40 hover:shadow-sm transition-all duration-200 cursor-pointer"
+        >
+          <div class="flex items-center gap-2 mb-2">
+            <span
+              class="w-8 h-8 rounded-lg bg-accent-blue/10 flex items-center justify-center text-base"
+              >🏢</span
+            >
+          </div>
+          <h3
+            class="text-sm font-semibold text-ink mb-1 group-hover:text-accent-blue transition-colors"
+          >
+            Company Salary Explorer
+          </h3>
+          <p class="text-xs text-body leading-relaxed">
+            Browse compensation at <strong class="text-ink"
+              >top companies</strong
+            > — Google, Meta, Amazon, Apple, McKinsey & more. See base salary, equity,
+            bonus, and perks for each role.
+          </p>
+          <div
+            class="mt-2 text-xs font-mono text-accent-blue group-hover:underline"
+          >
+            Explore companies →
           </div>
         </a>
       </div>
