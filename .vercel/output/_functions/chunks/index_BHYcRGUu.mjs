@@ -1,0 +1,52 @@
+import { t as __exportAll } from "./rolldown-runtime_D7D4PA-g.mjs";
+import { g as addAttribute, i as renderComponent, m as maybeRenderHead, u as renderTemplate } from "./server_D6Rm-QtC.mjs";
+import { t as createComponent } from "./compiler_Db9x-0at.mjs";
+import { t as $$Layout } from "./Layout_DAOvAHMr.mjs";
+//#region src/pages/glossary/index.astro
+var glossary_exports = /* @__PURE__ */ __exportAll({
+	default: () => $$Index,
+	file: () => $$file,
+	url: () => $$url
+});
+var $$Index = createComponent(($$result, $$props, $$slots) => {
+	const glossaryTerms = [
+		{
+			title: "What is Salary?",
+			slug: "what-is-salary",
+			excerpt: "Learn the core definition of a salary, how it contrasts with hourly wages, and the basic structure of annual employment contracts."
+		},
+		{
+			title: "What is Gross Salary?",
+			slug: "what-is-gross-salary",
+			excerpt: "Understand gross salary—your pre-tax compensation baseline before retirement, health care, and statutory taxes are withheld."
+		},
+		{
+			title: "What does Salary mean?",
+			slug: "what-does-salary-mean",
+			excerpt: "Explore the historical origins, modern business context, and professional expectations tied to salaried agreements."
+		},
+		{
+			title: "How does Salary Pay work?",
+			slug: "how-does-salary-pay-work",
+			excerpt: "Demystify pay frequencies (bi-weekly, semi-monthly) and discover how annual salary totals are broken down into paycheck lines."
+		}
+	];
+	return renderTemplate`${renderComponent($$result, "Layout", $$Layout, {
+		"title": "Salary Glossary Index — Understanding Employment Compensation",
+		"description": "Browse direct, professional definitions explaining salary, gross income, salary meaning, and payroll mechanisms.",
+		"breadcrumbs": [{
+			name: "Home",
+			path: "/"
+		}, {
+			name: "Glossary",
+			path: "/glossary"
+		}]
+	}, { "default": ($$result) => renderTemplate`${maybeRenderHead($$result)}<div class="max-w-3xl mx-auto w-full space-y-10"><!-- Header --><div class="text-center sm:text-left space-y-3 reveal"><h1 class="text-3xl font-semibold tracking-tight text-ink">Salary Glossary</h1><p class="text-sm text-body">Clear, direct explanations of compensation terms, definitions, and payroll standards in the United States.</p></div><!-- Glossary List Grid --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children reveal">${glossaryTerms.map((term) => renderTemplate`<div class="border border-hairline bg-canvas p-6 rounded-lg shadow-sm flex flex-col justify-between hover:border-accent-blue/40 transition-colors"><div class="space-y-2"><h2 class="text-base font-semibold text-ink"><a${addAttribute(`/glossary/${term.slug}`, "href")} class="hover:text-accent-blue transition-colors">${term.title}</a></h2><p class="text-xs text-body leading-relaxed">${term.excerpt}</p></div><div class="mt-4 pt-3 border-t border-hairline flex justify-end"><a${addAttribute(`/glossary/${term.slug}`, "href")} class="text-xs font-semibold text-accent-blue hover:text-accent-blue-deep flex items-center gap-1 transition-colors">Read Definition →</a></div></div>`)}</div><!-- Help Alert Box --><div class="p-5 border border-hairline bg-canvas-soft-2 rounded-lg text-xs text-body leading-relaxed"><p class="font-semibold text-ink mb-1">Looking for a counter-offer template?</p><p>Use our <a href="/" class="text-accent-blue hover:underline">Negotiation Tool</a> to input your specific role, location, and target salary, and receive a customized, pre-formatted draft ready to send.</p></div></div>` })}`;
+}, "C:/website/src/pages/glossary/index.astro", void 0);
+var $$file = "C:/website/src/pages/glossary/index.astro";
+var $$url = "/glossary";
+//#endregion
+//#region \0virtual:astro:page:src/pages/glossary/index@_@astro
+var page = () => glossary_exports;
+//#endregion
+export { page };

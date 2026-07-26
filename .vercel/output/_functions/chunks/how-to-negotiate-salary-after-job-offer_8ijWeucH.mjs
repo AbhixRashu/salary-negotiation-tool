@@ -1,0 +1,76 @@
+import { t as __exportAll } from "./rolldown-runtime_D7D4PA-g.mjs";
+import { i as renderComponent, m as maybeRenderHead, u as renderTemplate } from "./server_D6Rm-QtC.mjs";
+import { t as createComponent } from "./compiler_Db9x-0at.mjs";
+import { n as renderScript, t as $$Layout } from "./Layout_DAOvAHMr.mjs";
+//#region src/pages/guides/how-to-negotiate-salary-after-job-offer.astro
+var how_to_negotiate_salary_after_job_offer_exports = /* @__PURE__ */ __exportAll({
+	default: () => $$HowToNegotiateSalaryAfterJobOffer,
+	file: () => $$file,
+	url: () => $$url
+});
+var $$HowToNegotiateSalaryAfterJobOffer = createComponent(($$result, $$props, $$slots) => {
+	return renderTemplate`${renderComponent($$result, "Layout", $$Layout, {
+		"title": "How to Negotiate Salary After a Job Offer — Step-by-Step Guide",
+		"description": "A complete walkthrough on how to negotiate your base salary and total rewards package after receiving a formal job offer.",
+		"breadcrumbs": [
+			{
+				name: "Home",
+				path: "/"
+			},
+			{
+				name: "Guides",
+				path: "/guides"
+			},
+			{
+				name: "How to Negotiate Salary After a Job Offer",
+				path: "/guides/how-to-negotiate-salary-after-job-offer"
+			}
+		]
+	}, { "default": ($$result) => renderTemplate`${maybeRenderHead($$result)}<div class="max-w-3xl mx-auto w-full space-y-8"><!-- Reading Progress Bar --><div id="readingProgress" class="reading-progress"></div><!-- HowTo Schema JSON-LD --><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Negotiate Salary After a Job Offer",
+        "description": "Step-by-step guide to negotiating your base salary and total rewards package after receiving a formal job offer.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Express Gratitude and Request Time",
+            "text": "Start by expressing excitement and thankfulness. Ask for the offer in writing and request 48 to 72 hours to review."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Review the Entire Package",
+            "text": "Evaluate base salary, signing/annual bonuses, equity, health benefits, retirement matches, and time off."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Analyze Local Market Benchmarks",
+            "text": "Use salary data tools to find median values for your role in your specific city or remote area."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Formulate Your Counter-Proposal",
+            "text": "Aim for 10% to 20% higher than the initial offer. Have a specific target and a stretch number."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 5,
+            "name": "Send a Polite Written Counter-Offer",
+            "text": "Send a structured email with your interest, market data, achievements, and target number."
+          }
+        ]
+      }
+    <\/script><!-- Breadcrumb --><a href="/guides" class="inline-flex items-center gap-1.5 text-xs font-mono text-mute hover:text-ink transition-colors">← Back to Guides</a><!-- Article Content --><article id="guideArticle" class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm space-y-6"><header class="border-b border-hairline pb-4 space-y-2"><div class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider">Salary Negotiation Guides • 5 Min Read</div><h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink leading-snug">How to Negotiate Salary After a Job Offer</h1><p class="text-sm text-body leading-relaxed">Receiving a job offer is a major milestone, but it is just the beginning of the final stage. Learn how to construct a professional counter-offer strategically.</p></header><!-- Steps content --><div class="space-y-6 text-sm text-body leading-relaxed"><!-- Step 1 --><div class="space-y-2"><h2 class="text-base font-semibold text-ink">Step 1: Express Gratitude and Request Time</h2><p>When the employer extends the offer, always start by expressing sincere excitement and thankfulness. However, do not accept immediately on the call. Ask for the offer details in writing and request 48 to 72 hours to review the package with your family or advisors.</p><div class="p-4 border border-hairline bg-canvas-soft-2 rounded-md font-mono text-xs text-ink italic">"Thank you so much! I am thrilled about this opportunity to join the team. Could you please send over the full details of the offer in writing so I can review the complete benefits package? I will get back to you by Thursday."</div></div><!-- Step 2 --><div class="space-y-2"><h2 class="text-base font-semibold text-ink">Step 2: Review the Entire Package (Not Just Base Salary)</h2><p>Compensation is a multi-dimensional system. Evaluate the entire rewards package:</p><ul class="list-disc pl-5 space-y-1.5 text-xs"><li><strong>Base Salary:</strong> The core recurring wage.</li><li><strong>Signing / Annual Bonuses:</strong> One-time payments or performance targets.</li><li><strong>Equity / Options:</strong> RSUs or stock options (essential for tech companies).</li><li><strong>Health & Welfare:</strong> Health premiums, retirement matches (e.g., 401k), HSA deposits.</li><li><strong>Time Off:</strong> Vacation days, sick leave, paid holidays, and flexible schedules.</li></ul></div><!-- Step 3 --><div class="space-y-2"><h2 class="text-base font-semibold text-ink">Step 3: Analyze Local Market Benchmarks</h2><p>Use tools like our <a href="/average-salary-by-role" class="text-accent-blue hover:underline font-semibold">Average Salary Table</a> to find median values for your role in your specific city or remote area. Employers respond to objective market data. Having clear percentiles (25th, 50th, 75th) allows you to justify your counter-proposal with facts instead of feelings.</p></div><!-- Step 4 --><div class="space-y-2"><h2 class="text-base font-semibold text-ink">Step 4: Formulate Your Counter-Proposal</h2><p>Aim for a counter-offer that is 10% to 20% higher than the initial offer, assuming it falls within reasonable market ranges. Have a specific target number and a slightly higher "stretch" number so there is room to compromise.</p></div><!-- Step 5 --><div class="space-y-2"><h2 class="text-base font-semibold text-ink">Step 5: Send a Polite written Counter-Offer or Schedule a Call</h2><p>Send a structured email highlighting your interest in the position, citing typical market salary ranges in the local area, summarizing your primary achievement, and presenting your target number. Alternatively, use our conversational generator on the homepage to write this email draft instantly.</p></div></div></article><!-- Call to action block --><div class="p-6 border border-hairline bg-canvas rounded-lg shadow-sm flex flex-col sm:flex-row justify-between items-center gap-6"><div class="space-y-1"><p class="font-semibold text-ink text-sm">Need help writing your counter email?</p><p class="text-xs text-mute">Our conversational generator handles formatting and phrasing for you.</p></div><a href="/" class="px-5 py-2.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-xs transition-colors shrink-0 ripple-btn btn-press">Generate Counter Draft</a></div></div>` })}${renderScript($$result, "C:/website/src/pages/guides/how-to-negotiate-salary-after-job-offer.astro?astro&type=script&index=0&lang.ts")}`;
+}, "C:/website/src/pages/guides/how-to-negotiate-salary-after-job-offer.astro", void 0);
+var $$file = "C:/website/src/pages/guides/how-to-negotiate-salary-after-job-offer.astro";
+var $$url = "/guides/how-to-negotiate-salary-after-job-offer";
+//#endregion
+//#region \0virtual:astro:page:src/pages/guides/how-to-negotiate-salary-after-job-offer@_@astro
+var page = () => how_to_negotiate_salary_after_job_offer_exports;
+//#endregion
+export { page };

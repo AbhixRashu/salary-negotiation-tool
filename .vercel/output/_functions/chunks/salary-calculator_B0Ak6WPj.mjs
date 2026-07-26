@@ -1,0 +1,472 @@
+import { t as __exportAll } from "./rolldown-runtime_D7D4PA-g.mjs";
+import { i as renderComponent, m as maybeRenderHead, u as renderTemplate } from "./server_D6Rm-QtC.mjs";
+import { t as createComponent } from "./compiler_Db9x-0at.mjs";
+import { t as $$Layout } from "./Layout_DAOvAHMr.mjs";
+//#region src/pages/salary-calculator.astro
+var salary_calculator_exports = /* @__PURE__ */ __exportAll({
+	default: () => $$SalaryCalculator,
+	file: () => $$file,
+	url: () => $$url
+});
+var $$SalaryCalculator = createComponent(($$result, $$props, $$slots) => {
+	return renderTemplate`${renderComponent($$result, "Layout", $$Layout, {
+		"title": "US Salary Calculator 2025 — Federal & State Take-Home Pay Estimator",
+		"description": "Calculate your US take-home pay after federal income tax, Social Security, Medicare, and state income tax for all 50 states. Free, no login.",
+		"breadcrumbs": [{
+			name: "Home",
+			path: "/"
+		}, {
+			name: "Salary Calculator",
+			path: "/salary-calculator"
+		}]
+	}, { "default": ($$result) => renderTemplate`${maybeRenderHead($$result)}<div class="max-w-5xl mx-auto w-full space-y-10"><!-- Header --><div class="text-center sm:text-left reveal"><h1 class="text-3xl font-semibold tracking-tight text-ink mb-2">Salary Calculator</h1><p class="text-sm text-body">See your full take-home pay after federal income tax, FICA, and state income tax. Enter your salary below for a complete breakdown.</p></div><div class="grid grid-cols-1 lg:grid-cols-10 gap-6 stagger-children reveal"><!-- Left Column: Inputs --><div class="lg:col-span-4 space-y-4"><!-- State & Filing Card --><div class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm space-y-4 card-hover"><h2 class="text-base font-semibold text-ink flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-accent-blue"></span>Details</h2><div><label class="text-xs font-semibold text-body font-mono uppercase tracking-wider mb-1.5 block">State</label><select id="stateSelect" class="w-full bg-canvas border border-hairline rounded-md px-3 py-2.5 text-ink text-sm focus:border-accent-blue outline-none"><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA" selected>California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="DC">Washington D.C.</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option></select></div><div><label class="text-xs font-semibold text-body font-mono uppercase tracking-wider mb-1.5 block">Filing Status</label><div class="flex rounded-md overflow-hidden border border-hairline"><button id="statusSingle" class="flex-1 py-2 text-sm transition-colors bg-ink text-on-primary font-medium">Single</button><button id="statusMfj" class="flex-1 py-2 text-sm transition-colors text-body hover:text-ink bg-canvas">Married (MFJ)</button></div></div></div><!-- Salary Input Card --><div class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm space-y-4 card-hover"><h2 class="text-base font-semibold text-ink flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-accent-blue"></span>Salary</h2><div><div class="flex rounded-md overflow-hidden border border-hairline mb-3"><button id="periodAnnual" class="flex-1 py-1.5 text-xs transition-colors bg-ink text-on-primary font-medium">Annual</button><button id="periodMonthly" class="flex-1 py-1.5 text-xs transition-colors text-body hover:text-ink bg-canvas">Monthly</button><button id="periodWeekly" class="flex-1 py-1.5 text-xs transition-colors text-body hover:text-ink bg-canvas">Weekly</button><button id="periodDaily" class="flex-1 py-1.5 text-xs transition-colors text-body hover:text-ink bg-canvas">Daily</button><button id="periodHourly" class="flex-1 py-1.5 text-xs transition-colors text-body hover:text-ink bg-canvas">Hourly</button></div><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-mute text-sm font-mono">$</span><input type="number" id="salaryInput" min="0" step="1000" placeholder="75,000" class="w-full bg-canvas border border-hairline rounded-md pl-8 pr-3 py-2.5 text-ink text-sm focus:border-accent-blue outline-none font-mono" value="75000"></div><p id="annualizedLabel" class="text-xs text-mute mt-1.5 font-mono">Annualized: $75,000 / year</p></div><div><label class="text-xs font-semibold text-body font-mono uppercase tracking-wider mb-1.5 block">401(k) / Retirement Contribution — <span id="retirementPct">5</span>%</label><input type="range" id="retirementSlider" min="0" max="30" step="1" class="w-full accent-accent-blue" value="5"><div class="flex justify-between text-xs text-mute mt-0.5"><span>0%</span><span>30%</span></div></div></div></div><!-- Right Column: Results --><div class="lg:col-span-6 space-y-4"><!-- Summary Hero --><div class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm card-glow text-center" style="position:relative;z-index:1"><span class="text-xs font-mono text-mute uppercase tracking-wider block mb-1">Your Annual Take-Home Pay</span><span id="netAnnualDisplay" class="text-4xl sm:text-5xl font-semibold tracking-tight text-ink font-mono">$0</span><div class="flex justify-center gap-6 mt-3 text-xs text-mute font-mono"><span>Monthly: <strong id="netMonthlySmall" class="text-ink">$0</strong></span><span>Bi-Weekly: <strong id="netBiweeklySmall" class="text-ink">$0</strong></span><span>Weekly: <strong id="netWeeklySmall" class="text-ink">$0</strong></span></div></div><!-- Detailed Breakdown --><div class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm space-y-3"><h2 class="text-base font-semibold text-ink flex items-center gap-2 mb-2"><span class="w-2 h-2 rounded-full bg-accent-blue"></span>Pay Breakdown</h2><div class="divide-y divide-hairline"><div class="flex justify-between py-2 text-sm"><span class="text-body">Gross Annual Income</span><span id="bGross" class="font-mono font-semibold text-ink">$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">401(k) Contribution</span><span id="bRetirement" class="font-mono text-blue-600 dark:text-blue-400">-$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">Adjusted Gross Income</span><span id="bAdjusted" class="font-mono text-ink">$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">Standard Deduction</span><span id="bDeduction" class="font-mono text-mute">-$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">Taxable Income</span><span id="bTaxable" class="font-mono text-ink">$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">Federal Income Tax</span><span id="bFedTax" class="font-mono text-red-600 dark:text-red-400">-$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">Social Security</span><span id="bSsTax" class="font-mono text-red-600 dark:text-red-400">-$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">Medicare</span><span id="bMedicareTax" class="font-mono text-red-600 dark:text-red-400">-$0</span></div><div class="flex justify-between py-2 text-sm"><span class="text-body">State Income Tax</span><span id="bStateTax" class="font-mono text-red-600 dark:text-red-400">-$0</span></div><div class="flex justify-between py-3 text-base font-semibold"><span class="text-ink">Estimated Net Take-Home</span><span id="bNet" class="font-mono text-accent-blue text-xl">$0</span></div></div></div><!-- Per-Period Breakdown --><div class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm"><h2 class="text-base font-semibold text-ink flex items-center gap-2 mb-3"><span class="w-2 h-2 rounded-full bg-accent-blue"></span>Per Period Net Pay</h2><div class="grid grid-cols-2 sm:grid-cols-4 gap-4"><div class="text-center p-3 bg-canvas-soft border border-hairline rounded-md"><span class="text-xs text-mute font-mono block">Monthly</span><span id="pMonthly" class="text-lg font-semibold text-ink font-mono">$0</span></div><div class="text-center p-3 bg-canvas-soft border border-hairline rounded-md"><span class="text-xs text-mute font-mono block">Bi-Weekly</span><span id="pBiweekly" class="text-lg font-semibold text-ink font-mono">$0</span></div><div class="text-center p-3 bg-canvas-soft border border-hairline rounded-md"><span class="text-xs text-mute font-mono block">Weekly</span><span id="pWeekly" class="text-lg font-semibold text-ink font-mono">$0</span></div><div class="text-center p-3 bg-canvas-soft border border-hairline rounded-md"><span class="text-xs text-mute font-mono block">Hourly</span><span id="pHourly" class="text-lg font-semibold text-ink font-mono">$0</span></div></div></div><!-- State Tax Info Card --><div id="stateInfoCard" class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm"><h2 class="text-base font-semibold text-ink flex items-center gap-2 mb-3"><span class="w-2 h-2 rounded-full bg-accent-blue"></span><span id="stateInfoTitle">California</span> State Tax</h2><div id="stateBracketsContainer" class="space-y-1 text-sm"></div><p id="stateInfoNote" class="text-xs text-mute mt-2"></p></div><!-- Federal Tax Info Card --><div class="border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm"><h2 class="text-base font-semibold text-ink flex items-center gap-2 mb-3"><span class="w-2 h-2 rounded-full bg-accent-blue"></span>Federal Brackets (<span id="filingLabel">Single</span>)</h2><div id="federalBracketsContainer" class="space-y-1 text-sm"></div><p id="fedInfoNote" class="text-xs text-mute mt-2"></p></div></div></div></div>` })}<script>
+  (function () {
+    "use strict";
+
+    // ─── TAX DATA ──────────────────────────────────────────────────────────
+
+    const STD_DEDUCTION_SINGLE = 15000;
+    const STD_DEDUCTION_MFJ = 30000;
+
+    const FED_BRACKETS_SINGLE = [
+      { cap: 11925, rate: 0.10 },
+      { cap: 48475, rate: 0.12 },
+      { cap: 103350, rate: 0.22 },
+      { cap: 197300, rate: 0.24 },
+      { cap: 250525, rate: 0.32 },
+      { cap: 626350, rate: 0.35 },
+      { cap: Infinity, rate: 0.37 },
+    ];
+
+    const FED_BRACKETS_MFJ = [
+      { cap: 23850, rate: 0.10 },
+      { cap: 96950, rate: 0.12 },
+      { cap: 206700, rate: 0.22 },
+      { cap: 394600, rate: 0.24 },
+      { cap: 501050, rate: 0.32 },
+      { cap: 751600, rate: 0.35 },
+      { cap: Infinity, rate: 0.37 },
+    ];
+
+    const FED_LABELS_SINGLE = [
+      "$0 – $11,925", "$11,925 – $48,475", "$48,475 – $103,350",
+      "$103,350 – $197,300", "$197,300 – $250,525", "$250,525 – $626,350", "$626,350+"
+    ];
+    const FED_LABELS_MFJ = [
+      "$0 – $23,850", "$23,850 – $96,950", "$96,950 – $206,700",
+      "$206,700 – $394,600", "$394,600 – $501,050", "$501,050 – $751,600", "$751,600+"
+    ];
+
+    const SS_CAP = 176100;
+    const SS_RATE = 0.062;
+    const MEDICARE_RATE = 0.0145;
+    const ADDITIONAL_MEDICARE_THRESHOLD_SINGLE = 200000;
+    const ADDITIONAL_MEDICARE_THRESHOLD_MFJ = 250000;
+    const ADDITIONAL_MEDICARE_RATE = 0.009;
+
+    const NO_TAX_STATES = new Set(["AK", "FL", "NV", "NH", "SD", "TN", "TX", "WA", "WY"]);
+
+    const STATE_TAX_INFO = {
+      AL: { name: "Alabama", type: "progressive", brackets: { single: [[0, 0.02], [500, 0.04], [3000, 0.05]], mfj: [[0, 0.02], [500, 0.04], [3000, 0.05]] }, deduction: { single: 4000, mfj: 8000 }, note: "Standard deduction: $4,000 (Single) / $8,000 (MFJ)" },
+      AK: { name: "Alaska", type: "none", note: "No state income tax." },
+      AZ: { name: "Arizona", type: "flat", rate: 0.025, note: "Flat 2.50% rate." },
+      AR: { name: "Arkansas", type: "progressive", brackets: { single: [[0, 0.00], [5000, 0.02], [10000, 0.03], [14299, 0.033], [24299, 0.048], [24999, 0.049]], mfj: [[0, 0.00], [5000, 0.02], [10000, 0.03], [14299, 0.033], [24299, 0.048], [24999, 0.049]] }, deduction: { single: 2340, mfj: 4680 }, note: "Standard deduction: $2,340 (Single) / $4,680 (MFJ)" },
+      CA: { name: "California", type: "progressive", brackets: { single: [[0, 0.01], [10756, 0.02], [25499, 0.04], [40245, 0.06], [55866, 0.08], [70606, 0.093], [360659, 0.103], [432787, 0.113], [721314, 0.123], [1000000, 0.133]], mfj: [[0, 0.01], [21512, 0.02], [50998, 0.04], [80490, 0.06], [111732, 0.08], [141212, 0.093], [721318, 0.103], [865574, 0.113], [1442628, 0.123], [2000000, 0.133]] }, deduction: { single: 5540, mfj: 11080 }, note: "Standard deduction: $5,540 (Single) / $11,080 (MFJ)" },
+      CO: { name: "Colorado", type: "flat", rate: 0.044, note: "Flat 4.40% rate." },
+      CT: { name: "Connecticut", type: "progressive", brackets: { single: [[0, 0.03], [10000, 0.05], [50000, 0.055], [100000, 0.06], [200000, 0.065], [250000, 0.069], [500000, 0.0699]], mfj: [[0, 0.03], [20000, 0.05], [100000, 0.055], [200000, 0.06], [400000, 0.065], [500000, 0.069], [1000000, 0.0699]] }, deduction: { single: 0, mfj: 0 }, note: "No standard deduction. Personal exemption: $15,000 (phaseout applies)." },
+      DE: { name: "Delaware", type: "progressive", brackets: { single: [[0, 0.00], [2000, 0.022], [5000, 0.039], [10000, 0.048], [20000, 0.052], [25000, 0.0555], [60000, 0.066], [65000, 0.0735]], mfj: [[0, 0.00], [2000, 0.022], [5000, 0.039], [10000, 0.048], [20000, 0.052], [25000, 0.0555], [60000, 0.066], [65000, 0.0735]] }, deduction: { single: 6450, mfj: 12900 }, note: "Standard deduction: $6,450 (Single) / $12,900 (MFJ)" },
+      FL: { name: "Florida", type: "none", note: "No state income tax." },
+      GA: { name: "Georgia", type: "progressive", brackets: { single: [[0, 0.01], [1000, 0.02], [3000, 0.03], [5000, 0.04], [7000, 0.05], [10000, 0.0549], [12000, 0.0599]], mfj: [[0, 0.01], [1000, 0.02], [3000, 0.03], [5000, 0.04], [7000, 0.05], [10000, 0.0549], [12000, 0.0599]] }, deduction: { single: 6000, mfj: 8000 }, note: "Standard deduction: $6,000 (Single) / $8,000 (MFJ)" },
+      HI: { name: "Hawaii", type: "progressive", brackets: { single: [[0, 0.014], [2400, 0.032], [4800, 0.055], [9600, 0.064], [14400, 0.068], [19200, 0.072], [24000, 0.076], [36000, 0.079], [48000, 0.0825], [150000, 0.09], [175000, 0.10], [200000, 0.11]], mfj: [[0, 0.014], [4800, 0.032], [9600, 0.055], [19200, 0.064], [28800, 0.068], [38400, 0.072], [48000, 0.076], [72000, 0.079], [96000, 0.0825], [300000, 0.09], [350000, 0.10], [400000, 0.11]] }, deduction: { single: 2200, mfj: 4400 }, note: "Standard deduction: $2,200 (Single) / $4,400 (MFJ)" },
+      ID: { name: "Idaho", type: "flat", rate: 0.058, note: "Flat 5.80% rate (effective 2025)." },
+      IL: { name: "Illinois", type: "flat", rate: 0.0495, note: "Flat 4.95% rate." },
+      IN: { name: "Indiana", type: "flat", rate: 0.0315, note: "Flat 3.15% rate." },
+      IA: { name: "Iowa", type: "progressive", brackets: { single: [[0, 0.044], [6372, 0.0482], [12744, 0.0530], [25488, 0.0560], [57348, 0.0610]], mfj: [[0, 0.044], [6372, 0.0482], [12744, 0.0530], [25488, 0.0560], [57348, 0.0610]] }, deduction: { single: 2360, mfj: 4720 }, note: "Standard deduction: $2,360 (Single) / $4,720 (MFJ). Top rate 6.10%." },
+      KS: { name: "Kansas", type: "progressive", brackets: { single: [[0, 0.031], [15000, 0.0525], [30000, 0.057], [60000, 0.0575]], mfj: [[0, 0.031], [30000, 0.0525], [60000, 0.057], [120000, 0.0575]] }, deduction: { single: 3500, mfj: 7000 }, note: "Standard deduction: $3,500 (Single) / $7,000 (MFJ)" },
+      KY: { name: "Kentucky", type: "flat", rate: 0.04, note: "Flat 4.00% rate." },
+      LA: { name: "Louisiana", type: "progressive", brackets: { single: [[0, 0.0185], [12500, 0.035], [50000, 0.0425]], mfj: [[0, 0.0185], [25000, 0.035], [100000, 0.0425]] }, deduction: { single: 4500, mfj: 9000 }, note: "Standard deduction: $4,500 (Single) / $9,000 (MFJ)" },
+      ME: { name: "Maine", type: "progressive", brackets: { single: [[0, 0.058], [26050, 0.0675], [61600, 0.0715], [130350, 0.0795]], mfj: [[0, 0.058], [52100, 0.0675], [123200, 0.0715], [260700, 0.0795]] }, deduction: { single: 14350, mfj: 28700 }, note: "Standard deduction: $14,350 (Single) / $28,700 (MFJ)" },
+      MD: { name: "Maryland", type: "progressive", brackets: { single: [[0, 0.02], [1000, 0.03], [2000, 0.04], [3000, 0.0475], [100000, 0.05], [125000, 0.0525], [150000, 0.055], [250000, 0.0575]], mfj: [[0, 0.02], [1000, 0.03], [2000, 0.04], [3000, 0.0475], [100000, 0.05], [125000, 0.0525], [150000, 0.055], [250000, 0.0575]] }, deduction: { single: 2550, mfj: 5100 }, note: "Standard deduction: $2,550 (Single) / $5,100 (MFJ). Counties add up to 3.2%." },
+      MA: { name: "Massachusetts", type: "flat", rate: 0.05, note: "Flat 5.00% rate. Income over $1M taxed at 9%." },
+      MI: { name: "Michigan", type: "flat", rate: 0.0425, note: "Flat 4.25% rate." },
+      MN: { name: "Minnesota", type: "progressive", brackets: { single: [[0, 0.0535], [31760, 0.068], [83880, 0.0785], [157040, 0.0985], [290750, 0.1085]], mfj: [[0, 0.0535], [46440, 0.068], [124200, 0.0785], [212040, 0.0985], [387010, 0.1085]] }, deduction: { single: 14575, mfj: 29150 }, note: "Standard deduction: $14,575 (Single) / $29,150 (MFJ)" },
+      MS: { name: "Mississippi", type: "progressive", brackets: { single: [[0, 0.00], [10000, 0.04], [50000, 0.047]], mfj: [[0, 0.00], [10000, 0.04], [50000, 0.047]] }, deduction: { single: 2600, mfj: 5200 }, note: "Standard deduction: $2,600 (Single) / $5,200 (MFJ)" },
+      MO: { name: "Missouri", type: "progressive", brackets: { single: [[0, 0.00], [1000, 0.02], [2000, 0.025], [3000, 0.03], [4000, 0.035], [5000, 0.04], [6000, 0.045], [7000, 0.048]], mfj: [[0, 0.00], [1000, 0.02], [2000, 0.025], [3000, 0.03], [4000, 0.035], [5000, 0.04], [6000, 0.045], [7000, 0.048]] }, deduction: { single: 14820, mfj: 29640 }, note: "Standard deduction: $14,820 (Single) / $29,640 (MFJ)" },
+      MT: { name: "Montana", type: "progressive", brackets: { single: [[0, 0.019], [3700, 0.031], [6300, 0.052], [11000, 0.063], [16500, 0.0685], [22300, 0.0735], [28600, 0.079], [36100, 0.084], [45800, 0.089], [58500, 0.093], [73300, 0.094], [103300, 0.0955], [121000, 0.1075]], mfj: [[0, 0.019], [4700, 0.031], [10300, 0.052], [17000, 0.063], [25300, 0.0685], [34100, 0.0735], [43900, 0.079], [55400, 0.084], [70300, 0.089], [89800, 0.093], [112500, 0.094], [158700, 0.0955], [185900, 0.1075]] }, deduction: { single: 2790, mfj: 5580 }, note: "Standard deduction: $2,790 (Single) / $5,580 (MFJ)" },
+      NE: { name: "Nebraska", type: "progressive", brackets: { single: [[0, 0.0246], [5000, 0.0351], [10000, 0.0501], [20000, 0.0584], [35000, 0.064], [50000, 0.0685]], mfj: [[0, 0.0246], [10000, 0.0351], [20000, 0.0501], [40000, 0.0584], [70000, 0.064], [100000, 0.0685]] }, deduction: { single: 7950, mfj: 15900 }, note: "Standard deduction: $7,950 (Single) / $15,900 (MFJ)" },
+      NV: { name: "Nevada", type: "none", note: "No state income tax." },
+      NH: { name: "New Hampshire", type: "none", note: "No state income tax on wages. Interest & dividends tax phased out in 2025." },
+      NJ: { name: "New Jersey", type: "progressive", brackets: { single: [[0, 0.014], [20000, 0.0175], [35000, 0.035], [40000, 0.0553], [75000, 0.0637], [500000, 0.0897], [1000000, 0.1075]], mfj: [[0, 0.014], [20000, 0.0175], [50000, 0.0245], [70000, 0.035], [80000, 0.0553], [150000, 0.0637], [500000, 0.0897], [1000000, 0.1075]] }, deduction: { single: 0, mfj: 0 }, note: "No standard deduction. Personal exemption: $1,000." },
+      NM: { name: "New Mexico", type: "progressive", brackets: { single: [[0, 0.017], [5500, 0.032], [11000, 0.047], [16000, 0.049], [210000, 0.059]], mfj: [[0, 0.017], [8000, 0.032], [16000, 0.047], [24000, 0.049], [315000, 0.059]] }, deduction: { single: 14600, mfj: 29200 }, note: "Standard deduction: $14,600 (Single) / $29,200 (MFJ)" },
+      NY: { name: "New York", type: "progressive", brackets: { single: [[0, 0.04], [8500, 0.045], [11700, 0.0525], [13900, 0.0585], [80650, 0.0625], [215400, 0.0685], [1077550, 0.0965], [5000000, 0.103], [25000000, 0.109]], mfj: [[0, 0.04], [17150, 0.045], [23600, 0.0525], [27900, 0.0585], [161550, 0.0625], [323200, 0.0685], [2155600, 0.0965], [5000000, 0.103], [25000000, 0.109]] }, deduction: { single: 8000, mfj: 16050 }, note: "Standard deduction: $8,000 (Single) / $16,050 (MFJ)" },
+      NC: { name: "North Carolina", type: "flat", rate: 0.045, note: "Flat 4.50% rate." },
+      ND: { name: "North Dakota", type: "progressive", brackets: { single: [[0, 0.00], [44725, 0.0195], [100525, 0.027], [200000, 0.031], [250000, 0.034], [504500, 0.0365]], mfj: [[0, 0.00], [74750, 0.0195], [168275, 0.027], [250000, 0.031], [300000, 0.034], [504500, 0.0365]] }, deduction: { single: 15000, mfj: 30000 }, note: "Conforms to federal standard deduction." },
+      OH: { name: "Ohio", type: "progressive", brackets: { single: [[0, 0.00], [26050, 0.0275], [100000, 0.0325], [115300, 0.0385]], mfj: [[0, 0.00], [26050, 0.0275], [100000, 0.0325], [115300, 0.0385]] }, deduction: { single: 0, mfj: 0 }, note: "No standard deduction. Personal exemption up to $2,400." },
+      OK: { name: "Oklahoma", type: "progressive", brackets: { single: [[0, 0.0025], [1000, 0.0075], [2500, 0.0175], [3750, 0.0275], [4900, 0.0375], [7200, 0.0475], [8700, 0.0575], [12300, 0.0625], [14400, 0.0675], [160200, 0.0725]], mfj: [[0, 0.0025], [1000, 0.0075], [2500, 0.0175], [3750, 0.0275], [4900, 0.0375], [7200, 0.0475], [8700, 0.0575], [12300, 0.0625], [14400, 0.0675], [160200, 0.0725]] }, deduction: { single: 7000, mfj: 14000 }, note: "Standard deduction: $7,000 (Single) / $14,000 (MFJ)" },
+      OR: { name: "Oregon", type: "progressive", brackets: { single: [[0, 0.0475], [4300, 0.0675], [10750, 0.0875], [137100, 0.099], [206750, 0.099], [356250, 0.099]], mfj: [[0, 0.0475], [8600, 0.0675], [21500, 0.0875], [274200, 0.099], [413500, 0.099], [712500, 0.099]] }, deduction: { single: 2840, mfj: 5680 }, note: "Standard deduction: $2,840 (Single) / $5,680 (MFJ). OR kicker credit may apply." },
+      PA: { name: "Pennsylvania", type: "flat", rate: 0.0307, note: "Flat 3.07% rate." },
+      RI: { name: "Rhode Island", type: "progressive", brackets: { single: [[0, 0.0375], [77200, 0.0475], [175450, 0.0599]], mfj: [[0, 0.0375], [77200, 0.0475], [175450, 0.0599]] }, deduction: { single: 10750, mfj: 21500 }, note: "Standard deduction: $10,750 (Single) / $21,500 (MFJ)" },
+      SC: { name: "South Carolina", type: "progressive", brackets: { single: [[0, 0.00], [3200, 0.03], [6400, 0.04], [9600, 0.05], [12800, 0.06], [16000, 0.07], [19200, 0.074], [38400, 0.075]], mfj: [[0, 0.00], [3200, 0.03], [6400, 0.04], [9600, 0.05], [12800, 0.06], [16000, 0.07], [19200, 0.074], [38400, 0.075]] }, deduction: { single: 14980, mfj: 29960 }, note: "Standard deduction: $14,980 (Single) / $29,960 (MFJ)" },
+      SD: { name: "South Dakota", type: "none", note: "No state income tax." },
+      TN: { name: "Tennessee", type: "none", note: "No state income tax." },
+      TX: { name: "Texas", type: "none", note: "No state income tax." },
+      UT: { name: "Utah", type: "flat", rate: 0.0465, note: "Flat 4.65% rate." },
+      VT: { name: "Vermont", type: "progressive", brackets: { single: [[0, 0.0335], [45250, 0.066], [109525, 0.076], [227850, 0.0875], [518900, 0.0945]], mfj: [[0, 0.0335], [75650, 0.066], [183450, 0.076], [285350, 0.0875], [518900, 0.0945]] }, deduction: { single: 7650, mfj: 15300 }, note: "Standard deduction: $7,650 (Single) / $15,300 (MFJ)" },
+      VA: { name: "Virginia", type: "progressive", brackets: { single: [[0, 0.02], [3000, 0.03], [5000, 0.05], [17000, 0.0575]], mfj: [[0, 0.02], [3000, 0.03], [5000, 0.05], [17000, 0.0575]] }, deduction: { single: 8000, mfj: 16000 }, note: "Standard deduction: $8,000 (Single) / $16,000 (MFJ)" },
+      WA: { name: "Washington", type: "none", note: "No state income tax." },
+      DC: { name: "Washington D.C.", type: "progressive", brackets: { single: [[0, 0.04], [10000, 0.06], [40000, 0.065], [60000, 0.085], [250000, 0.0925], [500000, 0.1025], [1000000, 0.1075]], mfj: [[0, 0.04], [10000, 0.06], [40000, 0.065], [60000, 0.085], [250000, 0.0925], [500000, 0.1025], [1000000, 0.1075]] }, deduction: { single: 14600, mfj: 29200 }, note: "Standard deduction: $14,600 (Single) / $29,200 (MFJ)" },
+      WV: { name: "West Virginia", type: "progressive", brackets: { single: [[0, 0.03], [10000, 0.04], [25000, 0.045], [40000, 0.052], [60000, 0.0585]], mfj: [[0, 0.03], [10000, 0.04], [25000, 0.045], [40000, 0.052], [60000, 0.0585]] }, deduction: { single: 0, mfj: 0 }, note: "No standard deduction. Personal exemption: $1,200." },
+      WI: { name: "Wisconsin", type: "progressive", brackets: { single: [[0, 0.035], [13810, 0.044], [27630, 0.053], [304170, 0.0765]], mfj: [[0, 0.035], [18420, 0.044], [36830, 0.053], [405620, 0.0765]] }, deduction: { single: 14360, mfj: 28710 }, note: "Standard deduction: $14,360 (Single) / $28,710 (MFJ)" },
+      WY: { name: "Wyoming", type: "none", note: "No state income tax." },
+    };
+
+    // ─── DOM REFS ────────────────────────────────────────────────────────────
+
+    const stateSelect = document.getElementById("stateSelect");
+    const statusSingle = document.getElementById("statusSingle");
+    const statusMfj = document.getElementById("statusMfj");
+    const periodAnnual = document.getElementById("periodAnnual");
+    const periodMonthly = document.getElementById("periodMonthly");
+    const periodWeekly = document.getElementById("periodWeekly");
+    const periodDaily = document.getElementById("periodDaily");
+    const periodHourly = document.getElementById("periodHourly");
+    const salaryInput = document.getElementById("salaryInput");
+    const annualizedLabel = document.getElementById("annualizedLabel");
+    const retirementSlider = document.getElementById("retirementSlider");
+    const retirementPct = document.getElementById("retirementPct");
+
+    const netAnnualDisplay = document.getElementById("netAnnualDisplay");
+    const netMonthlySmall = document.getElementById("netMonthlySmall");
+    const netBiweeklySmall = document.getElementById("netBiweeklySmall");
+    const netWeeklySmall = document.getElementById("netWeeklySmall");
+
+    const bGross = document.getElementById("bGross");
+    const bRetirement = document.getElementById("bRetirement");
+    const bAdjusted = document.getElementById("bAdjusted");
+    const bDeduction = document.getElementById("bDeduction");
+    const bTaxable = document.getElementById("bTaxable");
+    const bFedTax = document.getElementById("bFedTax");
+    const bSsTax = document.getElementById("bSsTax");
+    const bMedicareTax = document.getElementById("bMedicareTax");
+    const bStateTax = document.getElementById("bStateTax");
+    const bNet = document.getElementById("bNet");
+
+    const pMonthly = document.getElementById("pMonthly");
+    const pBiweekly = document.getElementById("pBiweekly");
+    const pWeekly = document.getElementById("pWeekly");
+    const pHourly = document.getElementById("pHourly");
+
+    const stateInfoTitle = document.getElementById("stateInfoTitle");
+    const stateBracketsContainer = document.getElementById("stateBracketsContainer");
+    const stateInfoNote = document.getElementById("stateInfoNote");
+    const federalBracketsContainer = document.getElementById("federalBracketsContainer");
+    const filingLabel = document.getElementById("filingLabel");
+    const fedInfoNote = document.getElementById("fedInfoNote");
+
+    const ALL_PERIOD_BTNS = [periodAnnual, periodMonthly, periodWeekly, periodDaily, periodHourly];
+    const FILING_BTNS = [statusSingle, statusMfj];
+
+    // ─── STATE ───────────────────────────────────────────────────────────────
+
+    let isSingle = true;
+    let activePeriod = "annual";
+
+    // ─── HELPERS ─────────────────────────────────────────────────────────────
+
+    const fmt = (v) =>
+      new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      }).format(v);
+
+    const fmtNumber = (v) =>
+      new Intl.NumberFormat("en-US").format(Math.round(v));
+
+    function computeFederalTax(taxableIncome, single) {
+      if (taxableIncome <= 0) return 0;
+      const brackets = single ? FED_BRACKETS_SINGLE : FED_BRACKETS_MFJ;
+      let tax = 0;
+      let prev = 0;
+      for (const b of brackets) {
+        if (taxableIncome > b.cap) {
+          tax += (b.cap - prev) * b.rate;
+          prev = b.cap;
+        } else {
+          tax += (taxableIncome - prev) * b.rate;
+          break;
+        }
+      }
+      return tax;
+    }
+
+    function computeFica(gross) {
+      const ss = Math.min(gross, SS_CAP) * SS_RATE;
+      const threshold = isSingle ? ADDITIONAL_MEDICARE_THRESHOLD_SINGLE : ADDITIONAL_MEDICARE_THRESHOLD_MFJ;
+      let med = gross * MEDICARE_RATE;
+      if (gross > threshold) {
+        med += (gross - threshold) * ADDITIONAL_MEDICARE_RATE;
+      }
+      return { ss, med, total: ss + med };
+    }
+
+    function computeStateTax(taxableIncome, stateCode, single) {
+      const info = STATE_TAX_INFO[stateCode];
+      if (!info || info.type === "none") return 0;
+      if (info.type === "flat") {
+        return Math.max(0, taxableIncome * info.rate);
+      }
+      if (info.type === "progressive") {
+        const bk = single ? info.brackets.single : info.brackets.mfj;
+        let tax = 0;
+        let prev = 0;
+        for (const b of bk) {
+          const cap = b[0];
+          const rate = b[1];
+          if (taxableIncome > cap) {
+            tax += (cap - prev) * rate;
+            prev = cap;
+          } else {
+            tax += (taxableIncome - prev) * rate;
+            return Math.max(0, tax);
+          }
+        }
+        return Math.max(0, tax);
+      }
+      return 0;
+    }
+
+    function getStandardDeduction(single) {
+      return single ? STD_DEDUCTION_SINGLE : STD_DEDUCTION_MFJ;
+    }
+
+    function getStateDeduction(stateCode, single) {
+      const info = STATE_TAX_INFO[stateCode];
+      if (!info || !info.deduction) return 0;
+      return single ? info.deduction.single : info.deduction.mfj;
+    }
+
+    // ─── UI UPDATES ──────────────────────────────────────────────────────────
+
+    function setActive(btns, activeIdx) {
+      btns.forEach((btn, i) => {
+        if (i === activeIdx) {
+          btn.classList.remove("bg-canvas", "text-body", "hover:text-ink");
+          btn.classList.add("bg-ink", "text-on-primary");
+        } else {
+          btn.classList.remove("bg-ink", "text-on-primary");
+          btn.classList.add("bg-canvas", "text-body", "hover:text-ink");
+        }
+      });
+    }
+
+    function calculate() {
+      const stateCode = stateSelect.value;
+      const salaryVal = parseFloat(salaryInput.value) || 0;
+      let annualGross = 0;
+
+      switch (activePeriod) {
+        case "annual": annualGross = salaryVal; break;
+        case "monthly": annualGross = salaryVal * 12; break;
+        case "weekly": annualGross = salaryVal * 52; break;
+        case "daily": annualGross = salaryVal * 260; break;
+        case "hourly": annualGross = salaryVal * 2080; break;
+      }
+
+      const retPct = parseFloat(retirementSlider.value) || 0;
+      const retirementContrib = annualGross * (retPct / 100);
+      const adjustedGross = annualGross - retirementContrib;
+
+      const fedStdDeduction = getStandardDeduction(isSingle);
+      const fedTaxable = Math.max(0, adjustedGross - fedStdDeduction);
+      const fedTax = computeFederalTax(fedTaxable, isSingle);
+
+      const fica = computeFica(adjustedGross);
+
+      const stateDed = getStateDeduction(stateCode, isSingle);
+      const stateTaxable = Math.max(0, adjustedGross - stateDed);
+      const stateTax = computeStateTax(stateTaxable, stateCode, isSingle);
+
+      const totalTax = fedTax + fica.total + stateTax;
+      const net = Math.max(0, annualGross - retirementContrib - fedTax - fica.total - stateTax);
+
+      // Summary hero
+      netAnnualDisplay.textContent = fmt(net);
+      netMonthlySmall.textContent = fmt(Math.round(net / 12));
+      netBiweeklySmall.textContent = fmt(Math.round(net / 26));
+      netWeeklySmall.textContent = fmt(Math.round(net / 52));
+
+      // Breakdown
+      bGross.textContent = fmt(annualGross);
+      bRetirement.textContent = \`-\${fmt(retirementContrib)}\`;
+      bAdjusted.textContent = fmt(adjustedGross);
+      bDeduction.textContent = \`-\${fmt(fedStdDeduction)}\`;
+      bTaxable.textContent = fmt(fedTaxable);
+      bFedTax.textContent = \`-\${fmt(fedTax)}\`;
+      bSsTax.textContent = \`-\${fmt(fica.ss)}\`;
+      bMedicareTax.textContent = \`-\${fmt(fica.med)}\`;
+      bStateTax.textContent = \`-\${fmt(stateTax)}\`;
+      bNet.textContent = fmt(net);
+
+      // Per period
+      pMonthly.textContent = fmt(Math.round(net / 12));
+      pBiweekly.textContent = fmt(Math.round(net / 26));
+      pWeekly.textContent = fmt(Math.round(net / 52));
+      pHourly.textContent = fmt(Math.round(net / 2080));
+
+      // Annualized label
+      const periodNames = { annual: "year", monthly: "month", weekly: "week", daily: "day", hourly: "hour" };
+      annualizedLabel.textContent = \`Annualized: \${fmt(annualGross)} / year (\${fmtNumber(salaryVal)}/\${periodNames[activePeriod]})\`;
+
+      // Federal brackets display
+      updateFederalBrackets(fedTaxable);
+      updateStateInfo(stateCode, stateTaxable);
+    }
+
+    // ─── BRACKET DISPLAYS ────────────────────────────────────────────────────
+
+    function updateFederalBrackets(taxableIncome) {
+      const brackets = isSingle ? FED_BRACKETS_SINGLE : FED_BRACKETS_MFJ;
+      const labels = isSingle ? FED_LABELS_SINGLE : FED_LABELS_MFJ;
+      filingLabel.textContent = isSingle ? "Single" : "Married (MFJ)";
+      fedInfoNote.textContent = \`Standard deduction: \${fmt(isSingle ? STD_DEDUCTION_SINGLE : STD_DEDUCTION_MFJ)} applied first.\`;
+
+      let html = "";
+      for (let i = 0; i < brackets.length; i++) {
+        const b = brackets[i];
+        const label = labels[i];
+        const pct = (b.rate * 100).toFixed(b.rate >= 0.1 ? 0 : b.rate >= 0.01 ? 1 : 2) + "%";
+        const isActive = taxableIncome > 0 && taxableIncome > (i === 0 ? 0 : brackets[i - 1].cap);
+        html += \`<div class="flex items-center justify-between py-1 border-b last:border-0 border-hairline text-xs \${isActive ? 'opacity-100' : 'opacity-60'}">
+          <span class="text-body">\${label}</span>
+          <span class="font-mono text-red-500 dark:text-red-400 font-semibold">\${pct}</span>
+        </div>\`;
+      }
+      federalBracketsContainer.innerHTML = html;
+    }
+
+    function updateStateInfo(stateCode, taxableIncome) {
+      const info = STATE_TAX_INFO[stateCode];
+      if (!info) return;
+
+      stateInfoTitle.textContent = info.name;
+
+      if (info.type === "none") {
+        stateBracketsContainer.innerHTML = \`<p class="text-sm text-body">\${info.note}</p>\`;
+        stateInfoNote.textContent = "";
+        return;
+      }
+
+      if (info.type === "flat") {
+        const pct = (info.rate * 100).toFixed(2) + "%";
+        const amt = fmt(Math.round(taxableIncome * info.rate));
+        stateBracketsContainer.innerHTML = \`<div class="flex items-center justify-between py-1 text-sm">
+          <span class="text-body">Flat rate on taxable income</span>
+          <span class="font-mono text-red-500 dark:text-red-400 font-semibold">\${pct}</span>
+        </div>\`;
+        stateInfoNote.textContent = info.note;
+        return;
+      }
+
+      if (info.type === "progressive") {
+        const bk = isSingle ? info.brackets.single : info.brackets.mfj;
+        let html = "";
+        for (let i = 0; i < bk.length; i++) {
+          const cap = bk[i][0];
+          const rate = bk[i][1];
+          const pct = (rate * 100).toFixed(rate >= 1 ? 1 : 2) + "%";
+          const prevCap = i === 0 ? 0 : bk[i - 1][0];
+          const labelCap = cap === Infinity ? "above" : fmt(cap);
+          const label = i === 0 ? \`$0 – \${fmt(cap)}\` : \`\${fmt(prevCap)} – \${labelCap}\`;
+          const isActive = taxableIncome > prevCap;
+          html += \`<div class="flex items-center justify-between py-1 border-b last:border-0 border-hairline text-xs \${isActive ? 'opacity-100' : 'opacity-60'}">
+            <span class="text-body">\${label}</span>
+            <span class="font-mono text-red-500 dark:text-red-400 font-semibold">\${pct}</span>
+          </div>\`;
+        }
+        stateBracketsContainer.innerHTML = html;
+        const dedText = info.deduction ? \`State deduction: \${fmt(isSingle ? info.deduction.single : info.deduction.mfj)}. \` : "";
+        stateInfoNote.textContent = dedText + info.note;
+      }
+    }
+
+    // ─── EVENTS ──────────────────────────────────────────────────────────────
+
+    stateSelect.addEventListener("change", calculate);
+    retirementSlider.addEventListener("input", () => {
+      retirementPct.textContent = retirementSlider.value;
+      calculate();
+    });
+
+    salaryInput.addEventListener("input", calculate);
+
+    FILING_BTNS.forEach((btn, idx) => {
+      btn.addEventListener("click", () => {
+        isSingle = idx === 0;
+        setActive(FILING_BTNS, idx);
+        calculate();
+      });
+    });
+
+    ALL_PERIOD_BTNS.forEach((btn, idx) => {
+      btn.addEventListener("click", () => {
+        const periods = ["annual", "monthly", "weekly", "daily", "hourly"];
+        activePeriod = periods[idx];
+        setActive(ALL_PERIOD_BTNS, idx);
+
+        const val = parseFloat(salaryInput.value) || 0;
+        const annualVal = getAnnualValue(val, activePeriod);
+
+        // Recalculate - the calculator will recompute based on period label
+        updatePlaceholders();
+        calculate();
+      });
+    });
+
+    function getPeriodValue(annual, period) {
+      switch (period) {
+        case "annual": return annual;
+        case "monthly": return annual / 12;
+        case "weekly": return annual / 52;
+        case "daily": return annual / 260;
+        case "hourly": return annual / 2080;
+      }
+    }
+
+    function getAnnualValue(periodVal, period) {
+      switch (period) {
+        case "annual": return periodVal;
+        case "monthly": return periodVal * 12;
+        case "weekly": return periodVal * 52;
+        case "daily": return periodVal * 260;
+        case "hourly": return periodVal * 2080;
+      }
+    }
+
+    function updatePlaceholders() {
+      const placeholders = {
+        annual: "75,000",
+        monthly: "6,250",
+        weekly: "1,442",
+        daily: "288",
+        hourly: "36"
+      };
+      salaryInput.placeholder = placeholders[activePeriod] || "75,000";
+    }
+
+    // ─── INIT ────────────────────────────────────────────────────────────────
+
+    setActive(FILING_BTNS, 0);
+    setActive(ALL_PERIOD_BTNS, 0);
+    updatePlaceholders();
+    calculate();
+  })();
+<\/script>`;
+}, "C:/website/src/pages/salary-calculator.astro", void 0);
+var $$file = "C:/website/src/pages/salary-calculator.astro";
+var $$url = "/salary-calculator";
+//#endregion
+//#region \0virtual:astro:page:src/pages/salary-calculator@_@astro
+var page = () => salary_calculator_exports;
+//#endregion
+export { page };
