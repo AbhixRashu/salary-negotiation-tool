@@ -16,13 +16,7 @@ function containsInappropriateContent(text: string): boolean {
   });
 }
 
-function sanitizeAchievement(text: string): string {
-  if (!text) return '';
-  return text.split(/\s+/).filter(w => {
-    const lower = w.toLowerCase().replace(/[^a-z]/g, '');
-    return !INAPPROPRIATE_WORDS.some(bad => lower.includes(bad));
-  }).join(' ');
-}
+
 
 const SYSTEM_PROMPT = "You are the world's most elite salary negotiation strategist — personally hired by Fortune 500 executives to negotiate their compensation packages. You combine Harvard Negotiation Project methodology, FBI Behavioral Analysis negotiation tactics, and deep insider knowledge of HR decision-making. Your emails are so persuasive that recruiters forward them internally as examples of 'how to negotiate professionally.' Every sentence must serve a strategic purpose. Avoid ALL corporate clichés. No introductory commentary — start directly with the salutation.";
 
@@ -71,8 +65,13 @@ export const POST: APIRoute = async ({ request }) => {
         );
       }
       if (containsInappropriateContent(safeAchievement)) {
-        safeAchievement = sanitizeAchievement(safeAchievement);
-        console.warn(`[Sanitized] Achievement for ${role} at ${company} contained inappropriate words`);
+        return new Response(
+          JSON.stringify({ error: 'Achievement contains inappropriate or profane language. Please revise.' }),
+          {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
       }
     }
 
@@ -94,21 +93,21 @@ export const POST: APIRoute = async ({ request }) => {
     };
 
     const prompt = buildPrompt(params);
-    const geminiKey = process.env.GEMINI_API_KEY;
+    const geminiKeys = (process.env.GEMINI_API_KEY || '').split(',').map(k => k.trim()).filter(Boolean);
 
-    console.log(`[Request] ${new Date().toISOString()} | ${role} @ ${company} | tone: ${tone}`);
+    console.log(`[Request] ${new Date().toISOString()} | ${role} @ ${company} | tone: ${tone} | gemini keys: ${geminiKeys.length}`);
 
-    // Try Gemini first (stronger model available)
-    if (geminiKey) {
-      const geminiResult = await callGemini(prompt, geminiKey);
+    // Try each Gemini key in order until one succeeds
+    for (let i = 0; i < geminiKeys.length; i++) {
+      const geminiResult = await callGemini(prompt, geminiKeys[i]);
       if (geminiResult) {
-        console.log(`[Response] Gemini success | ${role} @ ${company}`);
+        console.log(`[Response] Gemini success (key ${i + 1}) | ${role} @ ${company}`);
         return new Response(
           JSON.stringify({ text: geminiResult, isFallback: false }),
           { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
       }
-      console.warn(`[Response] Gemini failed for ${role} @ ${company}, trying fallback`);
+      console.warn(`[Response] Gemini key ${i + 1} failed for ${role} @ ${company}${i < geminiKeys.length - 1 ? ', trying next key...' : ''}`);
     }
 
     // Fallback to Anthropic Claude
@@ -147,8 +146,11 @@ export const POST: APIRoute = async ({ request }) => {
 
 async function callGemini(prompt: string, apiKey: string): Promise<string | null> {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
     const response = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + apiKey,
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=' + apiKey,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -158,16 +160,17 @@ async function callGemini(prompt: string, apiKey: string): Promise<string | null
             parts: [{ text: prompt }]
           }],
           systemInstruction: {
-            role: 'user',
             parts: [{ text: SYSTEM_PROMPT }]
           },
           generationConfig: {
-            maxOutputTokens: 2000,
-            temperature: 0.7
+            maxOutputTokens: 2000
           }
-        })
+        }),
+        signal: controller.signal
       }
     );
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -177,14 +180,21 @@ async function callGemini(prompt: string, apiKey: string): Promise<string | null
 
     const result = await response.json();
     return result?.candidates?.[0]?.content?.parts?.[0]?.text || null;
-  } catch (err) {
-    console.error('Gemini call failed:', err);
+  } catch (err: any) {
+    if (err.name === 'AbortError') {
+      console.error('Gemini call timed out after 30s');
+    } else {
+      console.error('Gemini call failed:', err);
+    }
     return null;
   }
 }
 
 async function callClaude(prompt: string, apiKey: string): Promise<string | null> {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -197,8 +207,11 @@ async function callClaude(prompt: string, apiKey: string): Promise<string | null
         max_tokens: 2000,
         messages: [{ role: 'user', content: prompt }],
         system: SYSTEM_PROMPT
-      })
+      }),
+      signal: controller.signal
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -208,8 +221,12 @@ async function callClaude(prompt: string, apiKey: string): Promise<string | null
 
     const result = await response.json();
     return result.content[0].text;
-  } catch (err) {
-    console.error('Claude call failed:', err);
+  } catch (err: any) {
+    if (err.name === 'AbortError') {
+      console.error('Claude call timed out after 30s');
+    } else {
+      console.error('Claude call failed:', err);
+    }
     return null;
   }
 }
@@ -232,14 +249,16 @@ interface EmailParams {
 }
 
 function buildPrompt(params: EmailParams): string {
+  const usd = (n: string | number) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Number(n));
   const rangeStr = params.lowRange && params.highRange
-    ? `$${Number(params.lowRange).toLocaleString()} to $${Number(params.highRange).toLocaleString()}`
+    ? `${usd(params.lowRange)} to ${usd(params.highRange)}`
     : 'market standard rates';
   const offerStr = params.currentOffer
-    ? `$${Number(params.currentOffer).toLocaleString()}`
+    ? usd(params.currentOffer)
     : 'the initial offer';
   const targetStr = params.targetSalary
-    ? `$${Number(params.targetSalary).toLocaleString()}`
+    ? usd(params.targetSalary)
     : 'a market-aligned figure';
 
   const achievementDetail = params.achievement || '';
@@ -356,22 +375,21 @@ Write a complete, copy-paste-ready salary negotiation email. Every word must ear
 - Never give a range — a range invites them to pick the bottom
 
 ### 5. TONE ARCHITECTURE — "${params.tone}"
-${
-  params.tone === 'confident-polite'
-    ? `- **Confident & Polite:** Assertive but warm. Lead with market data, then value, then ask.
+${params.tone === 'confident-polite'
+      ? `- **Confident & Polite:** Assertive but warm. Lead with market data, then value, then ask.
   - Sentence rhythm: declarative statements softened with "I believe" or "I'm confident"
   - Vocabulary: "based on my research," "the value I bring," "fair alignment"
   - Energy: calm, assured, collaborative`
-    : params.tone === 'assertive'
-    ? `- **Assertive:** High agency, decisive, minimal qualifiers.
+      : params.tone === 'assertive'
+        ? `- **Assertive:** High agency, decisive, minimal qualifiers.
   - Sentence rhythm: short, declarative. Lead with the decision.
   - Vocabulary: "I require," "my baseline," "to move forward"
   - Energy: direct, professional, no apologizing`
-    : `- **Warm & Collaborative:** Relationship-first, friendly but professional.
+        : `- **Warm & Collaborative:** Relationship-first, friendly but professional.
   - Sentence rhythm: longer, flowing sentences. Open with shared enthusiasm.
   - Vocabulary: "I'd love to," "let's find a way," "mutually beneficial"
   - Energy: warm, team-oriented, flexible within structure`
-}
+    }
 
 ### 6. CLOSING — CALL TO ACTION
 - Specific, low-pressure, time-bound next step
@@ -403,11 +421,13 @@ function pick<T>(arr: T[]): T {
 }
 
 function generateFallbackEmail(p: EmailParams): string {
+  const usd = (n: string | number) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Number(n));
   const closings = ["Best,\n\n[Your Name]", "Best regards,\n\n[Your Name]", "Sincerely,\n\n[Your Name]"];
   const formattedRange = p.lowRange && p.highRange
-    ? `$${Number(p.lowRange).toLocaleString()} to $${Number(p.highRange).toLocaleString()}`
+    ? `${usd(p.lowRange)} to ${usd(p.highRange)}`
     : "market standard rates for this role";
-  const targetStr = p.targetSalary ? `$${Number(p.targetSalary).toLocaleString()}` : 'a market-aligned figure';
+  const targetStr = p.targetSalary ? usd(p.targetSalary) : 'a market-aligned figure';
   const locText = p.location.toLowerCase().includes('remote') ? 'nationally' : `in ${p.location}`;
   const rawAchievement = (p.achievement + " " + p.achievementDetail).trim();
   const isGarbage = containsInappropriateContent(rawAchievement) || rawAchievement.split(/\s+/).filter(Boolean).length < 5;
@@ -417,7 +437,7 @@ function generateFallbackEmail(p: EmailParams): string {
     : 'a consistent track record of delivering measurable results';
 
   const toneVariants: Record<string, { opening: string[]; valueLead: string[]; ask: string[]; close: string[] }> = {
-    "confident and polite": {
+    "confident-polite": {
       opening: [
         `Thank you for the offer to join ${p.company} as a ${p.role}. I've been following the team's work closely, and I'm excited about the problems you're solving.`,
         `I'm grateful for the offer to join ${p.company} as a ${p.role}. The conversation reaffirmed my excitement about the work your team is doing.`,
@@ -461,7 +481,7 @@ function generateFallbackEmail(p: EmailParams): string {
         `Let me know if you can meet at ${targetStr} — I'm ready to move forward.`
       ]
     },
-    "warm and collaborative": {
+    "warm-collaborative": {
       opening: [
         `Thank you so much for the offer to join ${p.company} as a ${p.role}! I've really enjoyed our conversations and would love to be part of what you're building.`,
         `I was so happy to receive the offer for the ${p.role} role at ${p.company}. I truly admire the culture and mission you're building.`,
@@ -485,7 +505,7 @@ function generateFallbackEmail(p: EmailParams): string {
     }
   };
 
-  const defaultVariants = toneVariants["confident and polite"];
+  const defaultVariants = toneVariants["confident-polite"];
   const tv = toneVariants[p.tone] || defaultVariants;
   const tone = {
     opening: pick(tv.opening),
@@ -496,15 +516,15 @@ function generateFallbackEmail(p: EmailParams): string {
 
   const competeVariants = p.competingOffer
     ? [
-        `I have another offer at a comparable level, but ${p.company} is my strong preference. If we can meet at ${targetStr}, I'm ready to commit immediately.`,
-        `I'm currently considering a competing offer at a similar level. That said, ${p.company} is my top choice. At ${targetStr}, I'd accept right away.`,
-        `Another company has put forward a competitive offer. I'd much rather join ${p.company} though — if we can settle at ${targetStr}, I'm in.`
-      ]
+      `I have another offer at a comparable level, but ${p.company} is my strong preference. If we can meet at ${targetStr}, I'm ready to commit immediately.`,
+      `I'm currently considering a competing offer at a similar level. That said, ${p.company} is my top choice. At ${targetStr}, I'd accept right away.`,
+      `Another company has put forward a competitive offer. I'd much rather join ${p.company} though — if we can settle at ${targetStr}, I'm in.`
+    ]
     : [
-        `${p.company} is where I want to be, and I'm confident this is the right place for me to do my best work.`,
-        `I've been intentional about where I want to take my career next, and ${p.company} is the clear frontrunner.`,
-        `I'm genuinely excited about the direction of ${p.company} and the impact I can have in this role.`
-      ];
+      `${p.company} is where I want to be, and I'm confident this is the right place for me to do my best work.`,
+      `I've been intentional about where I want to take my career next, and ${p.company} is the clear frontrunner.`,
+      `I'm genuinely excited about the direction of ${p.company} and the impact I can have in this role.`
+    ];
 
   const competingLine = pick(competeVariants);
 

@@ -1,0 +1,495 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="Privacy Policy — Salary Pitcher"
+    description="Privacy policy for Salary Pitcher — how we handle your data, cookies, and third-party services."
+    breadcrumbs={[
+        { name: "Home", path: "/" },
+        { name: "Privacy Policy", path: "/privacy" },
+    ]}
+>
+    <!-- Reading Progress Bar -->
+    <div id="privacyProgress" class="reading-progress"></div>
+
+    <div class="max-w-4xl mx-auto w-full flex gap-8 relative">
+        <!-- Sticky Table of Contents (Desktop) -->
+        <aside id="privacyTOC" class="hidden lg:block w-56 shrink-0 sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 reveal">
+            <p class="text-[10px] font-mono font-semibold uppercase tracking-widest text-mute mb-3">On this page</p>
+            <nav class="space-y-1 toc-nav">
+                <a href="#information-we-collect" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">1</span>
+                    Information We Collect
+                </a>
+                <a href="#how-we-use" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">2</span>
+                    How We Use Your Info
+                </a>
+                <a href="#ai-data" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">3</span>
+                    AI API Data Handling
+                </a>
+                <a href="#cookies" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">4</span>
+                    Cookies & Local Storage
+                </a>
+                <a href="#third-party" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">5</span>
+                    Third-Party Services
+                </a>
+                <a href="#data-retention" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">6</span>
+                    Data Retention
+                </a>
+                <a href="#your-rights" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">7</span>
+                    Your Rights
+                </a>
+                <a href="#changes-policy" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">8</span>
+                    Changes to Policy
+                </a>
+                <a href="#contact-privacy" class="toc-link group flex items-center gap-2 text-xs text-body hover:text-ink transition-all duration-200 py-1.5 pl-3 border-l-2 border-transparent hover:border-accent-blue rounded-r-md">
+                    <span class="toc-number w-5 h-5 rounded-full bg-canvas-soft-2 text-[9px] font-mono font-semibold text-mute flex items-center justify-center group-hover:bg-accent-blue/10 group-hover:text-accent-blue transition-colors">9</span>
+                    Contact
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 min-w-0 space-y-10">
+            <!-- Title / Header -->
+            <div class="space-y-4 text-center sm:text-left reveal">
+                <div
+                    class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider bg-accent-blue/15 text-accent-blue border border-accent-blue/10"
+                >
+                    Legal
+                </div>
+                <h1
+                    class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-tight"
+                >
+                    Privacy Policy
+                </h1>
+                <p class="text-sm text-body">
+                    How Salary Pitcher handles your data, privacy, and third-party
+                    services.
+                </p>
+            </div>
+
+            <!-- Mobile TOC (collapsible) -->
+            <div class="lg:hidden reveal">
+                <details class="border border-hairline bg-canvas rounded-lg group" id="mobileTocDetails">
+                    <summary class="flex items-center justify-between p-4 cursor-pointer select-none text-sm font-semibold text-ink">
+                        <span class="flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-blue"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                            Table of Contents
+                        </span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-open:rotate-180 text-mute"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <nav class="px-4 pb-4 space-y-1">
+                        <a href="#information-we-collect" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">1. Information We Collect</a>
+                        <a href="#how-we-use" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">2. How We Use Your Info</a>
+                        <a href="#ai-data" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">3. AI API Data Handling</a>
+                        <a href="#cookies" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">4. Cookies & Local Storage</a>
+                        <a href="#third-party" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">5. Third-Party Services</a>
+                        <a href="#data-retention" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">6. Data Retention</a>
+                        <a href="#your-rights" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">7. Your Rights</a>
+                        <a href="#changes-policy" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">8. Changes to Policy</a>
+                        <a href="#contact-privacy" class="mobile-toc-link block text-xs text-body hover:text-accent-blue py-1.5 px-3 rounded-md hover:bg-accent-blue/5 transition-all">9. Contact</a>
+                    </nav>
+                </details>
+            </div>
+
+            <!-- Privacy Content -->
+            <div
+                class="space-y-6 stagger-children reveal text-sm text-body leading-relaxed"
+            >
+                <div class="border border-hairline bg-canvas rounded-lg p-6">
+                    <p class="text-xs font-mono text-mute mb-4">
+                        <strong>Last updated:</strong> July 2026
+                    </p>
+                    <p>
+                        Salary Pitcher is designed with your privacy in mind. We do
+                        not require login, registration, or account creation to use
+                        any of our tools.
+                    </p>
+                </div>
+
+                <!-- Section: Information We Collect -->
+                <div
+                    id="information-we-collect"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            Information We Collect
+                        </h2>
+                    </div>
+                    <p class="mb-3 pl-10">
+                        We collect minimal information to operate and improve the
+                        site:
+                    </p>
+                    <ul class="space-y-2 list-disc pl-14">
+                        <li>
+                            <strong>Information you provide:</strong> When using our tools
+                            (e.g., salary negotiation email generator, offer comparison,
+                            strategy guide), you provide information such as job title,
+                            current salary, offer details, and company name. This data
+                            is processed in your browser and sent to our AI API to generate
+                            responses. We do not store this information on our servers.
+                        </li>
+                        <li>
+                            <strong>Theme preference:</strong> Your dark/light mode selection
+                            is stored locally in your browser using localStorage. This
+                            never leaves your device.
+                        </li>
+                        <li>
+                            <strong>Anonymous usage data:</strong> We may collect basic,
+                            anonymized analytics (page views, tool usage counts) to understand
+                            how the site is used and improve the experience. No personally
+                            identifiable information is collected through analytics.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section: How We Use Your Information -->
+                <div
+                    id="how-we-use"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            How We Use Your Information
+                        </h2>
+                    </div>
+                    <ul class="space-y-2 list-disc pl-14">
+                        <li>
+                            To generate AI-powered email drafts, playbooks, and
+                            content based on your inputs
+                        </li>
+                        <li>
+                            To improve the accuracy and relevance of our tools and
+                            salary data
+                        </li>
+                        <li>
+                            To monitor site performance and fix technical issues
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section: AI API Data Handling -->
+                <div
+                    id="ai-data"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            AI API Data Handling
+                        </h2>
+                    </div>
+                    <p class="pl-10">
+                        When you use our AI-powered tools (pitch assistant,
+                        follow-up generator, strategy guide), the information you
+                        provide is sent to our AI service provider (Google Gemini
+                        API) solely for the purpose of generating your response. We
+                        do not train AI models using your data. Google's privacy
+                        policy governs how they handle data sent to their API.
+                        Please refer to <a
+                            href="https://policies.google.com/privacy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-accent-blue hover:underline inline-flex items-center gap-1"
+                            >Google's Privacy Policy <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a
+                        > for more details.
+                    </p>
+                </div>
+
+                <!-- Section: Cookies -->
+                <div
+                    id="cookies"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            Cookies & Local Storage
+                        </h2>
+                    </div>
+                    <p class="mb-3 pl-10">We use minimal local storage and cookies:</p>
+                    <ul class="space-y-2 list-disc pl-14">
+                        <li>
+                            <strong>localStorage:</strong> Used to remember your dark/light
+                            mode preference (theme). This data stays on your device and
+                            is never sent to our servers.
+                        </li>
+                        <li>
+                            <strong>Session data:</strong> Some tool state may be temporarily
+                            stored in your browser session to prevent data loss if you
+                            accidentally navigate away.
+                        </li>
+                        <li>
+                            We do <strong>not</strong> use tracking cookies, advertising
+                            cookies, or third-party marketing cookies.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section: Third-Party Services -->
+                <div
+                    id="third-party"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">5</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            Third-Party Services
+                        </h2>
+                    </div>
+                    <p class="mb-3 pl-10">
+                        Salary Pitcher uses the following third-party services:
+                    </p>
+                    <ul class="space-y-2 list-disc pl-14">
+                        <li>
+                            <strong>Google Gemini API:</strong> Powers AI-generated content
+                            (email drafts, strategy playbooks). Your inputs are sent to
+                            this API for processing.
+                        </li>
+                        <li>
+                            <strong>Google Fonts:</strong> Used for typography. When you
+                            visit the site, your browser may request font files from Google's
+                            servers.
+                        </li>
+                        <li>
+                            <strong>Vercel / Hosting Provider:</strong> The site is hosted
+                            on a modern cloud platform that may collect basic server logs
+                            (IP address, browser type, pages visited) for security and
+                            performance monitoring.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section: Data Retention -->
+                <div
+                    id="data-retention"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">6</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            Data Retention
+                        </h2>
+                    </div>
+                    <p class="pl-10">
+                        We do not store your tool inputs (salary figures, offer
+                        details, generated emails) on our servers. Data is processed
+                        in real-time and discarded after the response is sent back
+                        to your browser. Server logs (IP addresses, page views) may
+                        be retained temporarily for security analysis and then
+                        automatically deleted.
+                    </p>
+                </div>
+
+                <!-- Section: Your Rights -->
+                <div
+                    id="your-rights"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">7</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            Your Rights
+                        </h2>
+                    </div>
+                    <p class="pl-10">
+                        Since we do not collect or store personal account
+                        information, there is no personal data for you to access,
+                        modify, or delete. If you have concerns about your data,
+                        please contact us at the email below.
+                    </p>
+                </div>
+
+                <!-- Section: Changes to This Policy -->
+                <div
+                    id="changes-policy"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">8</span>
+                        <h2 class="text-base font-semibold text-ink">
+                            Changes to This Policy
+                        </h2>
+                    </div>
+                    <p class="pl-10">
+                        We may update this Privacy Policy as our practices evolve.
+                        Continued use of the site after changes are posted
+                        constitutes acceptance of the updated policy.
+                    </p>
+                </div>
+
+                <!-- Section: Contact -->
+                <div
+                    id="contact-privacy"
+                    class="legal-section border border-hairline bg-canvas rounded-lg p-6 card-glow scroll-mt-24 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5"
+                >
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="section-number w-7 h-7 rounded-lg bg-accent-blue/10 text-accent-blue text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">9</span>
+                        <h2 class="text-base font-semibold text-ink">Contact</h2>
+                    </div>
+                    <p class="pl-10">Questions about this privacy policy can be sent to:</p>
+                    <a
+                        href="mailto:salarypitcher@gmail.com"
+                        class="mt-2 ml-10 inline-flex items-center gap-2 text-accent-blue hover:underline font-mono text-sm group"
+                    >
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="group-hover:scale-110 transition-transform"
+                        >
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M22 4l-10 8L2 4"></path>
+                        </svg>
+                        salarypitcher@gmail.com
+                    </a>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div
+                class="border border-hairline rounded-lg p-6 flex flex-col sm:flex-row justify-between items-center gap-6 bg-canvas shadow-sm lift-on-hover reveal"
+            >
+                <div class="space-y-1 text-center sm:text-left">
+                    <p class="font-semibold text-ink text-sm">
+                        Have a lowball or standard offer ready?
+                    </p>
+                    <p class="text-xs text-mute">
+                        Generate a professional counter email draft tailored to your
+                        metrics.
+                    </p>
+                </div>
+                <a
+                    href="/"
+                    class="px-6 py-2.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-xs transition-colors shrink-0 ripple-btn btn-press"
+                >
+                    Generate Draft Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ─── READING PROGRESS BAR ──────────────────────────────
+            const progressBar = document.getElementById('privacyProgress');
+            if (progressBar) {
+                const updateProgress = () => {
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                    progressBar.style.width = Math.min(progress, 100) + '%';
+                };
+                window.addEventListener('scroll', updateProgress, { passive: true });
+                updateProgress();
+            }
+
+            // ─── TOC ACTIVE SECTION TRACKING ────────────────────────
+            const sections = document.querySelectorAll('.legal-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const mobileTocLinks = document.querySelectorAll('.mobile-toc-link');
+
+            if (sections.length > 0 && tocLinks.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            // Update desktop TOC
+                            tocLinks.forEach(link => {
+                                const href = link.getAttribute('href');
+                                const numEl = link.querySelector('.toc-number') as HTMLElement;
+                                if (href === '#' + id) {
+                                    link.classList.add('text-ink', 'font-medium', 'border-accent-blue');
+                                    link.classList.remove('border-transparent', 'text-body');
+                                    if (numEl) {
+                                        numEl.classList.add('bg-accent-blue/10', 'text-accent-blue');
+                                        numEl.classList.remove('bg-canvas-soft-2', 'text-mute');
+                                    }
+                                } else {
+                                    link.classList.remove('text-ink', 'font-medium', 'border-accent-blue');
+                                    link.classList.add('border-transparent', 'text-body');
+                                    if (numEl) {
+                                        numEl.classList.remove('bg-accent-blue/10', 'text-accent-blue');
+                                        numEl.classList.add('bg-canvas-soft-2', 'text-mute');
+                                    }
+                                }
+                            });
+                            // Update mobile TOC
+                            mobileTocLinks.forEach(link => {
+                                const href = link.getAttribute('href');
+                                if (href === '#' + id) {
+                                    link.classList.add('text-accent-blue', 'bg-accent-blue/5', 'font-medium');
+                                } else {
+                                    link.classList.remove('text-accent-blue', 'bg-accent-blue/5', 'font-medium');
+                                }
+                            });
+                        }
+                    });
+                }, {
+                    threshold: 0.3,
+                    rootMargin: '-80px 0px -50% 0px'
+                });
+
+                sections.forEach(section => observer.observe(section));
+            }
+
+            // ─── SMOOTH SCROLL FOR TOC LINKS ────────────────────────
+            const allTocLinks = document.querySelectorAll('.toc-link, .mobile-toc-link');
+            allTocLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    if (!href) return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // Briefly highlight the section
+                        target.classList.add('ring-2', 'ring-accent-blue/20');
+                        setTimeout(() => {
+                            target.classList.remove('ring-2', 'ring-accent-blue/20');
+                        }, 1500);
+                    }
+                    // Close mobile TOC if open
+                    const mobileToc = document.getElementById('mobileTocDetails') as HTMLDetailsElement;
+                    if (mobileToc) mobileToc.open = false;
+                });
+            });
+
+            // ─── SECTION HOVER GLOW ANIMATION ────────────────────────
+            sections.forEach(section => {
+                section.addEventListener('mouseenter', () => {
+                    const num = section.querySelector('.section-number') as HTMLElement;
+                    if (num) {
+                        num.style.transform = 'scale(1.15) rotate(-5deg)';
+                        num.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+                    }
+                });
+                section.addEventListener('mouseleave', () => {
+                    const num = section.querySelector('.section-number') as HTMLElement;
+                    if (num) {
+                        num.style.transform = 'scale(1) rotate(0deg)';
+                    }
+                });
+            });
+        })();
+    </script>
+</Layout>

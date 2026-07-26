@@ -191,14 +191,14 @@ function barColor(median: number) {
     </div>
 
     <!-- Company Cards -->
-    <div id="companyGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div id="companyGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5 stagger-children reveal">
       {
         COMPANIES.map((company, idx) => {
           const cc = getCompanyColor(company.industry);
           const companyMax = Math.max(...company.roles.map((r) => r.median));
           return (
             <div
-              class="company-card border border-hairline bg-canvas rounded-lg shadow-sm hover:shadow-elevated transition-all duration-200 overflow-hidden reveal"
+              class="company-card border border-hairline bg-canvas rounded-lg shadow-sm hover:shadow-elevated transition-all duration-200 overflow-hidden reveal tilt-card"
               data-industry={company.industry}
               data-company={company.name.toLowerCase()}
               data-roles={company.roles.length}
@@ -389,7 +389,7 @@ function barColor(median: number) {
 </Layout>
 
 <!-- Data injection -->
-<script set:html={`window.__COMPANIES_DATA__ = ${companiesJson};`} />
+<script set:html={`window.__COMPANIES_DATA__ = ${companiesJson};`} is:inline />
 
 <script is:inline>
   (function () {

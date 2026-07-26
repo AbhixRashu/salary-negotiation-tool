@@ -17,6 +17,13 @@ const guides = [
     readTime: "4 min read",
   },
   {
+    title: "What Achievements Can Freshers List?",
+    slug: "what-achievements-can-freshers-list",
+    description:
+      "A complete guide for new graduates and freshers on what achievements to write in salary negotiation — even without corporate work experience.",
+    readTime: "4 min read",
+  },
+  {
     title: "How to Negotiate a Sign-On Bonus",
     slug: "how-to-negotiate-sign-on-bonus",
     description:
@@ -64,15 +71,8 @@ const guides = [
     <div class="space-y-6 stagger-children reveal">
       {
         guides.map((g, i) => {
-          const icons = ["📝", "🛡️", "💰", "❌", "🎯"];
-          const iconLabels = ["Guide", "Guide", "Guide", "Guide", "Guide"];
-          const colors = [
-            "#0070f3",
-            "#ff0080",
-            "#50e3c2",
-            "#ff4d4d",
-            "#f9cb28",
-          ];
+          const icons = ["📝", "🛡️", "🎓", "💰", "❌", "🎯"];
+          const iconLabels = ["Guide", "Guide", "Guide", "Guide", "Guide", "Guide"];
           const isPopular = i < 2;
           return (
             <div
@@ -113,10 +113,12 @@ const guides = [
                         : i === 1
                           ? "Intermediate"
                           : i === 2
-                            ? "Advanced"
+                            ? "Beginner"
                             : i === 3
-                              ? "All Levels"
-                              : "Beginner"}
+                              ? "Advanced"
+                              : i === 4
+                                ? "All Levels"
+                                : "Beginner"}
                     </span>
                   </div>
                 </div>

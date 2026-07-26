@@ -156,10 +156,9 @@
         var seniorityHtml = "";
         var levelIcons = ["&#x1F331;", "&#x1F33F;", "&#x1F333;", "&#x1F3D4;&#xFE0F;"];
         var levelColors = ["#10b981", "#3b82f6", "#8b5cf6", "#f59e0b"];
-        var expEntries = Object.entries(EXPERIENCE_LEVELS);
+        var expEntries = EXPERIENCE_LEVELS;
         for (var ei = 0; ei < expEntries.length; ei++) {
-            var entry = expEntries[ei];
-            var data = entry[1];
+            var data = expEntries[ei];
             var base = roleData.median;
             var adj = base * data.multiplier * multiplier;
             var maxAdj = base * 1.6 * multiplier;
@@ -355,10 +354,7 @@
         const overlay = document.createElement("div");
         overlay.className = "compare-panel-overlay";
 
-        const growthMax = Math.max.apply(
-            null,
-            compareRoles.map(function (r) { return r.growth; })
-        );
+
         const medianMax = Math.max.apply(
             null,
             compareRoles.map(function (r) { return r.median; })
@@ -670,7 +666,7 @@
     if (selectCategory)
         selectCategory.addEventListener("change", filterAndRenderTable);
     if (selectLocation)
-        selectLocation.addEventListener("change", function (e) {
+        selectLocation.addEventListener("change", function () {
             filterAndRenderTable();
             if (selectAllCheckbox) selectAllCheckbox.checked = false;
         });

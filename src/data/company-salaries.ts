@@ -16,7 +16,7 @@ export const COMPANIES: CompanySalaryData[] = [
       { title: "Product Manager", median: 185000, low: 145000, high: 245000, equity: "$40K-$120K/yr RSU", bonus: "15-20%" },
       { title: "Data Scientist", median: 175000, low: 135000, high: 230000, equity: "$40K-$100K/yr RSU", bonus: "15-20%" },
       { title: "UX Designer", median: 165000, low: 128000, high: 215000, equity: "$30K-$80K/yr RSU", bonus: "15-20%" },
-      { title: "Téch Lead", median: 320000, low: 250000, high: 420000, equity: "$150K-$300K/yr RSU", bonus: "20%" },
+      { title: "Tech Lead", median: 320000, low: 250000, high: 420000, equity: "$150K-$300K/yr RSU", bonus: "20%" },
       { title: "Engineering Manager", median: 350000, low: 270000, high: 460000, equity: "$150K-$300K/yr RSU", bonus: "20-25%" },
       { title: "Site Reliability Engineer", median: 195000, low: 155000, high: 265000, equity: "$50K-$130K/yr RSU", bonus: "15-20%" },
     ],
