@@ -15,6 +15,8 @@ var POST = async ({ request }) => {
 			headers: { "Content-Type": "application/json" }
 		});
 		for (const key of geminiKeys) try {
+			const controller = new AbortController();
+			const timeoutId = setTimeout(() => controller.abort(), 8500);
 			const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=" + key, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -24,8 +26,10 @@ var POST = async ({ request }) => {
 						parts: [{ text: prompt }]
 					}],
 					generationConfig: { maxOutputTokens: 300 }
-				})
+				}),
+				signal: controller.signal
 			});
+			clearTimeout(timeoutId);
 			if (!response.ok) {
 				console.error(`Gemini achievement error (key ${key.substring(0, 6)}...):`, await response.text());
 				continue;

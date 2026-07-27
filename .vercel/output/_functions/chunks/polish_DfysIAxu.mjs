@@ -106,7 +106,7 @@ Return ONLY the polished email. No explanations, no meta-commentary, no subject 
 async function callGemini(prompt, apiKey) {
 	try {
 		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), 3e4);
+		const timeoutId = setTimeout(() => controller.abort(), 8500);
 		const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=" + apiKey, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -128,7 +128,7 @@ async function callGemini(prompt, apiKey) {
 		}
 		return (await response.json())?.candidates?.[0]?.content?.parts?.[0]?.text || null;
 	} catch (err) {
-		if (err.name === "AbortError") console.error("Gemini Polish call timed out after 30s");
+		if (err.name === "AbortError") console.error("Gemini Polish call timed out after 8.5s");
 		else console.error("Gemini call failed:", err);
 		return null;
 	}
@@ -136,7 +136,7 @@ async function callGemini(prompt, apiKey) {
 async function callClaude(prompt, apiKey) {
 	try {
 		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), 3e4);
+		const timeoutId = setTimeout(() => controller.abort(), 8500);
 		const response = await fetch("https://api.anthropic.com/v1/messages", {
 			method: "POST",
 			headers: {
@@ -163,7 +163,7 @@ async function callClaude(prompt, apiKey) {
 		}
 		return (await response.json()).content[0].text;
 	} catch (err) {
-		if (err.name === "AbortError") console.error("Claude Polish call timed out after 30s");
+		if (err.name === "AbortError") console.error("Claude Polish call timed out after 8.5s");
 		else console.error("Claude call failed:", err);
 		return null;
 	}
