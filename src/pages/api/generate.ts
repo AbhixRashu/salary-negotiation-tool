@@ -147,7 +147,7 @@ export const POST: APIRoute = async ({ request }) => {
 async function callGemini(prompt: string, apiKey: string): Promise<string | null> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    const timeoutId = setTimeout(() => controller.abort(), 8500);
 
     const response = await fetch(
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=' + apiKey,
@@ -182,7 +182,7 @@ async function callGemini(prompt: string, apiKey: string): Promise<string | null
     return result?.candidates?.[0]?.content?.parts?.[0]?.text || null;
   } catch (err: any) {
     if (err.name === 'AbortError') {
-      console.error('Gemini call timed out after 30s');
+      console.error('Gemini call timed out after 8.5s');
     } else {
       console.error('Gemini call failed:', err);
     }
@@ -193,7 +193,7 @@ async function callGemini(prompt: string, apiKey: string): Promise<string | null
 async function callClaude(prompt: string, apiKey: string): Promise<string | null> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    const timeoutId = setTimeout(() => controller.abort(), 8500);
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -223,7 +223,7 @@ async function callClaude(prompt: string, apiKey: string): Promise<string | null
     return result.content[0].text;
   } catch (err: any) {
     if (err.name === 'AbortError') {
-      console.error('Claude call timed out after 30s');
+      console.error('Claude call timed out after 8.5s');
     } else {
       console.error('Claude call failed:', err);
     }
