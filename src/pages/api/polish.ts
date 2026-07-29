@@ -112,13 +112,16 @@ Return ONLY the polished email. No explanations, no meta-commentary, no subject 
 async function callGemini(prompt: string, apiKey: string): Promise<string | null> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8500);
+    const timeoutId = setTimeout(() => controller.abort(), 25000);
 
     const response = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=' + apiKey,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey
+        },
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
           systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
@@ -140,7 +143,7 @@ async function callGemini(prompt: string, apiKey: string): Promise<string | null
     return result?.candidates?.[0]?.content?.parts?.[0]?.text || null;
   } catch (err: any) {
     if (err.name === 'AbortError') {
-      console.error('Gemini Polish call timed out after 8.5s');
+      console.error('Gemini Polish call timed out after 25s');
     } else {
       console.error('Gemini call failed:', err);
     }
@@ -151,7 +154,7 @@ async function callGemini(prompt: string, apiKey: string): Promise<string | null
 async function callClaude(prompt: string, apiKey: string): Promise<string | null> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8500);
+    const timeoutId = setTimeout(() => controller.abort(), 25000);
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',

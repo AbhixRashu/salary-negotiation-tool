@@ -5,13 +5,18 @@ interface Props {
 	title?: string;
 	description?: string;
 	breadcrumbs?: { name: string; path: string }[];
+	canonical?: string;
 }
 
 const {
 	title = "Salary Pitcher — Free US Salary Negotiation Toolkit",
 	description = "Negotiate your salary with confidence. Get market-backed salary estimates and custom, human-sounding negotiation email drafts in minutes.",
 	breadcrumbs,
+	canonical,
 } = Astro.props;
+
+const pageUrl = canonical || Astro.url.pathname;
+const fullUrl = `https://salarypitcher.com${pageUrl.startsWith('/') ? pageUrl : '/' + pageUrl}`;
 ---
 
 <!doctype html>
@@ -26,11 +31,13 @@ const {
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<link rel="canonical" href={fullUrl} />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		<meta property="og:url" content={fullUrl} />
 
 		<!-- Breadcrumb Structured Data (JSON-LD) -->
 		{
