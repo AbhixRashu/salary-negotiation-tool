@@ -1,0 +1,56 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { NEGOTIATE_JOBS } from "../../data/job-data";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return NEGOTIATE_JOBS.map((job) => ({
+    params: { slug: job.slug },
+    props: { job },
+  }));
+}
+
+const { job } = Astro.props;
+
+const title = `Negotiate a ${job.readableTitle} Salary: Scripts & Data for 2026 | SalaryPitcher`;
+const description = `Learn how to negotiate a ${job.readableTitle} salary in the US. Market data, scripts, and what to prioritize in your compensation package.`;
+---
+
+<Layout title={title} description={description}>
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-6 text-xs font-mono text-mute space-x-2">
+      <a href="/blog" class="hover:text-ink transition-colors">Blog</a>
+      <span>/</span>
+      <a href="/salary-calculator" class="hover:text-ink transition-colors">Salary Calculator</a>
+      <span>/</span>
+      <span class="text-ink">Negotiate {job.readableTitle} Salary</span>
+    </div>
+
+    <h1 class="text-3xl font-semibold tracking-tight text-ink mb-6">How to Negotiate a {job.readableTitle} Salary in the US</h1>
+
+    {job.paragraphs.map((p) => (
+      <p class="text-body leading-relaxed mb-4">{p}</p>
+    ))}
+
+    <h2 class="text-2xl font-semibold text-ink mb-4 mt-10">What to Negotiate</h2>
+    <ul class="list-disc pl-6 text-body space-y-2 mb-6">
+      {job.bullets.map((b) => (
+        <li class="leading-relaxed">{b}</li>
+      ))}
+    </ul>
+
+    <div class="border border-accent-blue/30 bg-accent-blue/5 rounded-lg p-6 shadow-sm mt-8 mb-8">
+      <p class="text-body mb-4">Ready to negotiate? Generate a <strong class="text-ink">{job.readableTitle}</strong> counter offer email tailored to your specific offer details and experience level.</p>
+      <a href="/pitch-assistant" class="inline-flex items-center gap-2 px-6 py-3 bg-ink text-white font-medium rounded-full text-sm hover:bg-ink/90 transition-colors">Generate a {job.readableTitle} Counter Offer Email →</a>
+    </div>
+
+    <div class="pt-6 border-t border-hairline text-xs font-mono text-mute space-x-2 mt-12">
+      <a href="/blog" class="hover:text-ink transition-colors">&larr; Back to Blog</a>
+      <span>·</span>
+      <a href="/salary-calculator" class="hover:text-ink transition-colors">Salary Calculator</a>
+      <span>·</span>
+      <a href="/pitch-assistant" class="hover:text-ink transition-colors">Pitch Assistant</a>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { BLOG_POSTS } from "../../data/blog-posts";
+---
+
+<Layout
+  title="Salary Negotiation Guides & Templates | SalaryPitcher"
+  description="Expert guides on salary negotiation, counter offers, job offer comparison, and compensation strategy. Free tools included."
+>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-semibold tracking-tight text-ink mb-2">Salary Negotiation Guides</h1>
+    <p class="text-sm text-body mb-8">Data-backed guides to help you negotiate your next offer with confidence.</p>
+
+    <div class="space-y-6">
+      {BLOG_POSTS.map((post) => (
+        <a href={`/blog/${post.slug}`} class="block border border-hairline bg-canvas rounded-xl p-6 hover:border-accent-blue/50 hover:shadow-md transition-all duration-200">
+          <h2 class="text-lg font-semibold text-ink mb-2 hover:text-accent-blue transition-colors">{post.title}</h2>
+          <p class="text-sm text-body leading-relaxed">{post.metaDescription}</p>
+          <div class="mt-3 text-sm font-mono text-accent-blue group-hover:underline">Read more →</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

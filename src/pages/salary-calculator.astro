@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-  title="US Salary Calculator — Federal & State Take-Home Pay"
-  description="Calculate your US take-home pay after federal income tax, Social Security, Medicare, and state income tax. Free, no login."
+  title="US Take-Home Pay Calculator 2026 — Federal + State Tax | SalaryPitcher"
+  description="Calculate your exact after-tax salary by state. Includes federal, FICA, and state income tax estimates."
   breadcrumbs={[
     { name: "Home", path: "/" },
     { name: "Salary Calculator", path: "/salary-calculator" },
@@ -254,6 +254,40 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
   </div>
+
+  <!-- JSON-LD Schema: WebApplication -->
+  <script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"US Salary Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}})} is:inline />
+
+  <!-- Static Content Section for SEO -->
+  <section class="py-16 px-6 max-w-4xl mx-auto">
+    <h2 class="text-2xl font-semibold text-ink mb-4">How Are Taxes Calculated in This Salary Calculator?</h2>
+    <p class="text-body mb-4 leading-relaxed">This salary calculator uses the 2026 federal marginal tax brackets to estimate your federal income tax. Your income is reduced by the applicable standard deduction ($15,000 for single filers, $30,000 for married filing jointly), and the remaining taxable income is taxed progressively across seven brackets ranging from 10% to 37%. Each bracket applies only to income within that bracket's range, so your effective tax rate is typically lower than your highest marginal rate.</p>
+    <p class="text-body mb-4 leading-relaxed">For FICA taxes, we apply the 6.2% Social Security tax up to the annual wage cap of $176,100 and the 1.45% Medicare tax on all wages. High earners (above $200,000 single / $250,000 MFJ) also pay an additional 0.9% Medicare surtax. State income tax is calculated using each state's specific brackets or flat rate, with applicable state-level standard deductions applied before taxation.</p>
+
+    <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Federal Tax Brackets vs State Income Tax: What You Need to Know</h2>
+    <p class="text-body mb-4 leading-relaxed">Federal income tax in the US is progressive, meaning you pay higher rates only on income above each bracket threshold. For 2026, the seven federal brackets are 10%, 12%, 22%, 24%, 32%, 35%, and 37%. The standard deduction eliminates tax on the first $15,000 of income for single filers and $30,000 for married couples filing jointly, which means a significant portion of your income is tax-free at the federal level.</p>
+    <p class="text-body mb-4 leading-relaxed">State income tax varies dramatically. Some states have no income tax at all, while others impose flat rates or progressive brackets reaching over 13% in the highest California bracket. When comparing job offers across states, the state tax difference alone can be worth $5,000–$20,000+ annually depending on your income level.</p>
+    <p class="text-body font-semibold mt-4">States with no individual income tax:</p>
+    <ul class="list-disc pl-6 text-body space-y-1 mt-2">
+      <li>Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Frequently Asked Questions</h2>
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-lg font-semibold text-ink mb-2">Is this calculator accurate for 2026?</h3>
+        <p class="text-body leading-relaxed">Yes, the calculator uses 2026 federal tax brackets, standard deductions, FICA limits, and state tax data. It provides a close estimate of your take-home pay, but individual circumstances (itemized deductions, credits, investment income) may vary.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-ink mb-2">Does this include FICA and FUTA taxes?</h3>
+        <p class="text-body leading-relaxed">Yes, Social Security (6.2% up to $176,100) and Medicare (1.45% on all wages, plus 0.9% surtax for high earners) are included. FUTA is an employer-paid tax and does not affect your take-home pay.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-ink mb-2">Which US states have no income tax?</h3>
+        <p class="text-body leading-relaxed">Nine states do not tax wage income: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. New Hampshire does not tax wages but taxes interest and dividends.</p>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <script is:inline>

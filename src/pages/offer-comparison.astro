@@ -5,8 +5,8 @@ const metroJson = JSON.stringify(METRO_AREAS);
 ---
 
 <Layout
-  title="Compare Job Offers Side-by-Side | Salary Pitcher"
-  description="Compare job offers side-by-side. Adjust for cost of living, see total comp including equity and bonus, 5-year projections, and tax estimates."
+  title="Job Offer Comparison Calculator — Compare Up to 5 Offers Free | SalaryPitcher"
+  description="Compare total compensation across multiple job offers. Factor in equity, bonus, benefits, and cost of living."
 >
   <div class="w-full space-y-8 max-w-5xl mx-auto">
     <div class="reveal">
@@ -282,6 +282,46 @@ const metroJson = JSON.stringify(METRO_AREAS);
       </div>
     </div>
   </div>
+
+  <!-- JSON-LD Schema: WebApplication -->
+  <script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Job Offer Comparison Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}})} is:inline />
+
+  <!-- Static Content Section for SEO -->
+  <section class="py-16 px-6 max-w-4xl mx-auto">
+    <h2 class="text-2xl font-semibold text-ink mb-4">How to Compare Two Job Offers Beyond Base Salary</h2>
+    <p class="text-body mb-4 leading-relaxed">Base salary is only one piece of the puzzle when evaluating job offers. Total compensation includes equity (RSUs or stock options), annual bonuses, signing bonuses, retirement matching, health benefits, and perks like remote work stipends or tuition reimbursement. Two offers with the same base salary can differ by $50,000+ annually when all components are factored in.</p>
+    <p class="text-body mb-4 leading-relaxed">Our comparison tool helps you see the full picture by normalizing each offer across these dimensions. You can add perks and benefits checkboxes to estimate total value, and the cost-of-living adjustment shows you what each offer is actually worth in your specific location.</p>
+
+    <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Understanding Total Compensation: Base, Equity, Bonus, and Benefits</h2>
+    <ul class="list-disc pl-6 text-body space-y-2 mb-6">
+      <li><strong class="text-ink">Base Salary:</strong> The fixed annual amount you receive. This is your lowest-risk component and the foundation for future raises.</li>
+      <li><strong class="text-ink">Equity / RSUs:</strong> Stock grants that vest over time (typically 4 years with 1-year cliff). At public companies these have known value; at startups they are speculative.</li>
+      <li><strong class="text-ink">Annual Bonus:</strong> Performance-based or guaranteed. Target bonuses of 10–20% of base are common in tech and finance.</li>
+      <li><strong class="text-ink">Signing Bonus:</strong> One-time cash payment to accept the offer. Often the easiest component to negotiate upward.</li>
+      <li><strong class="text-ink">401(k) Matching:</strong> Free money from your employer. A 5% match on a $150,000 salary adds $7,500/year to your total comp.</li>
+      <li><strong class="text-ink">Health &amp; Wellness:</strong> Insurance premiums, gym memberships, mental health support — collectively worth $5,000–$20,000/year.</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Cost of Living Adjustments: When Location Changes the Math</h2>
+    <p class="text-body mb-4 leading-relaxed">A $150,000 salary in San Francisco buys roughly the same lifestyle as $95,000 in Atlanta, after accounting for housing, taxes, transportation, and groceries. Our calculator uses metro-specific cost-of-living multipliers to normalize each offer so you can compare apples to apples regardless of location.</p>
+    <p class="text-body mb-4 leading-relaxed">Remote roles add another layer of complexity. Some companies use location-based pay bands that adjust your salary based on where you live, while others pay a national rate. When comparing remote offers, always check whether the employer adjusts for geographic cost differences and factor that into your decision.</p>
+
+    <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Frequently Asked Questions</h2>
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-lg font-semibold text-ink mb-2">Can I negotiate equity at a startup?</h3>
+        <p class="text-body leading-relaxed">Yes. Startup equity is often more negotiable than base salary because cash is scarce and founders expect candidates to ask. You can negotiate for a larger grant, accelerated vesting, or extended exercise windows.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-ink mb-2">Should I accept a lower base for more equity?</h3>
+        <p class="text-body leading-relaxed">It depends on risk tolerance and the company stage. For public companies with liquid RSUs, equity is essentially cash. For early-stage startups, treat equity as a bonus — never take less base than you need to cover living expenses.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-ink mb-2">How do I account for remote salary differences?</h3>
+        <p class="text-body leading-relaxed">Use the cost-of-living adjustment in this tool. Select your current location for one offer and the employer's location for another to see the real purchasing power difference.</p>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <script set:html={`window.__METRO_DATA__ = ${metroJson};`} is:inline />

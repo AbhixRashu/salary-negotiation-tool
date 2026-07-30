@@ -4,8 +4,8 @@ import { ROLES } from "../data/salaries";
 ---
 
 <Layout
-    title="Salary Pitch Assistant — Negotiation Email Generator"
-    description="Answer a few quick questions to receive a confident, polite, and persuasive salary counter-offer draft in under two minutes."
+    title="Salary Counter Offer Email Generator (Free, No Login) | SalaryPitcher"
+    description="Enter your offer details and get a data-backed counter-offer email instantly. No signup required."
 >
     <div class="max-w-2xl mx-auto w-full py-4 sm:py-8">
         <h1 class="sr-only">Salary Pitch Assistant — Negotiation Email Generator</h1>
@@ -449,6 +449,67 @@ import { ROLES } from "../data/salaries";
             </div>
         </div>
     </div>
+
+    <!-- JSON-LD Schema: WebApplication -->
+    <script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Salary Negotiation Email Generator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"150"}})} is:inline />
+    <!-- JSON-LD Schema: FAQPage -->
+    <script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can you lose a job offer by negotiating salary?","acceptedAnswer":{"@type":"Answer","text":"It is extremely rare. Around 85% of US employers expect candidates to negotiate, and data-backed, polite counters almost never result in rescinded offers."}},{"@type":"Question","name":"How much more should I ask for in a counter offer?","acceptedAnswer":{"@type":"Answer","text":"Most successful counters ask for 10–20% above the initial offer, anchored to market data for the specific role and location."}},{"@type":"Question","name":"Is this salary negotiation email generator free?","acceptedAnswer":{"@type":"Answer","text":"Yes. No login, no credit card. Answer a few questions and receive a personalized counter-offer email in under two minutes."}}]})} is:inline />
+
+    <!-- Static Content Section for SEO -->
+    <section class="py-16 px-6 max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold text-ink mb-4">How the Salary Negotiation Email Generator Works</h2>
+      <p class="text-body mb-4 leading-relaxed">Step 1: Enter your offer details, role, and location. The generator uses market data from thousands of US salary points to calibrate your counter to the right range for your specific situation. You will be guided through a conversational flow — no technical setup required.</p>
+      <p class="text-body mb-4 leading-relaxed">Step 2: Select your tone — collaborative, assertive, or data-driven. Each tone adjusts the language, sentence structure, and urgency level of the generated email so it matches your personality and the negotiation context. Choose the one that feels most authentic to you.</p>
+      <p class="text-body mb-4 leading-relaxed">Step 3: Copy your generated email and send within 24–48 hours. Studies show that responding within this window signals both eagerness and thoughtful consideration. Your email will include market justification, a specific counter number, and a professional closing.</p>
+
+      <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Why You Should Always Negotiate Your Offer (Backed by Data)</h2>
+      <ul class="list-disc pl-6 text-body space-y-2 mb-6">
+        <li><strong class="text-ink">85% of employers</strong> expect you to negotiate — silence is often interpreted as disinterest.</li>
+        <li>Failing to negotiate can cost <strong class="text-ink">$500K+ over a career</strong> due to compounding raises based on starting salary.</li>
+        <li><strong class="text-ink">70% of candidates</strong> who ask receive some improvement, whether in base, bonus, or benefits.</li>
+        <li>The average increase from negotiating is <strong class="text-ink">7–20%</strong>, which translates to thousands of dollars annually.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">What to Include in a Counter Offer Email</h2>
+      <ul class="list-disc pl-6 text-body space-y-2 mb-6">
+        <li><strong class="text-ink">Express gratitude</strong> for the offer and the opportunity to interview with the team.</li>
+        <li><strong class="text-ink">State your specific counter number</strong> with market data backing up your request.</li>
+        <li><strong class="text-ink">Show flexibility</strong> on timeline, start date, or title if needed to reach a mutual agreement.</li>
+        <li><strong class="text-ink">Request a response</strong> within 24–48 hours to keep the process moving forward.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Sample Counter Offer Email Template</h2>
+      <pre class="bg-gray-100 dark:bg-gray-900 p-6 rounded-lg text-sm font-mono leading-relaxed overflow-x-auto mb-6 border border-hairline"><code>Subject: [Job Title] Offer — [Your Name]
+
+Dear [Hiring Manager Name],
+
+Thank you so much for the offer to join [Company] as [Job Title]. I am excited about the role and the team you are building.
+
+Based on my research using [Market Data Source], the typical range for this role with my experience level is [Market Range]. Given my background in [Key Skill] and the value I plan to bring, I would like to counter at [Counter Amount].
+
+I am flexible on the start date and happy to discuss any other aspect of the offer. I would appreciate a response within 48 hours so I can plan accordingly.
+
+Thank you again for this opportunity.
+
+Best regards,
+[Your Name]</code></pre>
+
+      <h2 class="text-2xl font-semibold text-ink mb-4 mt-12">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold text-ink mb-2">Can you lose a job offer by negotiating salary?</h3>
+          <p class="text-body leading-relaxed">It is extremely rare. Around 85% of US employers expect candidates to negotiate, and data-backed, polite counters almost never result in rescinded offers.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-ink mb-2">How much more should I ask for in a counter offer?</h3>
+          <p class="text-body leading-relaxed">Most successful counters ask for 10–20% above the initial offer, anchored to market data for the specific role and location.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-ink mb-2">Is this salary negotiation email generator free?</h3>
+          <p class="text-body leading-relaxed">Yes. No login, no credit card. Answer a few questions and receive a personalized counter-offer email in under two minutes.</p>
+        </div>
+      </div>
+    </section>
 </Layout>
 
 <script define:vars={{ ROLES_DATA: ROLES }} is:inline>

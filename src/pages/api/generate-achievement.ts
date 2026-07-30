@@ -54,7 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
       for (const key of geminiKeys) {
         try {
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 25000);
+          const timeoutId = setTimeout(() => controller.abort(), 30000);
           const response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`,
             {
