@@ -42,6 +42,48 @@ import Layout from "../../layouts/Layout.astro";
       }
     </script>
 
+    <!-- FAQPage Schema JSON-LD -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Should I give a number when asked about salary expectations?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ideally not. The strongest move is to ask about the employer's approved budget range first, or to give a wide market-backed range rather than a single number. Stating a precise number early caps your ceiling and reduces your leverage later."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good salary range to give in an interview?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Give a range that is wide enough to stay flexible but anchored in real market data — for example, $100,000 to $125,000. Base the low end on your true floor, never below market, so you don't anchor the conversation too low."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I answer salary expectations as a fresher or new graduate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Research the market median for entry-level roles in your city and answer with a range around it, or defer by asking what the budgeted range is for the position. Avoid naming a number below the market just to seem flexible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it illegal for a recruiter to ask about my current salary?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In many US states and cities, asking about salary history is illegal or restricted. If you are asked, you can politely decline and redirect to the market value of the role you're interviewing for."
+            }
+          }
+        ]
+      }
+    </script>
+
     <!-- Title / Header -->
     <div class="space-y-4 text-center sm:text-left">
       <div
@@ -56,8 +98,10 @@ import Layout from "../../layouts/Layout.astro";
       </h1>
       <p class="text-sm text-body">
         Answering salary expectation questions *during the interview process* is
-        completely different from *post-offer negotiation*. Learn how to handle
-        it strategically.
+        completely different from *post-offer negotiation*. In an interview, one
+        careless number can anchor the entire conversation and cost you
+        thousands before you ever see an offer. Learn how to handle the question
+        strategically — without dodging, lying, or lowballing yourself.
       </p>
     </div>
 
@@ -72,6 +116,14 @@ import Layout from "../../layouts/Layout.astro";
         limits your leverage later when they are sold on you. Your objective is
         to learn the employer's budget first, or defer until the full scope of
         the role is clear.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        Here is the reality most candidates miss: recruiters rarely need your
+        number to make a decision — they need it to filter you. If you name a
+        figure below their range, you signal you are cheap to hire. If you name
+        a figure far above it, you risk being screened out. By deferring and
+        asking for their approved range first, you let them filter themselves
+        while you keep all your options open.
       </p>
     </div>
 
@@ -90,7 +142,10 @@ import Layout from "../../layouts/Layout.astro";
         </h3>
         <p class="text-sm text-body leading-relaxed">
           The safest and most professional response. Turn the question around to
-          ask about their approved budget range for the position.
+          ask about their approved budget range for the position. Most
+          recruiters will share a range when asked directly and politely — they
+          would rather anchor you inside their budget than lose you to a
+          guess.
         </p>
 
         <div
@@ -119,7 +174,8 @@ import Layout from "../../layouts/Layout.astro";
         <p class="text-sm text-body leading-relaxed">
           If the recruiter insists on a number, provide a wide range backed by
           market research, and emphasize that it is subject to changes based on
-          the total benefits package.
+          the total benefits package. The width protects you — a range is not a
+          commitment, and the low end is just a starting floor.
         </p>
 
         <div
@@ -138,6 +194,17 @@ import Layout from "../../layouts/Layout.astro";
             within that scope."
           </p>
         </div>
+        <p class="text-sm text-body leading-relaxed">
+          Anchor your low end with real data — check the median for your role
+          and city on our
+          <a
+            href="/average-salary-by-role"
+            class="text-accent-blue hover:underline font-semibold"
+            >average salary by role</a
+          >
+          page before the call. Never set your floor below market just to seem
+          flexible; you will only anchor the negotiation downward.
+        </p>
       </div>
 
       <!-- Strategy 3 -->
@@ -167,6 +234,70 @@ import Layout from "../../layouts/Layout.astro";
           </p>
         </div>
       </div>
+    </div>
+
+    <!-- Written applications -->
+    <div class="space-y-3">
+      <h2
+        class="text-xl font-semibold text-ink tracking-tight border-b border-hairline pb-2"
+      >
+        How to Handle Salary Expectation Questions on Applications
+      </h2>
+      <p class="text-sm text-body leading-relaxed">
+        Online application forms change the game because you cannot deflect — a
+        field marked "required" demands an answer. The strategy is the same as
+        the broad range method: give a wide, market-backed range rather than a
+        single number. A range keeps you in consideration while leaving room to
+        negotiate upward.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        If the field is optional, skip it. If it is required, set your floor at
+        or slightly above the market median for your role and location — use our
+        <a
+          href="/salary-calculator"
+          class="text-accent-blue hover:underline font-semibold"
+          >salary calculator</a
+        >
+        to check typical take-home figures first. Something like "$120,000 to
+        $150,000 depending on total compensation" reads as reasonable, informed,
+        and open to discussion.
+      </p>
+    </div>
+
+    <!-- Practice -->
+    <div class="space-y-3">
+      <h2
+        class="text-xl font-semibold text-ink tracking-tight border-b border-hairline pb-2"
+      >
+        Practice Your Answer Before the Call
+      </h2>
+      <p class="text-sm text-body leading-relaxed">
+        The salary expectation question usually arrives in the first ten minutes
+        of a screening call, when you are least prepared. Rehearse one
+        deflection line and one range line out loud before any interview so the
+        response sounds natural rather than rehearsed:
+      </p>
+      <div
+        class="p-5 border border-hairline bg-canvas-soft-2 rounded-md space-y-2"
+      >
+        <div
+          class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider"
+        >
+          The One-Minute Prep
+        </div>
+        <p class="text-sm text-ink italic leading-relaxed">
+          "Before I share a number, could you tell me the approved budget range
+          for this position?" — and if pushed: "Based on market data, I'm
+          targeting the range of [Floor] to [Ceiling], depending on the total
+          package."
+        </p>
+      </div>
+      <p class="text-sm text-body leading-relaxed">
+        Keep the floor firmly anchored to real data for your title and city, and
+        resist the urge to round down to sound agreeable. Once the number is
+        said, it becomes the anchor for every conversation that follows — make
+        it a number you can live with.
+      </p>
     </div>
 
     <!-- Dos and Don'ts table -->
@@ -226,6 +357,75 @@ import Layout from "../../layouts/Layout.astro";
             </li>
           </ul>
         </div>
+      </div>
+    </div>
+
+    <!-- FAQ section -->
+    <div
+      class="border border-hairline bg-canvas p-6 rounded-lg shadow-sm space-y-5"
+    >
+      <h2 class="text-base font-semibold text-ink">
+        Frequently Asked Questions About Answering Salary Expectations
+      </h2>
+      <div class="space-y-4 text-sm text-body leading-relaxed">
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            Should I give a number when asked about salary expectations?
+          </h3>
+          <p class="text-xs">
+            Ideally not. The strongest move is to ask about the employer's
+            approved budget range first, or to give a wide market-backed range
+            rather than a single number. Stating a precise number early caps
+            your ceiling.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            What is a good salary range to give in an interview?
+          </h3>
+          <p class="text-xs">
+            A range wide enough to stay flexible but anchored in real market
+            data — for example, $100,000 to $125,000. Base the low end on your
+            true floor, never below market.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            How do I answer salary expectations as a fresher or new graduate?
+          </h3>
+          <p class="text-xs">
+            Research the market median for entry-level roles in your city and
+            answer with a range around it, or defer by asking what the budgeted
+            range is for the position.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            Is it illegal for a recruiter to ask about my current salary?
+          </h3>
+          <p class="text-xs">
+            In many US states and cities, asking about salary history is illegal
+            or restricted. If asked, you can politely decline and redirect to
+            the market value of the role.
+          </p>
+        </div>
+      </div>
+      <div class="pt-2">
+        <p class="text-xs text-body leading-relaxed">
+          Once you get past the expectation question and land the offer, the
+          real work begins. Read
+          <a
+            href="/guides/how-to-negotiate-salary-after-job-offer"
+            class="text-accent-blue hover:underline font-semibold"
+            >how to negotiate salary after a job offer</a
+          >
+          and avoid the classic errors in our
+          <a
+            href="/guides/salary-negotiation-mistakes"
+            class="text-accent-blue hover:underline font-semibold"
+            >10 salary negotiation mistakes to avoid</a
+          >.
+        </p>
       </div>
     </div>
   </div>

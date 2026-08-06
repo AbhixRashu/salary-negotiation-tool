@@ -1,4 +1,4 @@
-sunimport fs from 'fs';
+ fs from 'fs';
 
 const content = fs.readFileSync('src/data/salaries.ts', 'utf8');
 const regex = /\{ role: "([^"]+)", category: "([^"]+)", median: (\d+), low: (\d+), high: (\d+), growth: [\d.]+, skills: (\[[^\]]+\]), description: "([^"]+)" \},/g;

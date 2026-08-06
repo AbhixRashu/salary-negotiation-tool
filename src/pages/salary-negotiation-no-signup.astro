@@ -1,0 +1,331 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Salary Negotiation Tool — No Signup, No Login, Free | SalaryPitcher"
+  description="Use a free salary negotiation tool with no signup required. Generate counter offer emails, compare offers, and calculate your worth instantly."
+  breadcrumbs={[
+    { name: "Home", path: "/" },
+    { name: "Salary Negotiation Tool (No Signup)", path: "/salary-negotiation-no-signup" },
+  ]}
+>
+  <!-- FAQPage Schema JSON-LD -->
+  <script is:inline type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I really not need to sign up to use the salary negotiation tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Correct. There is no account, no email, and no login. Open the tool, answer a few questions, and generate your negotiation email right in the browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What can I do with a no-signup salary negotiation tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can generate a personalized counter offer email, see a market-backed salary range for your role and location, compare up to five job offers side by side, and calculate your net take-home pay — all without creating an account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a no-signup salary tool less accurate than a paid one?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The market data comes from Bureau of Labor Statistics wage surveys for your role and metro area. Being free and login-free does not reduce the quality of the data or the email drafts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my information stored anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Because there is no account system, the answers you enter never leave your browser until you choose to send the generated email yourself. Nothing is saved on our servers."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <div class="max-w-3xl mx-auto w-full space-y-8">
+    <!-- Header -->
+    <div class="text-center space-y-4 py-4">
+      <div
+        class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider bg-accent-blue/15 text-accent-blue border border-accent-blue/10"
+      >
+        No Signup · No Login · Free
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-tight">
+        Free Salary Negotiation Tool — No Signup Required
+      </h1>
+      <p class="text-sm text-body max-w-xl mx-auto leading-relaxed">
+        Most salary tools lock the useful parts behind a signup wall. This one
+        does not. Open the tool, answer a handful of questions, and get a
+        market-backed negotiation email — no account, no email, no credit card.
+      </p>
+      <a
+        href="/pitch-assistant"
+        class="inline-flex items-center gap-2 px-8 py-3.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-sm transition-all duration-300 cursor-pointer ripple-btn btn-press"
+      >
+        Start Negotiating — No Signup →
+      </a>
+    </div>
+
+    <!-- Why no signup matters -->
+    <section class="border border-hairline bg-canvas rounded-lg shadow-sm p-6 sm:p-8 space-y-4">
+      <h2 class="text-xl font-semibold text-ink tracking-tight">
+        Why a No-Signup Salary Negotiation Tool Matters
+      </h2>
+      <p class="text-sm text-body leading-relaxed">
+        Job offers come with deadlines. The last thing you want when a recruiter
+        is waiting for a response is a 10-minute account creation flow and a
+        marketing email list. A no-signup tool lets you go from "I have an
+        offer" to "here is my counter email" in the time it takes to finish a
+        coffee.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        It also removes the friction that causes most people to skip
+        negotiating altogether. When the tool is instantly accessible, you are
+        far more likely to actually send a counter — and sending one is worth,
+        on average, an extra
+        <strong class="text-ink">7-20% of your salary</strong>. That is
+        thousands of dollars per year, and it compounds across every future
+        raise and job change built on top of your starting base.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        Beyond the email generator, this no-signup suite includes a
+        <a
+          href="/offer-comparison"
+          class="text-accent-blue hover:underline font-semibold"
+          >job offer comparison tool</a
+        >
+        that lets you weigh up to five offers side by side, and a
+        <a
+          href="/salary-calculator"
+          class="text-accent-blue hover:underline font-semibold"
+          >salary calculator</a
+        >
+        that estimates your net take-home pay. Every tool works without an
+        account.
+      </p>
+    </section>
+
+    <!-- How to use -->
+    <section class="border border-hairline bg-canvas rounded-lg shadow-sm p-6 sm:p-8 space-y-4">
+      <h2 class="text-xl font-semibold text-ink tracking-tight">
+        How to Use the Tool Without Creating an Account
+      </h2>
+      <div class="space-y-4">
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">1. Enter your role and offer</h3>
+          <p class="text-xs text-body leading-relaxed">
+            Pick your job title, location, and experience level, then type in
+            the salary you were offered. The tool immediately calculates a
+            market range so you can see where you stand.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">2. Add your achievement</h3>
+          <p class="text-xs text-body leading-relaxed">
+            Describe your strongest measurable result in at least 30 words. This
+            becomes the justification baked into your email draft.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">3. Generate and send</h3>
+          <p class="text-xs text-body leading-relaxed">
+            Choose your tone, review the draft, and copy it into your email
+            client. Nothing is stored — your details leave your browser only
+            when you press send.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy & trust -->
+    <section class="border border-hairline bg-canvas rounded-lg shadow-sm p-6 sm:p-8 space-y-4">
+      <h2 class="text-xl font-semibold text-ink tracking-tight">
+        What Happens to Your Data
+      </h2>
+      <p class="text-sm text-body leading-relaxed">
+        Because the tool has no login, there is no profile, no saved history,
+        and no email marketing list to join. The details you enter are used only
+        to build your email on the spot. For more on how we handle information,
+        read our
+        <a href="/privacy" class="text-accent-blue hover:underline font-semibold"
+          >privacy policy</a
+        >.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        If you are new to the process and want strategy before you draft, start
+        with our guide on
+        <a
+          href="/guides/how-to-negotiate-salary-after-job-offer"
+          class="text-accent-blue hover:underline font-semibold"
+          >how to negotiate salary after a job offer</a
+        >, then use the no-signup tool to turn that strategy into a polished
+        email.
+      </p>
+    </section>
+
+    <!-- More tools -->
+    <section class="border border-hairline bg-canvas rounded-lg shadow-sm p-6 sm:p-8 space-y-4">
+      <h2 class="text-xl font-semibold text-ink tracking-tight">
+        More No-Signup Salary Tools in the Suite
+      </h2>
+      <p class="text-sm text-body leading-relaxed">
+        The negotiation email is just the starting point. This site is a full
+        no-signup salary toolkit, and every tool is free:
+      </p>
+      <ul class="list-disc pl-5 space-y-2 text-sm text-body leading-relaxed">
+        <li>
+          <strong class="text-ink">Pitch Assistant</strong> — the core
+          negotiation email generator that turns your role, offer, and
+          achievement into a complete counter.
+        </li>
+        <li>
+          <a
+            href="/offer-comparison"
+            class="text-accent-blue hover:underline font-semibold"
+            >Offer comparison tool</a
+          >
+          — line up to five job offers side by side with base, equity, bonus,
+          and cost-of-living adjustments.
+        </li>
+        <li>
+          <a
+            href="/salary-calculator"
+            class="text-accent-blue hover:underline font-semibold"
+            >Salary calculator</a
+          >
+          — convert hourly to annual and estimate federal take-home pay.
+        </li>
+        <li>
+          <a
+            href="/company-salaries"
+            class="text-accent-blue hover:underline font-semibold"
+            >Company salary explorer</a
+          >
+          — see compensation at Google, Meta, Amazon, and other top employers.
+        </li>
+      </ul>
+      <p class="text-sm text-body leading-relaxed">
+        Unlike platforms that collect your email and then bury the useful
+        features behind a paywall, everything here works immediately — no
+        account creation, no credit card, no email capture.
+      </p>
+    </section>
+
+    <!-- Comparison to paid -->
+    <section class="border border-hairline bg-canvas rounded-lg shadow-sm p-6 sm:p-8 space-y-4">
+      <h2 class="text-xl font-semibold text-ink tracking-tight">
+        How This Tool Compares to Paid Negotiation Services
+      </h2>
+      <p class="text-sm text-body leading-relaxed">
+        Paid negotiation coaches and services can be worth the money for
+        executive-level packages, but most candidates do not need one. The core
+        of a successful counter — market data, a clear achievement, and a
+        polite, specific ask — is exactly what this free, no-signup tool
+        provides.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        The data is the same Bureau of Labor Statistics source used by many paid
+        services, and the generated email is fully editable. Spend the money
+        (and the time) only if you have a genuinely complex package with equity,
+        retention bonuses, or unusual terms. For a standard offer, start here.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        If you are weighing whether a competing offer changes your strategy, the
+        free
+        <a
+          href="/offer-comparison"
+          class="text-accent-blue hover:underline font-semibold"
+          >offer comparison tool</a
+        >
+        can show the real dollar difference between packages after equity and
+        cost-of-living adjustments — leverage you can then use in your counter
+        email.
+      </p>
+      <p class="text-sm text-body leading-relaxed">
+        Before you open the tool, spend three minutes reviewing
+        <a
+          href="/guides/salary-negotiation-mistakes"
+          class="text-accent-blue hover:underline font-semibold"
+          >10 salary negotiation mistakes to avoid</a
+        >
+        — avoiding the common errors is worth more than any template.
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <section
+      class="p-6 border border-hairline bg-canvas rounded-lg shadow-sm flex flex-col sm:flex-row justify-between items-center gap-6"
+    >
+      <div class="space-y-1 text-center sm:text-left">
+        <p class="font-semibold text-ink text-sm">
+          No account. No waiting. Just your counter.
+        </p>
+        <p class="text-xs text-mute">
+          Generate a market-backed negotiation email in about two minutes.
+        </p>
+      </div>
+      <a
+        href="/pitch-assistant"
+        class="px-6 py-2.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-xs transition-colors shrink-0 ripple-btn btn-press"
+      >
+        Use the Tool Now →
+      </a>
+    </section>
+
+    <!-- FAQ -->
+    <section class="border border-hairline bg-canvas rounded-lg shadow-sm p-6 sm:p-8 space-y-5">
+      <h2 class="text-xl font-semibold text-ink tracking-tight">
+        Salary Negotiation Tool — FAQ
+      </h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-ink mb-1">
+            Do I really not need to sign up?
+          </h3>
+          <p class="text-xs text-body leading-relaxed">
+            Correct. There is no account, no email, and no login. Open the tool
+            and start generating right in the browser.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-ink mb-1">
+            What can I do with a no-signup salary negotiation tool?
+          </h3>
+          <p class="text-xs text-body leading-relaxed">
+            Generate a personalized counter offer email, see a market-backed
+            salary range, compare up to five offers, and estimate take-home pay —
+            all without creating an account.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-ink mb-1">
+            Is a no-signup salary tool less accurate than a paid one?
+          </h3>
+          <p class="text-xs text-body leading-relaxed">
+            No. The market data comes from Bureau of Labor Statistics wage
+            surveys for your role and metro area.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-ink mb-1">
+            Is my information stored anywhere?
+          </h3>
+          <p class="text-xs text-body leading-relaxed">
+            No. Because there is no account system, nothing is saved on our
+            servers.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

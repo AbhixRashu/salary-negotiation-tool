@@ -60,6 +60,48 @@ import Layout from "../../layouts/Layout.astro";
       }
     </script>
 
+    <!-- FAQPage Schema JSON-LD -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How long should I wait before negotiating salary after a job offer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Send your counter within 24-48 hours of receiving the written offer. This signals genuine interest while showing you reviewed the full package. Waiting longer than 72 hours risks the employer moving on."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I lose a job offer by negotiating salary after receiving it?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rescinding over a polite, data-backed counter is extremely rare. Around 85% of US employers expect candidates to negotiate, and candidates who ask typically earn 7-20% more. Employers usually only walk away if you are rude, aggressive, or issue ultimatums."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much should I counter after a job offer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most successful counters ask for 10-20% above the initial offer, anchored to market data for the specific role and location. If the offer is well below market, you can justify a higher counter with wage survey data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if the employer says the salary is non-negotiable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If base salary is capped by internal bands, pivot to non-salary levers: a sign-on bonus, accelerated first review, additional PTO, equity, or a remote-work stipend. Recruiters often have flexibility in these buckets even when base pay is frozen."
+            }
+          }
+        ]
+      }
+    </script>
+
     <!-- Breadcrumb -->
     <a
       href="/guides"
@@ -77,7 +119,7 @@ import Layout from "../../layouts/Layout.astro";
         <div
           class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider"
         >
-          Salary Negotiation Guides • 5 Min Read
+          Salary Negotiation Guides • 6 Min Read
         </div>
         <h1
           class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink leading-snug"
@@ -85,14 +127,41 @@ import Layout from "../../layouts/Layout.astro";
           How to Negotiate Salary After a Job Offer
         </h1>
         <p class="text-sm text-body leading-relaxed">
-          Receiving a job offer is a major milestone, but it is just the
-          beginning of the final stage. Learn how to construct a professional
-          counter-offer strategically.
+          You did the hard part — you interviewed, you impressed, and the offer
+          just landed in your inbox. Now comes the moment most candidates get
+          wrong: deciding whether to accept it as-is or negotiate. Receiving a
+          job offer is a major milestone, but it is just the beginning of the
+          final stage. This guide walks you through exactly how to construct a
+          professional, market-backed counter-offer without risking the offer.
         </p>
       </header>
 
       <!-- Steps content -->
       <div class="space-y-6 text-sm text-body leading-relaxed">
+        <!-- Why negotiate -->
+        <div class="space-y-2">
+          <h2 class="text-base font-semibold text-ink">
+            Why Negotiating Salary After a Job Offer Is Worth It
+          </h2>
+          <p>
+            The offer is not a take-it-or-leave-it figure — it is the opening
+            position in a conversation the employer expects you to have.
+            Research consistently shows that <strong class="text-ink"
+              >85% of US employers expect candidates to negotiate</strong
+            >, and those who ask receive
+            <strong class="text-ink">7-20% more</strong> on average. The
+            compounding effect is even bigger: every future raise and bonus is
+            typically calculated from your starting base, so a $5,000 difference
+            today can be worth well over $100,000 across a career.
+          </p>
+          <p>
+            The risk is far smaller than most people fear. A polite,
+            data-driven counter almost never results in a rescinded offer. The
+            exceptions are unprofessional behavior, aggressive ultimatums, or
+            negotiating in bad faith — all of which this guide helps you avoid.
+          </p>
+        </div>
+
         <!-- Step 1 -->
         <div class="space-y-2">
           <h2 class="text-base font-semibold text-ink">
@@ -103,7 +172,8 @@ import Layout from "../../layouts/Layout.astro";
             sincere excitement and thankfulness. However, do not accept
             immediately on the call. Ask for the offer details in writing and
             request 48 to 72 hours to review the package with your family or
-            advisors.
+            advisors. Taking a beat to review is a sign of diligence, not
+            disinterest — hiring teams expect it.
           </p>
           <div
             class="p-4 border border-hairline bg-canvas-soft-2 rounded-md font-mono text-xs text-ink italic"
@@ -121,8 +191,10 @@ import Layout from "../../layouts/Layout.astro";
             Step 2: Review the Entire Package (Not Just Base Salary)
           </h2>
           <p>
-            Compensation is a multi-dimensional system. Evaluate the entire
-            rewards package:
+            Compensation is a multi-dimensional system. A tempting base number
+            can hide a weak benefits package, and a modest base can be
+            outweighed by strong equity and bonus. Before you negotiate, evaluate
+            the entire rewards package:
           </p>
           <ul class="list-disc pl-5 space-y-1.5 text-xs">
             <li><strong>Base Salary:</strong> The core recurring wage.</li>
@@ -143,6 +215,17 @@ import Layout from "../../layouts/Layout.astro";
               and flexible schedules.
             </li>
           </ul>
+          <p>
+            If the base salary looks frozen, note which levers are flexible
+            before you reply. If you are weighing multiple offers at once, use
+            our free
+            <a
+              href="/offer-comparison"
+              class="text-accent-blue hover:underline font-semibold"
+              >offer comparison tool</a
+            >
+            to line up base, equity, bonus, and cost-of-living side by side.
+          </p>
         </div>
 
         <!-- Step 3 -->
@@ -160,6 +243,13 @@ import Layout from "../../layouts/Layout.astro";
             (25th, 50th, 75th) allows you to justify your counter-proposal with facts
             instead of feelings.
           </p>
+          <p>
+            Pull together a two-line market summary before you draft anything:
+            the typical range for your title in your metro, plus the median. That
+            single data point becomes the anchor for your counter — it shifts the
+            conversation from "how much do you want" to "here is what this role is
+            worth, and here is where I sit within it."
+          </p>
         </div>
 
         <!-- Step 4 -->
@@ -171,25 +261,126 @@ import Layout from "../../layouts/Layout.astro";
             Aim for a counter-offer that is 10% to 20% higher than the initial
             offer, assuming it falls within reasonable market ranges. Have a
             specific target number and a slightly higher "stretch" number so
-            there is room to compromise.
+            there is room to compromise. Anchoring works in your favor: the
+            number you state first sets the reference point, and recruiters
+            typically split the difference between the offer and your ask.
+          </p>
+          <p>
+            Set your stretch number about 5% above your real target. If the
+            employer meets you in the middle, you land where you actually wanted
+            to be — and everyone feels like the negotiation worked.
           </p>
         </div>
 
         <!-- Step 5 -->
         <div class="space-y-2">
           <h2 class="text-base font-semibold text-ink">
-            Step 5: Send a Polite written Counter-Offer or Schedule a Call
+            Step 5: Send a Polite Written Counter-Offer or Schedule a Call
           </h2>
           <p>
             Send a structured email highlighting your interest in the position,
             citing typical market salary ranges in the local area, summarizing
-            your primary achievement, and presenting your target number.
-            Alternatively, use our conversational generator on the homepage to
-            write this email draft instantly.
+            your primary achievement, and presenting your target number. Email is
+            usually the stronger channel because it gives you a written record
+            and lets you state your case exactly as planned.
+          </p>
+          <div
+            class="p-4 border border-hairline bg-canvas-soft-2 rounded-md font-mono text-xs text-ink italic"
+          >
+            "Thank you again for the offer. After reviewing the full package and
+            looking at market data for this role in [Location], I'd like to
+            discuss the base salary. Typical ranges sit between [Low] and [High],
+            and given the results I'll bring — particularly [achievement] — I was
+            hoping we could target [Your Number]."
+          </div>
+          <p>
+            Do not want to write it from scratch? Use our
+            <a
+              href="/pitch-assistant"
+              class="text-accent-blue hover:underline font-semibold"
+              >free negotiation email generator</a
+            >
+            to build a personalized draft in under two minutes.
+          </p>
+        </div>
+
+        <!-- What if no -->
+        <div class="space-y-2">
+          <h2 class="text-base font-semibold text-ink">
+            What If the Employer Says the Salary Is Firm?
+          </h2>
+          <p>
+            A firm base salary does not mean a frozen package. Pivot to the levers
+            hiring managers can approve more easily: a
+            <a
+              href="/guides/how-to-negotiate-sign-on-bonus"
+              class="text-accent-blue hover:underline font-semibold"
+              >sign-on bonus</a
+            >, an accelerated six-month review, additional PTO, a professional
+            development budget, or a remote-work stipend. One-time items are
+            easier to approve than recurring salary because they live in a
+            different budget line.
+          </p>
+          <p>
+            Before you send anything, make sure you are not committing any of the
+            classic errors — review our list of
+            <a
+              href="/guides/salary-negotiation-mistakes"
+              class="text-accent-blue hover:underline font-semibold"
+              >10 salary negotiation mistakes to avoid</a
+            >.
           </p>
         </div>
       </div>
     </article>
+
+    <!-- FAQ section -->
+    <section class="border border-hairline bg-canvas rounded-lg shadow-sm p-6 sm:p-8 space-y-5">
+      <h2 class="text-base font-semibold text-ink">
+        Frequently Asked Questions About Negotiating Salary After a Job Offer
+      </h2>
+      <div class="space-y-4 text-sm text-body leading-relaxed">
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            How long should I wait before negotiating salary after a job offer?
+          </h3>
+          <p class="text-xs">
+            Send your counter within 24-48 hours of receiving the written offer.
+            This signals genuine interest while showing you reviewed the full
+            package. Waiting longer than 72 hours risks the employer moving on.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            Can I lose a job offer by negotiating salary after receiving it?
+          </h3>
+          <p class="text-xs">
+            Rescinding over a polite, data-backed counter is extremely rare.
+            Around 85% of US employers expect candidates to negotiate, and those
+            who ask typically earn 7-20% more.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            How much should I counter after a job offer?
+          </h3>
+          <p class="text-xs">
+            Most successful counters ask for 10-20% above the initial offer,
+            anchored to market data for the specific role and location.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-semibold text-ink">
+            What if the employer says the salary is non-negotiable?
+          </h3>
+          <p class="text-xs">
+            Pivot to non-salary levers: a sign-on bonus, accelerated first
+            review, additional PTO, equity, or a remote-work stipend. Recruiters
+            often have flexibility in these buckets even when base pay is frozen.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <!-- Call to action block -->
     <div

@@ -60,6 +60,48 @@ import Layout from "../../layouts/Layout.astro";
             }
         </script>
 
+        <!-- FAQPage Schema JSON-LD -->
+        <script is:inline type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "How much sign-on bonus should I ask for?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "For individual contributors, a sign-on bonus typically runs 5-20% of the base salary; for executive roles it can reach 15-50%. Base your exact ask on what you are leaving behind — unvested equity, forfeited annual bonus, or relocation costs — plus the market norm."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "When is the best time to negotiate a sign-on bonus?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "After you receive the written offer but before you sign. That is when you have maximum leverage, and sign-on bonuses are often the easiest line item for a recruiter to approve because they are a one-time budget item."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I ask for a sign-on bonus if the base salary is non-negotiable?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes — that is exactly when to ask. If the base is frozen by internal salary bands, a one-time sign-on bonus is often the fastest way to close the gap because it does not change the recurring salary structure."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is a sign-on bonus paid upfront?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Usually it is paid as a lump sum in your first paycheck, but many employers split it into two payments across the first year. Always confirm the payment schedule and whether a clawback clause applies if you leave within a set period."
+                        }
+                    }
+                ]
+            }
+        </script>
+
         <!-- Breadcrumb -->
         <a
             href="/guides"
@@ -77,7 +119,7 @@ import Layout from "../../layouts/Layout.astro";
                 <div
                     class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider"
                 >
-                    Salary Negotiation Guides • 5 Min Read
+                    Salary Negotiation Guides • 6 Min Read
                 </div>
                 <h1
                     class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink leading-snug"
@@ -86,8 +128,10 @@ import Layout from "../../layouts/Layout.astro";
                 </h1>
                 <p class="text-sm text-body leading-relaxed">
                     A sign-on bonus can add thousands of dollars to your
-                    first-year compensation. Learn when and how to ask for one
-                    professionally.
+                    first-year compensation — and it is often the easiest part of
+                    a package to negotiate, even when the base salary is frozen.
+                    Learn when and how to ask for one professionally, how much to
+                    request, and exactly what to say.
                 </p>
             </header>
 
@@ -136,13 +180,60 @@ import Layout from "../../layouts/Layout.astro";
                         If the base salary is capped due to internal bands, a
                         sign-on bonus is often the easiest alternative for
                         recruiters to approve because it is a one-time budget
-                        item.
+                        item. It lives in a different budget line than recurring
+                        payroll, so approval is usually faster and requires less
+                        senior sign-off.
+                    </p>
+                    <p>
+                        Ask for the bonus in the same message as your overall
+                        counter so the conversation stays cohesive — negotiating
+                        piecemeal can feel like a long list of demands. See how
+                        to structure the full counter in our guide on
+                        <a
+                            href="/guides/how-to-negotiate-salary-after-job-offer"
+                            class="text-accent-blue hover:underline font-semibold"
+                            >how to negotiate salary after a job offer</a
+                        >.
                     </p>
                 </div>
 
                 <div class="space-y-2">
                     <h2 class="text-base font-semibold text-ink">
-                        3. Common Justifications
+                        3. How Much Sign-On Bonus to Ask For
+                    </h2>
+                    <p>
+                        Your target should be grounded in what you are actually
+                        giving up, plus market norms. Add up:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-xs">
+                        <li>
+                            <strong>Forfeited equity:</strong> The value of unvested
+                            RSUs or options you will leave behind
+                        </li>
+                        <li>
+                            <strong>Lost annual bonus:</strong> The prorated bonus
+                            you will not receive by switching mid-year
+                        </li>
+                        <li>
+                            <strong>Relocation costs:</strong> Moving, temporary
+                            housing, or a higher cost of living
+                        </li>
+                        <li>
+                            <strong>Market norm:</strong> The 5-20% of base that is
+                            typical for your level
+                        </li>
+                    </ul>
+                    <p>
+                        If your calculation lands near or above that 20% ceiling,
+                        lead with the concrete numbers ("I'm leaving $15,000 in
+                        unvested equity") rather than a round figure. Justification
+                        with specifics is far more persuasive.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-base font-semibold text-ink">
+                        4. Common Justifications
                     </h2>
                     <p>
                         Employers expect a reasonable explanation for why you
@@ -170,7 +261,7 @@ import Layout from "../../layouts/Layout.astro";
 
                 <div class="space-y-2">
                     <h2 class="text-base font-semibold text-ink">
-                        4. Sample Script
+                        5. Sample Script
                     </h2>
                     <div
                         class="p-5 border border-hairline bg-canvas-soft-2 rounded-md font-sans text-xs text-ink space-y-3 leading-relaxed"
@@ -197,7 +288,7 @@ import Layout from "../../layouts/Layout.astro";
 
                 <div class="space-y-2">
                     <h2 class="text-base font-semibold text-ink">
-                        5. Payment Structure Tactics
+                        6. Payment Structure Tactics
                     </h2>
                     <p>
                         If the employer agrees to a sign-on bonus, clarify the
@@ -218,9 +309,121 @@ import Layout from "../../layouts/Layout.astro";
                             upfront.
                         </li>
                     </ul>
+                    <p>
+                        A lump sum in your first paycheck is ideal — it arrives
+                        before you feel the effect of the transition. If the
+                        employer proposes a split or a clawback, it is not a
+                        dealbreaker, but get the terms in writing so there are no
+                        surprises at tax time or if you resign early. Make sure
+                        the rest of your negotiation avoids the common pitfalls
+                        covered in our list of
+                        <a
+                            href="/guides/salary-negotiation-mistakes"
+                            class="text-accent-blue hover:underline font-semibold"
+                            >10 salary negotiation mistakes to avoid</a
+                        >.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-base font-semibold text-ink">
+                        7. Tax and Vesting Considerations
+                    </h2>
+                    <p>
+                        A sign-on bonus is taxed as ordinary income, and most
+                        employers withhold a flat 22% for federal taxes, so the
+                        deposited amount will be noticeably lower than the
+                        headline figure. If you are relocating, some employers
+                        offer a separate relocation allowance that can be
+                        tax-favorable — ask which bucket your payment sits in.
+                    </p>
+                    <p>
+                        Also confirm the vesting or repayment terms before you
+                        spend the money. A common clawback requires repayment of
+                        the full bonus if you leave within 12 months, which
+                        matters if you are still interviewing elsewhere. Get the
+                        repayment schedule in the written offer so there are no
+                        surprises later.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-base font-semibold text-ink">
+                        8. What If the Employer Says No?
+                    </h2>
+                    <p>
+                        A rejection is not the end of the road. If the sign-on
+                        bonus is declined, pivot to the next one-time or
+                        flexibility lever: an accelerated six-month salary
+                        review, a guaranteed first-year performance bonus, extra
+                        PTO, or a relocation stipend. The goal is to keep total
+                        first-year compensation moving in the right direction
+                        even when individual items are refused.
+                    </p>
+                    <p>
+                        To see the full negotiation put together into a single
+                        polished email, use our
+                        <a
+                            href="/pitch-assistant"
+                            class="text-accent-blue hover:underline font-semibold"
+                            >free counter offer email generator</a
+                        >
+                        — it blends your base, bonus, and achievement into one
+                        professional draft in under two minutes.
+                    </p>
                 </div>
             </div>
         </article>
+
+        <!-- FAQ section -->
+        <div
+            class="p-6 border border-hairline bg-canvas rounded-lg shadow-sm space-y-5"
+        >
+            <h2 class="text-base font-semibold text-ink">
+                Frequently Asked Questions About Negotiating a Sign-On Bonus
+            </h2>
+            <div class="space-y-4 text-sm text-body leading-relaxed">
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        How much sign-on bonus should I ask for?
+                    </h3>
+                    <p class="text-xs">
+                        For individual contributors, typically 5-20% of base
+                        salary; for executive roles, 15-50%. Base the exact ask
+                        on what you are leaving behind plus market norms.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        When is the best time to negotiate a sign-on bonus?
+                    </h3>
+                    <p class="text-xs">
+                        After you receive the written offer but before you sign,
+                        when your leverage is highest.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        Can I ask for a sign-on bonus if the base salary is non-negotiable?
+                    </h3>
+                    <p class="text-xs">
+                        Yes — that is exactly when to ask. A one-time bonus is
+                        often easier to approve than a change to the recurring
+                        salary band.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        Is a sign-on bonus paid upfront?
+                    </h3>
+                    <p class="text-xs">
+                        Usually as a lump sum in your first paycheck, but some
+                        employers split it across the first year. Confirm the
+                        schedule and any clawback clause in writing.
+                    </p>
+                </div>
+            </div>
+        </div>
 
         <!-- Call to action block -->
         <div

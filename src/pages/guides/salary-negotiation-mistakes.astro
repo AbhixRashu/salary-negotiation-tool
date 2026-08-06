@@ -66,6 +66,48 @@ import Layout from "../../layouts/Layout.astro";
             }
         </script>
 
+        <!-- FAQPage Schema JSON-LD -->
+        <script is:inline type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is the biggest mistake people make in salary negotiation?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Giving the first number and negotiating without market data. Both cap your ceiling: naming a figure too early anchors the conversation low, and asking without research leaves you with no evidence to justify a higher counter."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can you lose an offer by negotiating salary?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Almost never, as long as you stay polite and data-backed. Around 85% of US employers expect candidates to negotiate. Offers are typically only rescinded when a candidate is rude, aggressive, or issues ultimatums."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How much should I counter to avoid looking unreasonable?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "10-20% above the initial offer is standard and rarely seen as unreasonable. Anchor the counter to the market range for your role and location, and show flexibility on total compensation, not just base."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What should I do if I already made a salary mistake in the process?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "You can still recover. If you named a number too early or too low, pivot to market data in the next conversation and reframe around the role's value. Recruiters respond to objective ranges over previous figures."
+                        }
+                    }
+                ]
+            }
+        </script>
+
         <!-- Breadcrumb -->
         <a
             href="/guides"
@@ -79,23 +121,31 @@ import Layout from "../../layouts/Layout.astro";
             id="guideArticle"
             class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm space-y-6"
         >
-            <header class="border-b border-hairline pb-4 space-y-2">
-                <div
-                    class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider"
-                >
-                    Salary Negotiation Guides • 4 Min Read
-                </div>
-                <h1
-                    class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink leading-snug"
-                >
-                    10 Salary Negotiation Mistakes to Avoid
-                </h1>
-                <p class="text-sm text-body leading-relaxed">
-                    Even strong candidates can lose thousands by making simple,
-                    avoidable mistakes during salary discussions. Learn what not
-                    to do.
-                </p>
-            </header>
+                <header class="border-b border-hairline pb-4 space-y-2">
+                    <div
+                        class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider"
+                    >
+                        Salary Negotiation Guides • 6 Min Read
+                    </div>
+                    <h1
+                        class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink leading-snug"
+                    >
+                        10 Salary Negotiation Mistakes to Avoid
+                    </h1>
+                    <p class="text-sm text-body leading-relaxed">
+                        Even strong candidates can lose thousands by making simple,
+                        avoidable mistakes during salary discussions. The difference
+                        between a good and a great offer is rarely talent — it is
+                        whether you avoid the errors below. Learn what not to do,
+                        then use our free
+                        <a
+                            href="/pitch-assistant"
+                            class="text-accent-blue hover:underline font-semibold"
+                            >negotiation email generator</a
+                        >
+                        to turn the right approach into a polished counter.
+                    </p>
+                </header>
 
             <!-- Interactive Table of Contents -->
             <div
@@ -367,6 +417,13 @@ import Layout from "../../layouts/Layout.astro";
                         history is illegal. Redirect to market rate for the
                         position.
                     </p>
+                    <p class="pl-11">
+                        If a recruiter or an application form asks anyway, hold
+                        the line politely. Once your current number is in the
+                        conversation, it becomes the ceiling they measure
+                        against — even if that number is years out of date or
+                        from a lower-cost market.
+                    </p>
                     <div
                         class="ml-11 p-3 border-l-2 border-accent-blue bg-accent-blue/5 rounded-r-md text-xs"
                     >
@@ -464,7 +521,107 @@ import Layout from "../../layouts/Layout.astro";
                     </div>
                 </div>
             </div>
+
+            <!-- Avoid them entirely -->
+            <div class="space-y-2 pt-4">
+                <h2 class="text-base font-semibold text-ink">
+                    How to Negotiate Without Making These Salary Mistakes
+                </h2>
+                <p>
+                    The common thread across every mistake above is a lack of
+                    preparation. Before you respond to any offer, spend twenty
+                    minutes gathering three things: the market range for your
+                    role and location (start with our
+                    <a
+                        href="/average-salary-by-role"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >average salary by role</a
+                    >
+                    data), your single best measurable achievement, and the total
+                    picture of the offer — base, bonus, equity, and benefits.
+                </p>
+                <p>
+                    With those three inputs, writing a professional counter email
+                    is straightforward. Our free
+                    <a
+                        href="/pitch-assistant"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >salary negotiation email generator</a
+                    >
+                    turns them into a complete, personalized draft — so you can
+                    focus on the strategy instead of staring at a blank page. If
+                    the offer is unusually low, follow the step-by-step plan in
+                    our guide on
+                    <a
+                        href="/guides/how-to-counter-lowball-offer"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >how to counter a lowball offer</a
+                    >, and if the base is capped, learn how to unlock a
+                    <a
+                        href="/guides/how-to-negotiate-sign-on-bonus"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >sign-on bonus</a
+                    >
+                    instead.
+                </p>
+                <p>
+                    One final habit separates strong negotiators from everyone
+                    else: treat every offer as the first round, not the final
+                    word. Send your counter within 24-48 hours, stay polite and
+                    data-backed, and remember that most employers expect — and
+                    even respect — a candidate who negotiates well.
+                </p>
+            </div>
         </article>
+
+        <!-- FAQ section -->
+        <div
+            class="p-6 border border-hairline bg-canvas rounded-lg shadow-sm space-y-5"
+        >
+            <h2 class="text-base font-semibold text-ink">
+                Frequently Asked Questions About Salary Negotiation Mistakes
+            </h2>
+            <div class="space-y-4 text-sm text-body leading-relaxed">
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        What is the biggest mistake people make in salary negotiation?
+                    </h3>
+                    <p class="text-xs">
+                        Giving the first number and negotiating without market
+                        data. Both cap your ceiling and leave you without
+                        evidence to justify a higher counter.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        Can you lose an offer by negotiating salary?
+                    </h3>
+                    <p class="text-xs">
+                        Almost never, as long as you stay polite and data-backed.
+                        Around 85% of US employers expect candidates to
+                        negotiate.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        How much should I counter to avoid looking unreasonable?
+                    </h3>
+                    <p class="text-xs">
+                        10-20% above the initial offer is standard. Anchor it to
+                        the market range for your role and location.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        What should I do if I already made a salary mistake in the process?
+                    </h3>
+                    <p class="text-xs">
+                        You can still recover. Pivot to market data in the next
+                        conversation and reframe around the role's value.
+                    </p>
+                </div>
+            </div>
+        </div>
 
         <!-- Call to action block -->
         <div
