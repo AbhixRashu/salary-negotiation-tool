@@ -17,6 +17,7 @@ const {
 
 const pageUrl = canonical || Astro.url.pathname;
 const fullUrl = `https://salarypitcher.com${pageUrl.startsWith('/') ? pageUrl : '/' + pageUrl}`;
+const isVercelPreview = Astro.url.hostname.endsWith('vercel.app');
 ---
 
 <!doctype html>
@@ -31,6 +32,7 @@ const fullUrl = `https://salarypitcher.com${pageUrl.startsWith('/') ? pageUrl : 
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		{isVercelPreview && <meta name="robots" content="noindex" />}
 		<link rel="canonical" href={fullUrl} />
 
 		<!-- Open Graph / Facebook -->
