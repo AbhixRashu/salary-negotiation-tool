@@ -1,0 +1,44 @@
+name: Weekly Automated SEO Guide Writer
+
+on:
+  schedule:
+    # Runs every Monday at 9:00 AM UTC (Cloud execution - no local PC needed)
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allows manual trigger from GitHub UI anytime
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Project Dependencies
+        run: npm ci
+
+      - name: Generate New Weekly SEO Guide
+        run: node scripts/auto-generate-seo.js
+
+      - name: Verify Production Astro Build
+        run: npm run build
+
+      - name: Commit and Push New Guide to Live Site
+        run: |
+          git config --global user.name "SalaryPitcher SEO Bot"
+          git config --global user.email "bot@salarypitcher.com"
+          git add .
+          if git diff --staged --quiet; then
+            echo "No new guides to commit."
+          else
+            git commit -m "chore(seo): auto-publish new weekly SEO guide [cloud automated]"
+            git push origin main
+          fi
