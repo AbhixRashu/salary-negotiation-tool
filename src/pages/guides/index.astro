@@ -3,6 +3,48 @@ import Layout from "../../layouts/Layout.astro";
 
 const guides = [
   {
+    title: "How to Negotiate Total Compensation (Not Just Salary)",
+    slug: "negotiate-total-compensation",
+    description:
+      "Master the full compensation package — base salary, equity, bonuses, benefits, and remote perks — using a unified negotiation framework.",
+    readTime: "8 min read",
+  },
+  {
+    title: "How to Respond to a Job Offer You Want to Negotiate",
+    slug: "respond-to-job-offer-negotiate",
+    description:
+      "Step-by-step phone scripts, buy-time emails, and counter-offer templates for the first 48 hours after receiving a job offer.",
+    readTime: "6 min read",
+  },
+  {
+    title: "What to Negotiate Besides Salary in a Job Offer",
+    slug: "what-to-negotiate-besides-salary",
+    description:
+      "Base salary won't budge? 12 high-value non-cash alternatives (signing bonus, PTO, remote days, title) with dollar estimates and scripts.",
+    readTime: "6 min read",
+  },
+  {
+    title: "How to Negotiate Salary With No Competing Offers",
+    slug: "negotiate-salary-no-leverage",
+    description:
+      "No competing offer? No experience? Discover 6 real leverage sources that turn factual market data into a higher starting salary.",
+    readTime: "6 min read",
+  },
+  {
+    title: "How to Negotiate Salary for a Remote Job",
+    slug: "negotiate-salary-remote-job",
+    description:
+      "Master remote location-based pay models, cost-of-living adjustments, home office stipends, and remote-specific counter scripts.",
+    readTime: "6 min read",
+  },
+  {
+    title: "How to Negotiate a Raise or Internal Promotion",
+    slug: "negotiate-raise-promotion-current-job",
+    description:
+      "Specific playbooks, timing advice, and brag-document templates for asking your current manager for more pay without burning bridges.",
+    readTime: "6 min read",
+  },
+  {
     title: "How to Negotiate Salary After a Job Offer",
     slug: "how-to-negotiate-salary-after-job-offer",
     description:
@@ -71,9 +113,9 @@ const guides = [
     <div class="space-y-6 stagger-children reveal">
       {
         guides.map((g, i) => {
-          const icons = ["📝", "🛡️", "🎓", "💰", "❌", "🎯"];
-          const iconLabels = ["Guide", "Guide", "Guide", "Guide", "Guide", "Guide"];
-          const isPopular = i < 2;
+          const icons = ["💎", "⚡", "🎁", "🎯", "💻", "📈", "📝", "🛡️", "🎓", "💰", "❌", "🎯"];
+          const iconLabels = ["Guide", "Guide", "Guide", "Guide", "Guide", "Guide", "Guide", "Guide", "Guide", "Guide", "Guide", "Guide"];
+          const isPopular = i < 3;
           return (
             <div
               class="border border-hairline bg-canvas rounded-lg shadow-sm transition-all duration-300 card-hover tilt-card glow-border overflow-hidden relative lift-on-hover"
@@ -86,7 +128,7 @@ const guides = [
               <div class="p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div class="space-y-2 max-w-xl flex-1">
                   <div class="flex items-center gap-2">
-                    <span class="text-lg" role="img" aria-label={iconLabels[i]}>{icons[i]}</span>
+                    <span class="text-lg" role="img" aria-label={iconLabels[i % iconLabels.length]}>{icons[i % icons.length]}</span>
                     <span class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider">
                       {g.readTime}
                     </span>
