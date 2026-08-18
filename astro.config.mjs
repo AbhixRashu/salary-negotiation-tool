@@ -16,13 +16,6 @@ export default defineConfig({
   },
 
   integrations: [sitemap({
-    customPages: [
-      'https://salarypitcher.com/',
-      'https://salarypitcher.com/pitch-assistant',
-      'https://salarypitcher.com/salary-calculator',
-      'https://salarypitcher.com/offer-comparison',
-      'https://salarypitcher.com/blog',
-    ],
     serialize(item) {
       const url = item.url.replace(/\/$/, '');
       const priorityMap = {
