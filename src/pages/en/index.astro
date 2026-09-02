@@ -1,0 +1,133 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout
+  title={t("seo.title")}
+  description={t("seo.description")}
+>
+  <div class="max-w-5xl mx-auto w-full space-y-16">
+    <!-- Hero Section -->
+    <section class="text-center py-12 sm:py-20 reveal">
+      <span class="inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider bg-accent-blue/10 text-accent-blue border border-accent-blue/20 mb-4">
+        {t("hero.badge")}
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight text-ink mb-4 leading-tight">
+        {t("hero.title")}
+      </h1>
+      <p class="text-body text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+        {t("hero.subtitle")}
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href={`/${lang}/pitch-assistant/`}
+          class="px-8 py-3.5 bg-ink text-on-primary hover:opacity-90 font-medium rounded-full text-sm transition-all cursor-pointer ripple-btn btn-press shadow-sm"
+        >
+          {t("hero.cta")}
+        </a>
+        <div class="flex items-center gap-4 text-xs text-mute font-mono">
+          <span class="flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"></path></svg>
+            {t("hero.noLogin")}
+          </span>
+          <span class="flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            {t("hero.time")}
+          </span>
+          <span class="flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+            {t("hero.aiPowered")}
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Negotiate Section -->
+    <section class="reveal">
+      <div class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm">
+        <span class="inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 mb-4">
+          {t("whyNegotiate.badge")}
+        </span>
+        <h2 class="text-2xl font-semibold text-ink mb-3 tracking-tight">
+          {t("whyNegotiate.title")}
+        </h2>
+        <p class="text-body leading-relaxed mb-6 text-sm sm:text-base">
+          {t("whyNegotiate.body")}
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
+          <div class="flex items-start gap-3 p-3 rounded-md bg-canvas-soft border border-hairline">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"></path></svg>
+            <span class="text-ink">{t("whyNegotiate.point1")}</span>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-md bg-canvas-soft border border-hairline">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"></path></svg>
+            <span class="text-ink">{t("whyNegotiate.point2")}</span>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-md bg-canvas-soft border border-hairline">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"></path></svg>
+            <span class="text-ink">{t("whyNegotiate.point3")}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="reveal space-y-5">
+      <div class="text-center mb-6">
+        <span class="inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider bg-accent-blue/10 text-accent-blue border border-accent-blue/20 mb-2">
+          {t("tools.badge")}
+        </span>
+        <p class="text-body text-sm max-w-lg mx-auto">
+          {t("tools.subtitle")}
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href={`/${lang}/follow-up/`} class="group border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm hover:border-accent-blue/50 hover:shadow-md transition-all duration-200 block">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-9 h-9 rounded-lg bg-accent-blue/10 flex items-center justify-center text-lg group-hover:scale-105 transition-transform">💬</span>
+            <span class="text-[10px] font-mono font-semibold uppercase tracking-wider bg-purple-500/10 text-purple-600 border border-purple-500/20 px-2 py-0.5 rounded-full">New</span>
+          </div>
+          <h3 class="text-base font-semibold text-ink mb-1.5 group-hover:text-accent-blue transition-colors">{t("tools.followUp")}</h3>
+          <p class="text-xs sm:text-sm text-body leading-relaxed">{t("tools.followUpDesc")}</p>
+          <div class="mt-3 text-xs font-mono text-accent-blue group-hover:underline">Try it →</div>
+        </a>
+        <a href={`/${lang}/negotiation-strategy/`} class="group border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm hover:border-accent-blue/50 hover:shadow-md transition-all duration-200 block">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-9 h-9 rounded-lg bg-accent-blue/10 flex items-center justify-center text-lg group-hover:scale-105 transition-transform">🧠</span>
+          </div>
+          <h3 class="text-base font-semibold text-ink mb-1.5 group-hover:text-accent-blue transition-colors">{t("tools.strategy")}</h3>
+          <p class="text-xs sm:text-sm text-body leading-relaxed">{t("tools.strategyDesc")}</p>
+          <div class="mt-3 text-xs font-mono text-accent-blue group-hover:underline">Get your playbook →</div>
+        </a>
+        <a href={`/${lang}/offer-comparison/`} class="group border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm hover:border-accent-blue/50 hover:shadow-md transition-all duration-200 block">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-9 h-9 rounded-lg bg-accent-blue/10 flex items-center justify-center text-lg group-hover:scale-105 transition-transform">📊</span>
+          </div>
+          <h3 class="text-base font-semibold text-ink mb-1.5 group-hover:text-accent-blue transition-colors">{t("tools.compare")}</h3>
+          <p class="text-xs sm:text-sm text-body leading-relaxed">{t("tools.compareDesc")}</p>
+          <div class="mt-3 text-xs font-mono text-accent-blue group-hover:underline">Compare offers →</div>
+        </a>
+        <a href={`/${lang}/salary-calculator/`} class="group border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm hover:border-accent-blue/50 hover:shadow-md transition-all duration-200 block">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-9 h-9 rounded-lg bg-accent-blue/10 flex items-center justify-center text-lg group-hover:scale-105 transition-transform">🧮</span>
+          </div>
+          <h3 class="text-base font-semibold text-ink mb-1.5 group-hover:text-accent-blue transition-colors">{t("tools.calculator")}</h3>
+          <p class="text-xs sm:text-sm text-body leading-relaxed">{t("tools.calculatorDesc")}</p>
+          <div class="mt-3 text-xs font-mono text-accent-blue group-hover:underline">Calculate pay →</div>
+        </a>
+        <a href={`/${lang}/company-salaries/`} class="group border border-hairline bg-canvas p-5 sm:p-6 rounded-lg shadow-sm hover:border-accent-blue/50 hover:shadow-md transition-all duration-200 block">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-9 h-9 rounded-lg bg-accent-blue/10 flex items-center justify-center text-lg group-hover:scale-105 transition-transform">🏢</span>
+          </div>
+          <h3 class="text-base font-semibold text-ink mb-1.5 group-hover:text-accent-blue transition-colors">{t("tools.companies")}</h3>
+          <p class="text-xs sm:text-sm text-body leading-relaxed">{t("tools.companiesDesc")}</p>
+          <div class="mt-3 text-xs font-mono text-accent-blue group-hover:underline">Explore companies →</div>
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

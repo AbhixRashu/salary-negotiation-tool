@@ -1,0 +1,670 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout
+    title="10 Salary Negotiation Mistakes to Avoid — Expert Advice"
+    description="Discover the most common salary negotiation mistakes that cost you thousands. Learn exactly what not to do when negotiating your job offer."
+    breadcrumbs={[
+        { name: "Home", path: "/" },
+        { name: "Guides", path: "/guides" },
+        {
+            name: "10 Salary Negotiation Mistakes to Avoid",
+            path: "/guides/salary-negotiation-mistakes",
+        },
+    ]}
+>
+    <div class="max-w-3xl mx-auto w-full space-y-8">
+        <!-- Reading Progress Bar -->
+        <div id="readingProgress" class="reading-progress"></div>
+
+        <!-- HowTo Schema JSON-LD -->
+        <script is:inline type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "HowTo",
+                "name": "10 Salary Negotiation Mistakes to Avoid",
+                "description": "A list of common pitfalls in salary negotiation and how to avoid them to maximize your compensation.",
+                "step": [
+                    {
+                        "@type": "HowToStep",
+                        "position": 1,
+                        "name": "Giving the First Number",
+                        "text": "Never state your salary expectations first. Let the employer disclose their budget range to preserve your negotiating leverage."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "position": 2,
+                        "name": "Focusing Only on Base Salary",
+                        "text": "Consider the total compensation package including bonuses, equity, benefits, and PTO, not just the base salary figure."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "position": 3,
+                        "name": "Negotiating Without Market Data",
+                        "text": "Always research market rates for your role, location, and experience level before entering negotiations."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "position": 4,
+                        "name": "Accepting the First Offer Immediately",
+                        "text": "Always ask for time to review the offer. Most employers expect some negotiation and build room into their initial offer."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "position": 5,
+                        "name": "Being Rude or Aggressive",
+                        "text": "A polite, professional, data-driven approach earns respect. Aggression or entitlement can cause an offer to be rescinded."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "position": 6,
+                        "name": "Failing to Get the Offer in Writing",
+                        "text": "Always request the full offer details in writing before any negotiation begins. Verbal offers are not binding."
+                    }
+                ]
+            }
+        </script>
+
+        <!-- FAQPage Schema JSON-LD -->
+        <script is:inline type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is the biggest mistake people make in salary negotiation?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Giving the first number and negotiating without market data. Both cap your ceiling: naming a figure too early anchors the conversation low, and asking without research leaves you with no evidence to justify a higher counter."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can you lose an offer by negotiating salary?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Almost never, as long as you stay polite and data-backed. Around 85% of US employers expect candidates to negotiate. Offers are typically only rescinded when a candidate is rude, aggressive, or issues ultimatums."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How much should I counter to avoid looking unreasonable?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "10-20% above the initial offer is standard and rarely seen as unreasonable. Anchor the counter to the market range for your role and location, and show flexibility on total compensation, not just base."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What should I do if I already made a salary mistake in the process?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "You can still recover. If you named a number too early or too low, pivot to market data in the next conversation and reframe around the role's value. Recruiters respond to objective ranges over previous figures."
+                        }
+                    }
+                ]
+            }
+        </script>
+
+        <!-- Breadcrumb -->
+        <a
+            href="/en/guides"
+            class="inline-flex items-center gap-1.5 text-xs font-mono text-mute hover:text-ink transition-colors"
+        >
+            ← Back to Guides
+        </a>
+
+        <!-- Article Content -->
+        <article
+            id="guideArticle"
+            class="border border-hairline bg-canvas p-6 sm:p-8 rounded-lg shadow-sm space-y-6"
+        >
+                <header class="border-b border-hairline pb-4 space-y-2">
+                    <div
+                        class="text-[10px] font-mono font-semibold text-mute uppercase tracking-wider"
+                    >
+                        Salary Negotiation Guides • 6 Min Read
+                    </div>
+                    <h1
+                        class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink leading-snug"
+                    >
+                        10 Salary Negotiation Mistakes to Avoid
+                    </h1>
+                    <p class="text-sm text-body leading-relaxed">
+                        Even strong candidates can lose thousands by making simple,
+                        avoidable mistakes during salary discussions. The difference
+                        between a good and a great offer is rarely talent — it is
+                        whether you avoid the errors below. Learn what not to do,
+                        then use our free
+                        <a
+                            href="/en/pitch-assistant"
+                            class="text-accent-blue hover:underline font-semibold"
+                            >negotiation email generator</a
+                        >
+                        to turn the right approach into a polished counter.
+                    </p>
+                </header>
+
+            <!-- Interactive Table of Contents -->
+            <div
+                class="p-4 border border-hairline rounded-lg bg-canvas-soft-2 text-xs"
+            >
+                <div
+                    class="font-semibold text-ink font-mono uppercase tracking-wider mb-2"
+                >
+                    📋 Table of Contents
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                    <a
+                        href="#mistake-1"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >1. Giving the First Number</a
+                    >
+                    <a
+                        href="#mistake-2"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >2. Focusing Only on Base Salary</a
+                    >
+                    <a
+                        href="#mistake-3"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >3. Without Market Data</a
+                    >
+                    <a
+                        href="#mistake-4"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >4. Accepting First Offer</a
+                    >
+                    <a
+                        href="#mistake-5"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >5. Being Rude or Aggressive</a
+                    >
+                    <a
+                        href="#mistake-6"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >6. Not Getting in Writing</a
+                    >
+                    <a
+                        href="#mistake-7"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >7. Disclosing Current Salary</a
+                    >
+                    <a
+                        href="#mistake-8"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >8. One Component Only</a
+                    >
+                    <a
+                        href="#mistake-9"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >9. Not Leveraging Competing Offers</a
+                    >
+                    <a
+                        href="#mistake-10"
+                        class="text-body hover:text-accent-blue transition-colors"
+                        >10. Accepting from Fear</a
+                    >
+                </div>
+            </div>
+
+            <div class="space-y-6 text-sm text-body leading-relaxed">
+                <div
+                    id="mistake-1"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >1</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Giving the First Number
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Stating your salary range first caps your ceiling. Let
+                        the employer name their budget. If pressed, use the
+                        "broad range" technique or deflect by asking about the
+                        approved range for the role.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-accent-blue bg-accent-blue/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-accent-blue"
+                            >💡 Pro Tip:</span
+                        > Try saying: <em class="text-ink"
+                            >"I'd like to understand the full scope of the role
+                            first. What's the approved budget range for this
+                            position?"</em
+                        >
+                    </div>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-red-500 bg-red-500/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-red-500"
+                            >⚠️ Estimated Cost:</span
+                        > Giving a number too early can cost you <strong
+                            class="text-ink">$5,000 - $15,000</strong
+                        > in lost negotiation leverage.
+                    </div>
+                </div>
+
+                <div
+                    id="mistake-2"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >2</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Focusing Only on Base Salary
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Total compensation includes bonuses, equity/stock
+                        options, 401k matches, health benefits, PTO,
+                        professional development budgets, and remote work
+                        stipends. A lower base salary with strong bonus
+                        potential can outperform a higher base with no upside.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-accent-blue bg-accent-blue/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-accent-blue"
+                            >💡 Pro Tip:</span
+                        > Evaluate the <strong class="text-ink"
+                            >Total Rewards Package</strong
+                        > — a $100K salary with 20% bonus + equity is worth more than
+                        $115K with nothing.
+                    </div>
+                </div>
+
+                <div
+                    id="mistake-3"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >3</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Negotiating Without Market Data
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Use our <a
+                            href="/en/average-salary-by-role"
+                            class="text-accent-blue hover:underline font-semibold"
+                            >Average Salary Table</a
+                        > to anchor your counter in real Bureau of Labor Statistics
+                        data. Employers respond better to objective market benchmarks
+                        than subjective requests.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-accent-blue bg-accent-blue/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-accent-blue"
+                            >💡 Pro Tip:</span
+                        > Check the <strong class="text-ink"
+                            >25th, 50th, and 75th percentiles</strong
+                        > for your role + location. Use the median as your anchor.
+                    </div>
+                </div>
+
+                <div
+                    id="mistake-4"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >4</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Accepting the First Offer Immediately
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Most employers expect you to negotiate. Accepting
+                        immediately leaves money on the table. Always ask for
+                        48-72 hours to review the full package, even if the
+                        offer sounds good.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-accent-blue bg-accent-blue/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-accent-blue"
+                            >💡 Pro Tip:</span
+                        > Say: <em class="text-ink"
+                            >"Thank you! Could you send the full offer details
+                            in writing? I'd like to review the complete package
+                            before responding."</em
+                        >
+                    </div>
+                </div>
+
+                <div
+                    id="mistake-5"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >5</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Being Rude or Aggressive
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Employers can and do rescind offers if candidates behave
+                        unprofessionally. A calm, data-driven approach is always
+                        more effective than demanding ultimatums.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-red-500 bg-red-500/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-red-500"
+                            >⚠️ Warning:</span
+                        > 15% of offers are rescinded due to aggressive negotiating
+                        behavior. Stay professional.
+                    </div>
+                </div>
+
+                <div
+                    id="mistake-6"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >6</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Failing to Get the Offer in Writing
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Verbally agreed numbers can shift during the formal
+                        approval process. Always request a written offer letter
+                        detailing base salary, bonus structure, equity,
+                        benefits, and start date.
+                    </p>
+                </div>
+
+                <div
+                    id="mistake-7"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >7</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Disclosing Your Current Salary
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Past salary is irrelevant to the value of the role you
+                        are pursuing. In many US states, asking for salary
+                        history is illegal. Redirect to market rate for the
+                        position.
+                    </p>
+                    <p class="pl-11">
+                        If a recruiter or an application form asks anyway, hold
+                        the line politely. Once your current number is in the
+                        conversation, it becomes the ceiling they measure
+                        against — even if that number is years out of date or
+                        from a lower-cost market.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-accent-blue bg-accent-blue/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-accent-blue"
+                            >💡 Pro Tip:</span
+                        > Redirect with: <em class="text-ink"
+                            >"I'd prefer to focus on the value of this role.
+                            Based on market data for similar positions, my
+                            target range is..."</em
+                        >
+                    </div>
+                </div>
+
+                <div
+                    id="mistake-8"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >8</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Negotiating Only One Component
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        If base salary is capped, pivot to sign-on bonus,
+                        additional PTO, remote flexibility, or a guaranteed
+                        performance bonus. There are often multiple levers
+                        available.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-accent-blue bg-accent-blue/5 rounded-r-md text-xs"
+                    >
+                        <span class="font-semibold text-accent-blue"
+                            >💡 Pro Tip:</span
+                        > Sign-on bonuses are the easiest lever. Most employers can
+                        approve a <strong class="text-ink"
+                            >one-time payment</strong
+                        > even when base salary is capped.
+                    </div>
+                </div>
+
+                <div
+                    id="mistake-9"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >9</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Not Leveraging Competing Offers
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        If you have a competing offer, mention it politely. It
+                        creates urgency without demanding. "I have another offer
+                        at a comparable level, but this team is my first
+                        choice."
+                    </p>
+                </div>
+
+                <div
+                    id="mistake-10"
+                    class="space-y-2 p-4 -mx-2 rounded-lg hover:bg-canvas-soft/50 transition-colors scroll-mt-24"
+                >
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center font-mono font-bold text-xs shrink-0"
+                            >10</span
+                        >
+                        <h2 class="text-base font-semibold text-ink">
+                            Accepting Too Quickly Out of Fear
+                        </h2>
+                    </div>
+                    <p class="pl-11">
+                        Many candidates accept below-market offers because they
+                        fear the offer will vanish. In reality, rescinding over
+                        a polite, market-backed counter is extremely rare. Use
+                        our free tool to build a confident counter-proposal.
+                    </p>
+                    <div
+                        class="ml-11 p-3 border-l-2 border-emerald-500 bg-emerald-500/5 rounded-r-md text-xs"
+                    >
+                        <span
+                            class="font-semibold text-emerald-600 dark:text-emerald-400"
+                            >✅ Key Takeaway:</span
+                        > Less than <strong class="text-ink"
+                            >2% of offers</strong
+                        > are rescinded over polite, data-backed negotiations. Don't
+                        let fear leave money on the table.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avoid them entirely -->
+            <div class="space-y-2 pt-4">
+                <h2 class="text-base font-semibold text-ink">
+                    How to Negotiate Without Making These Salary Mistakes
+                </h2>
+                <p>
+                    The common thread across every mistake above is a lack of
+                    preparation. Before you respond to any offer, spend twenty
+                    minutes gathering three things: the market range for your
+                    role and location (start with our
+                    <a
+                        href="/en/average-salary-by-role"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >average salary by role</a
+                    >
+                    data), your single best measurable achievement, and the total
+                    picture of the offer — base, bonus, equity, and benefits.
+                </p>
+                <p>
+                    With those three inputs, writing a professional counter email
+                    is straightforward. Our free
+                    <a
+                        href="/en/pitch-assistant"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >salary negotiation email generator</a
+                    >
+                    turns them into a complete, personalized draft — so you can
+                    focus on the strategy instead of staring at a blank page. If
+                    the offer is unusually low, follow the step-by-step plan in
+                    our guide on
+                    <a
+                        href="/en/guides/how-to-counter-lowball-offer"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >how to counter a lowball offer</a
+                    >, and if the base is capped, learn how to unlock a
+                    <a
+                        href="/en/guides/how-to-negotiate-sign-on-bonus"
+                        class="text-accent-blue hover:underline font-semibold"
+                        >sign-on bonus</a
+                    >
+                    instead.
+                </p>
+                <p>
+                    One final habit separates strong negotiators from everyone
+                    else: treat every offer as the first round, not the final
+                    word. Send your counter within 24-48 hours, stay polite and
+                    data-backed, and remember that most employers expect — and
+                    even respect — a candidate who negotiates well.
+                </p>
+            </div>
+        </article>
+
+        <!-- FAQ section -->
+        <div
+            class="p-6 border border-hairline bg-canvas rounded-lg shadow-sm space-y-5"
+        >
+            <h2 class="text-base font-semibold text-ink">
+                Frequently Asked Questions About Salary Negotiation Mistakes
+            </h2>
+            <div class="space-y-4 text-sm text-body leading-relaxed">
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        What is the biggest mistake people make in salary negotiation?
+                    </h3>
+                    <p class="text-xs">
+                        Giving the first number and negotiating without market
+                        data. Both cap your ceiling and leave you without
+                        evidence to justify a higher counter.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        Can you lose an offer by negotiating salary?
+                    </h3>
+                    <p class="text-xs">
+                        Almost never, as long as you stay polite and data-backed.
+                        Around 85% of US employers expect candidates to
+                        negotiate.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        How much should I counter to avoid looking unreasonable?
+                    </h3>
+                    <p class="text-xs">
+                        10-20% above the initial offer is standard. Anchor it to
+                        the market range for your role and location.
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-ink">
+                        What should I do if I already made a salary mistake in the process?
+                    </h3>
+                    <p class="text-xs">
+                        You can still recover. Pivot to market data in the next
+                        conversation and reframe around the role's value.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to action block -->
+        <div
+            class="p-6 border border-hairline bg-canvas rounded-lg shadow-sm flex flex-col sm:flex-row justify-between items-center gap-6"
+        >
+            <div class="space-y-1">
+                <p class="font-semibold text-ink text-sm">
+                    Want to make sure you get it right?
+                </p>
+                <p class="text-xs text-mute">
+                    Generate a confident, professional counter-offer email in
+                    under 2 minutes.
+                </p>
+            </div>
+            <a
+                href="/en/"
+                class="px-5 py-2.5 bg-ink text-canvas hover:bg-ink/90 font-medium rounded-full text-xs transition-colors shrink-0 ripple-btn btn-press magnetic-btn"
+            >
+                <span class="magnetic-inner">Generate Counter-Offer →</span>
+            </a>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    (function () {
+        "use strict";
+        const progressBar = document.getElementById("readingProgress");
+        const article = document.getElementById("guideArticle");
+        if (progressBar && article) {
+            window.addEventListener("scroll", function () {
+                const rect = article.getBoundingClientRect();
+                const totalHeight = article.scrollHeight - window.innerHeight;
+                const scrolled = Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        (window.scrollY - rect.top + window.innerHeight / 2) /
+                            totalHeight,
+                    ),
+                );
+                progressBar.style.width = Math.min(100, scrolled * 100) + "%";
+            });
+        }
+    })();
+</script>

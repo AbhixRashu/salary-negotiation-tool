@@ -1,0 +1,96 @@
+---
+import { languages } from "../i18n/ui";
+import { getLangFromUrl } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split("/").filter(Boolean);
+const pathWithoutLang = segments.length > 1 ? "/" + segments.slice(1).join("/") : "/";
+---
+
+<div class="relative lang-picker-wrap inline-block">
+  <button
+    type="button"
+    class="lang-picker-btn flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-hairline bg-canvas text-xs font-mono text-mute hover:text-ink hover:border-ink/20 transition-colors cursor-pointer"
+    aria-label="Select language"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+  >
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="2" y1="12" x2="22" y2="12"></line>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+    <span>{languages[lang]}</span>
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lang-picker-chevron transition-transform duration-150">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div
+    class="lang-picker-dropdown hidden absolute right-0 mt-2 w-40 bg-canvas border border-hairline rounded-lg shadow-lg z-50 py-1"
+    role="listbox"
+    aria-label="Available languages"
+  >
+    {
+      Object.entries(languages).map(([code, label]) => (
+        <a
+          href={`/${code}${pathWithoutLang}`}
+          class={`block px-3 py-2 text-xs font-sans transition-colors ${
+            code === lang
+              ? "text-accent-blue bg-accent-blue/5 font-semibold"
+              : "text-body hover:text-ink hover:bg-canvas-soft"
+          }`}
+          role="option"
+          aria-selected={code === lang}
+        >
+          {label}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  function initLangPickers() {
+    const pickers = document.querySelectorAll(".lang-picker-wrap");
+    if (!pickers.length) return;
+
+    pickers.forEach((picker) => {
+      const btn = picker.querySelector(".lang-picker-btn");
+      const dropdown = picker.querySelector(".lang-picker-dropdown");
+      const chevron = picker.querySelector(".lang-picker-chevron") as HTMLElement | null;
+      if (!btn || !dropdown) return;
+
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        // Close other dropdowns first
+        document.querySelectorAll(".lang-picker-dropdown").forEach((d) => {
+          if (d !== dropdown) d.classList.add("hidden");
+        });
+        document.querySelectorAll(".lang-picker-btn").forEach((b) => {
+          if (b !== btn) b.setAttribute("aria-expanded", "false");
+        });
+        document.querySelectorAll(".lang-picker-chevron").forEach((c) => {
+          if (c !== chevron) (c as HTMLElement).style.transform = "";
+        });
+
+        const isOpen = !dropdown.classList.contains("hidden");
+        dropdown.classList.toggle("hidden");
+        btn.setAttribute("aria-expanded", (!isOpen).toString());
+        if (chevron) chevron.style.transform = isOpen ? "" : "rotate(180deg)";
+      });
+    });
+
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".lang-picker-dropdown").forEach((d) => d.classList.add("hidden"));
+      document.querySelectorAll(".lang-picker-btn").forEach((b) => b.setAttribute("aria-expanded", "false"));
+      document.querySelectorAll(".lang-picker-chevron").forEach((c) => ((c as HTMLElement).style.transform = ""));
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLangPickers);
+  } else {
+    initLangPickers();
+  }
+</script>
