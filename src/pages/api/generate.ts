@@ -18,7 +18,7 @@ function containsInappropriateContent(text: string): boolean {
 
 
 
-const SYSTEM_PROMPT = "You are the world's most elite salary negotiation strategist — personally hired by Fortune 500 executives to negotiate their compensation packages. You combine Harvard Negotiation Project methodology, FBI Behavioral Analysis negotiation tactics, and deep insider knowledge of HR decision-making. Your emails are so persuasive that recruiters forward them internally as examples of 'how to negotiate professionally.' Every sentence must serve a strategic purpose. Avoid ALL corporate clichés. No introductory commentary — start directly with the salutation.";
+const SYSTEM_PROMPT = "You are an expert executive communications coach. You write short, warm, confident, and highly natural salary negotiation emails for real professionals. Your emails sound 100% human, genuine, and conversational — never robotic, wordy, or packed with corporate buzzwords. Every sentence is concise and purposeful. Start directly with the salutation.";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -166,7 +166,8 @@ async function callGemini(prompt: string, apiKey: string): Promise<string | null
             parts: [{ text: SYSTEM_PROMPT }]
           },
           generationConfig: {
-            maxOutputTokens: 2000
+            maxOutputTokens: 600,
+            temperature: 0.6
           }
         }),
         signal: controller.signal
@@ -207,7 +208,8 @@ async function callClaude(prompt: string, apiKey: string): Promise<string | null
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 2000,
+        max_tokens: 600,
+        temperature: 0.6,
         messages: [{ role: 'user', content: prompt }],
         system: SYSTEM_PROMPT
       }),
@@ -256,167 +258,84 @@ function buildPrompt(params: EmailParams): string {
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Number(n));
   const rangeStr = params.lowRange && params.highRange
     ? `${usd(params.lowRange)} to ${usd(params.highRange)}`
-    : 'market standard rates';
+    : 'market benchmarks';
   const offerStr = params.currentOffer
     ? usd(params.currentOffer)
-    : 'the initial offer';
+    : 'the current offer';
   const targetStr = params.targetSalary
     ? usd(params.targetSalary)
-    : 'a market-aligned figure';
+    : 'a competitive market figure';
 
   const achievementDetail = params.achievement || '';
-  const achievementExtra = params.achievementDetail || '';
 
   const baseContext = `
-## CANDIDATE PROFILE
-- **Role:** ${params.role}
-- **Company:** ${params.company}
-- **Industry:** ${params.industry || 'Not specified'}
-- **Company Size:** ${params.companySize || 'Not specified'}
-- **Location:** ${params.location}
-- **Experience Level Implied:** Senior professional with measurable impact
-- **Current Offer:** ${offerStr}
-- **Target Salary:** ${targetStr}
-- **Market Range (${params.location}):** ${rangeStr}
-- **Key Achievement:** ${achievementDetail}${achievementExtra ? `\n- **Additional Context:** ${achievementExtra}` : ''}
-- **Competing Offer:** ${params.competingOffer ? 'YES — candidate holds an active alternative offer (leverage confirmed)' : 'NO — candidate is negotiating from offer strength alone'}
-- **Desired Tone:** ${params.tone}
+Role: ${params.role}
+Company: ${params.company}
+Location: ${params.location}
+Current Offer: ${offerStr}
+Target Ask: ${targetStr}
+Market Range: ${rangeStr}
+Key Achievement: ${achievementDetail || 'proven track record of measurable business results'}
+Competing Offer: ${params.competingOffer ? 'Yes (holds another competitive offer)' : 'No'}
+Tone: ${params.tone}
 `;
 
-  // If user provided an HR reply email, craft a strategic reply
+  // If user provided an HR reply email, craft a concise, natural reply
   if (params.hrReplyEmail && params.hrReplyEmail.length > 10) {
-    return `You are a world-class salary negotiation strategist — the person CEOs and VPs secretly hire to negotiate their own offers. You have closed $200M+ in compensation packages across FAANG, hedge funds, and startups. You combine Harvard Negotiation Project methodology, CIA negotiation tactics (from the FBI's Behavioral Analysis Program), and real-world recruiting insider knowledge.
+    return `Write a short, natural, human email replying to the recruiter/hiring manager. It must sound like a real person typing a quick, thoughtful email.
 
-## CONTEXT
-
-The candidate received the following email from a recruiter at ${params.company}:
-
---- BEGIN RECRUITER / HR EMAIL ---
-${params.hrReplyEmail.substring(0, 500)}
---- END RECRUITER / HR EMAIL ---
+CONTEXT:
+Recruiter's Message:
+"""
+${params.hrReplyEmail.substring(0, 400)}
+"""
 
 ${baseContext}
 
-## STRATEGIC DIRECTIVES
+STRICT WRITING RULES:
+1. TOTAL LENGTH: 80–120 words MAX. Exactly 2 or 3 short paragraphs.
+2. TONE (${params.tone}):
+   - confident-polite: Warm, respectful, clear, and positive.
+   - assertive: Crisp, decisive, polite, straight to the point.
+   - warm-collaborative: Very friendly, enthusiastic, solution-oriented.
+3. STRUCTURE:
+   - Paragraph 1: Thank them and reference their note warmly.
+   - Paragraph 2: State the counter salary (${targetStr}) clearly, mentioning market rate or key impact naturally in 1 sentence.
+   - Paragraph 3: Express excitement and readiness to finalize ("If we can make this work, I'm ready to move forward right away. Happy to jump on a quick call!").
+4. ZERO CORPORATE ROBOTIC CLICHÉS:
+   - NO "I hope this email finds you well"
+   - NO "I am writing to respectfully request"
+   - NO "At this juncture" / "First and foremost"
+   - NO "Deliberate about where I land"
+5. Start immediately with "Hi [Name]," or "Hello [Name],". End with "Best," or "Best regards," followed by "[Your Name]". No commentary or subject lines.`;
+  }
 
-Write a REPLY to the recruiter's email above. This is not a cold email — it is a professional negotiation move inside an active dialogue.
+  return `Write a concise, natural, human salary negotiation counter-offer email. It must sound like a real professional typing a genuine email from their inbox, NOT an AI or a textbook.
 
-1. **Acknowledge & Validate First** — Open by referencing something specific from the recruiter's message to show engagement and build rapport. Do NOT ignore what they wrote.
+${baseContext}
 
-2. **Apply Advanced Negotiation Frameworks:**
-   - **Anchoring:** The target salary (${targetStr}) is your anchor. Frame it as data-driven, not emotional.
-   - **BATNA Reinforcement:** ${params.competingOffer ? 'Subtly acknowledge the competing offer as market validation of your value, but express genuine preference for ' + params.company + '.' : 'Imply (without stating) that you have options and are being deliberate about where you land.'}
-   - **Value-First Positioning:** Lead with the specific value you bring (the achievement), then connect it to why the target is justified.
-   - **Reciprocity Principle:** Frame the ask as enabling you to deliver maximum value to the company, not as personal gain.
-   - **Liking Principle:** Maintain warm professionalism that makes the recruiter want to advocate for you internally.
-
-3. **Tone Calibration (${params.tone}):**
-   - "confident-polite": Mirror the recruiter's energy. Direct + respectful. Use language like "based on my research" and "I'm confident I can deliver."
-   - "assertive": Shorter sentences. Higher agency. Use "I require" or "my baseline is." Frame it as a decision gate.
-   - "warm-collaborative": Longer, warmer sentences. Use "I'd love to" and "Let's find a way." Emphasize team/culture fit.
-
-4. **Structure Architecture:**
-   - Opening: Thank + specific reference to their email + state you're excited about the role.
-   - Value Paragraph: One tight sentence weaving your achievement into why the target is warranted.
-   - Market Data Sentence: Reference the salary range in ${params.location} to externalize the justification.
-   - The Ask: Clear, specific number (${targetStr}). Not a range — a target.
-   - Closing Call to Action: Specific next step ("happy to discuss on a call this Thursday" or "let me know if you'd like to connect to align on this").
-
-5. **FORBIDDEN PHRASES (zero tolerance):**
+STRICT WRITING RULES:
+1. TOTAL LENGTH: 90–130 words MAX (strictly keep under 140 words). Exactly 2 or 3 short, easy-to-read paragraphs.
+2. TONE (${params.tone}):
+   - confident-polite: Warm, appreciative, clear, and confident.
+   - assertive: Direct, professional, firm on the number, no fluff.
+   - warm-collaborative: Friendly, relationship-first, excited to join.
+3. STRUCTURE:
+   - Paragraph 1: Genuine thanks for the offer and excitement about the ${params.role} role at ${params.company} (1-2 sentences).
+   - Paragraph 2: Weave in the key impact (${achievementDetail ? 'their achievement' : 'past track record'}) and market range (${rangeStr}), then state the exact target figure (${targetStr}) as the desired base salary. (1-2 sentences).
+   ${params.competingOffer ? '- Mention having another competitive offer, but make it clear that ' + params.company + ' is the #1 choice.' : ''}
+   - Paragraph 3: Strong commitment hook ("If we can align around ${targetStr}, I am ready to sign the offer immediately. Let me know if you're open to a quick call to discuss!").
+4. STRICT FORBIDDEN PHRASES (Do NOT use):
    - "I hope this email finds you well"
    - "I am writing to express..."
    - "First and foremost"
-   - "Thank you for this opportunity" (use specific thanks instead)
-   - "At this time" / "At this juncture"
+   - "At this juncture" / "At this point in time"
    - "I would like to respectfully request"
-   - "I am reaching out because..."
-
-6. **PSYCHOLOGICAL TRIGGERS TO EMBED:**
-   - Scarcity: implied without stating ("I'm being deliberate about where I land")
-   - Social Proof: market data as third-party validation
-   - Commitment/Consistency: tie the ask to the company's stated values or the team's goals
-   - Authority: the achievement demonstrates you're a top-performer
-
-7. **FORMATTING RULES:**
-   - Max 220 words
-   - 3-4 short paragraphs (2-3 sentences each)
-   - Start directly with salutation: "Hi [Name]," or "Hello [Name],"
-   - No subject line needed
-   - Copy-paste ready — no meta commentary or explanations`;
-  }
-
-  return `You are a world-class salary negotiation strategist — the person Fortune 500 executives secretly hire to negotiate their own compensation packages. You blend Harvard Negotiation Project methodology, FBI Behavioral Analysis negotiation tactics, and deep insider knowledge of how HR and recruiting teams evaluate counter-offers internally.
-
-## CONTEXT
-
-The candidate is preparing to negotiate their offer with ${params.company} for the ${params.role} position.
-
-${baseContext}
-
-## STRATEGIC DIRECTIVES
-
-Write a complete, copy-paste-ready salary negotiation email. Every word must earn its place. This email will be sent to a real hiring manager or recruiter.
-
-### 1. OPENING STRATEGY
-- Start with direct appreciation for the offer itself (not a generic "thank you for this opportunity")
-- Express genuine excitement about the role and the team's mission
-- Create immediate rapport in 1-2 sentences
-
-### 2. VALUE PROP POSITIONING
-- Weave the candidate's key achievement (${achievementDetail || 'their proven track record'}) into the justification as THE reason the target is justified
-- Connect their past impact to future value for ${params.company}
-- Do NOT list achievements like a resume — tell a mini-story of capability
-
-### 3. MARKET ANCHORING
-- Use the market salary data (${rangeStr}) for ${params.role} in ${params.location} as third-party validation
-- Frame the target (${targetStr}) as aligned with market reality, not greed
-- Externalize the justification: "Based on market data..." not "I feel I deserve..."
-
-### 4. THE ASK — ANCHOR PRECISELY
-- State the target salary clearly: ${targetStr}
-- If ${params.competingOffer ? 'there is a competing offer, frame it as market confirmation of your value: "I have another offer at this level, but ' + params.company + ' is my clear first choice."' : 'there is no competing offer, do NOT fabricate one. Frame the ask around value delivered + market rate alone.'}
-- Never give a range — a range invites them to pick the bottom
-
-### 5. TONE ARCHITECTURE — "${params.tone}"
-${params.tone === 'confident-polite'
-      ? `- **Confident & Polite:** Assertive but warm. Lead with market data, then value, then ask.
-  - Sentence rhythm: declarative statements softened with "I believe" or "I'm confident"
-  - Vocabulary: "based on my research," "the value I bring," "fair alignment"
-  - Energy: calm, assured, collaborative`
-      : params.tone === 'assertive'
-        ? `- **Assertive:** High agency, decisive, minimal qualifiers.
-  - Sentence rhythm: short, declarative. Lead with the decision.
-  - Vocabulary: "I require," "my baseline," "to move forward"
-  - Energy: direct, professional, no apologizing`
-        : `- **Warm & Collaborative:** Relationship-first, friendly but professional.
-  - Sentence rhythm: longer, flowing sentences. Open with shared enthusiasm.
-  - Vocabulary: "I'd love to," "let's find a way," "mutually beneficial"
-  - Energy: warm, team-oriented, flexible within structure`
-    }
-
-### 6. CLOSING — CALL TO ACTION
-- Specific, low-pressure, time-bound next step
-- Examples: "I'm happy to hop on a call this week to discuss." / "Let me know if you're open to connecting briefly."
-- Reiterate enthusiasm for the role
-
-### 7. ZERO-TOLERANCE FORBIDDEN LIST
-Absolutely DO NOT use any of these corporate clichés:
-- "I hope this email finds you well"
-- "I am writing to express my interest"
-- "First and foremost"
-- "Thank you for this opportunity" (use specific thanks instead)
-- "At this time" / "At this juncture" / "At this point in time"
-- "I would like to respectfully request"
-- "I am reaching out to..."
-- "Per my previous conversation"
-
-### 8. FORMAT RULES
-- Max 220 words
-- 3-4 tight paragraphs (2-3 sentences max each)
-- Start directly with "Hi [Hiring Manager Name]," or "Dear [Hiring Manager Name],"
-- End with "Best regards" or "Best" + [Your Name]
-- Copy-paste ready — no explanations, no meta commentary, no introductory text
-- Single spacing between paragraphs`;
+   - "Per my previous conversation"
+5. FORMAT:
+   - Start directly with "Hi [Hiring Manager Name]," or "Dear [Hiring Manager Name],"
+   - End with "Best regards," or "Best," followed by "[Your Name]".
+   - Return ONLY the clean, ready-to-copy email text without any intro, outro, or subject line.`;
 }
 
 function pick<T>(arr: T[]): T {

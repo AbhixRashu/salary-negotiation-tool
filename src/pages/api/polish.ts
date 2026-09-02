@@ -2,40 +2,32 @@ import type { APIRoute } from 'astro';
 
 
 
-const SYSTEM_PROMPT = `You are a world-class salary negotiation strategist. You help professionals refine their negotiation emails to be more persuasive, concise, and effective. You combine Harvard Negotiation Project methodology, FBI behavioral tactics, and real HR insider knowledge.`;
+const SYSTEM_PROMPT = `You are an expert executive communications coach. You refine salary negotiation emails to sound 100% human, natural, warm, and confident. Keep emails concise (80–130 words) and direct. Never use corporate jargon or robot-like transitions.`;
 
 const POLISH_PROMPTS: Record<string, string> = {
-  'more-assertive': `Rewrite the email to be more assertive and decisive:
-- Use stronger verbs ("require" instead of "would like", "need" instead of "hope")
-- Shorten sentences. Remove qualifiers ("I think", "I believe", "maybe")
-- State the target number as a firm baseline, not a request
-- Keep max 220 words, 3-4 paragraphs, direct salutation, professional closing`,
-  'warmer-tone': `Rewrite the email to be warmer and more collaborative:
-- Open with genuine appreciation and relationship-building language
-- Use "we" language, emphasize mutual benefit
-- Soften the ask: "I'd love to find a way to..." instead of "I require"
-- Add a personal touch referencing the team/culture
-- Keep max 220 words, 3-4 paragraphs, direct salutation, professional closing`,
-  'shorten': `Rewrite the email to be concise (max 150 words):
-- Cut all fluff. Keep only: appreciation, one value sentence, market anchor, the ask, next step
-- 2-3 paragraphs max. Every word must earn its place
-- Direct salutation, professional closing`,
-  'add-market-data': `Rewrite the email to incorporate stronger market data justification:
-- Reference specific percentile data for the role/location
-- Mention industry benchmarks, cost-of-living adjustments
-- Frame the target as data-driven, not personal desire
-- Keep max 220 words, 3-4 paragraphs, direct salutation, professional closing`,
-  'fix-grammar': `Polish the email for grammar, flow, and professional tone:
-- Fix any awkward phrasing, run-on sentences, or repetitive words
-- Improve sentence rhythm and transitions
-- Ensure consistent voice throughout
-- Keep the exact same structure and key points
-- Max 220 words, same paragraph count`,
-  'expand-details': `Expand the email with more specific value demonstration:
-- Add 1-2 sentences elaborating on the achievement with concrete metrics
-- Include team size, revenue impact, % improvement, or timeline
-- Keep it credible and specific — no fluff
-- Max 250 words, 4 paragraphs, direct salutation, professional closing`
+  'more-assertive': `Rewrite the email to be slightly more assertive and direct:
+- Use clear, confident phrasing while staying respectful
+- Keep the exact numbers and role intact
+- Strict length: 90–120 words, 2-3 short paragraphs, natural sign-off`,
+  'warmer-tone': `Rewrite the email to be warmer, friendly, and collaborative:
+- Express genuine enthusiasm for the role and team
+- Frame the counter-offer politely and collaboratively
+- Strict length: 90–120 words, 2-3 short paragraphs, natural sign-off`,
+  'shorten': `Rewrite the email to be ultra-concise (under 90 words):
+- Cut all unnecessary filler words
+- Keep only: quick thanks, 1 value/market justification sentence, target number ask, and ready-to-sign next step
+- 2 short paragraphs max`,
+  'add-market-data': `Rewrite the email to weave in market data naturally:
+- Mention local/industry market benchmarks smoothly in 1 clear sentence
+- Frame the target salary as market-aligned
+- Strict length: 90–120 words, 2-3 short paragraphs`,
+  'fix-grammar': `Polish the email for natural flow, correct grammar, and human conversational tone:
+- Remove robotic phrasing or run-on sentences
+- Keep the exact same key points and numbers
+- Keep it under 110 words`,
+  'expand-details': `Enrich the email with 1 concrete detail about impact:
+- Add 1 concise sentence highlighting proven impact or key achievement
+- Keep it credible, direct, and under 130 words total`
 };
 
 export const POST: APIRoute = async ({ request }) => {
