@@ -34,7 +34,7 @@ const glossaryTerms = [
   description="Browse direct, professional definitions explaining salary, gross income, salary meaning, and payroll mechanisms."
   breadcrumbs={[
     { name: "Home", path: "/" },
-    { name: "Glossary", path: "/glossary" },
+    { name: "Glossary", path: "/en/glossary" },
   ]}
 >
   <div class="max-w-3xl mx-auto w-full space-y-10">
@@ -57,7 +57,7 @@ const glossaryTerms = [
             <div class="space-y-2">
               <h2 class="text-base font-semibold text-ink">
                 <a
-                  href={`/glossary/${term.slug}`}
+                  href={`/en/glossary/${term.slug}`}
                   class="hover:text-accent-blue transition-colors"
                 >
                   {term.title}
@@ -67,7 +67,7 @@ const glossaryTerms = [
             </div>
             <div class="mt-4 pt-3 border-t border-hairline flex justify-end">
               <a
-                href={`/glossary/${term.slug}`}
+                href={`/en/glossary/${term.slug}`}
                 class="text-xs font-semibold text-accent-blue hover:text-accent-blue-deep flex items-center gap-1 transition-colors"
               >
                 Read Definition →
