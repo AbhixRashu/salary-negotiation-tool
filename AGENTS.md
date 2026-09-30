@@ -12,6 +12,14 @@ Always Use:
 - Prompt in generate.ts must use world-class negotiation frameworks (Harvard Negotiation, FBI tactics, anchoring, BATNA)
 - Keep zero-tolerance for corporate clichés in generated emails
 - Google Gemini MCP available at opencode.json for AI-assisted development
-- Site uses Astro SSR (output: 'server') with @astrojs/node adapter — NOT static mode
-- Run production: `node --env-file=.env ./dist/server/entry.mjs` after `npm run build` (or use `npm start`)
+- Site uses Astro SSR (output: 'server') with @astrojs/vercel adapter — NOT static mode
+- `npm run build` writes the Build Output API bundle to `.vercel/output`; the Vercel adapter does NOT emit `dist/server/entry.mjs`, so `npm start` cannot serve the site locally — use `npm run dev`
 - .env file required with GEMINI_API_KEY for AI generation (fallback template works without it)
+
+## AdSense / ads.txt Rules
+- `public/ads.txt` must stay exactly `google.com, pub-1132201977628357, DIRECT, f08c47fec0942fa0` — never edit, move or delete it (any change restarts the AdSense review clock)
+- AdSense code (meta `google-adsense-account` + `adsbygoogle.js`) lives in `src/layouts/Layout.astro` and renders only on production (never localhost / *.vercel.app)
+- The CSP in `vercel.json` must keep the Google ad domains in `script-src`/`img-src`/`frame-src`/`connect-src` — `frame-src 'none'` or an allowlist without googlesyndication silently kills all ads
+- AdSense crawls ads.txt at the ROOT domain, so `salarypitcher.com/ads.txt` is the file that matters
+- Main traffic is on the subdomain `govtjob.salarypitcher.com` (separate repo: `sarkari-sahayak`, also ships the same ads.txt) — keep its AdSense code + ads.txt in sync
+- Adding a new third-party script/service? Re-check the CSP in `vercel.json` first, otherwise it will be blocked in production

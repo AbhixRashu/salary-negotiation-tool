@@ -24,6 +24,18 @@ const pageUrl = canonical || Astro.url.pathname;
 const fullUrl = `https://salarypitcher.com${pageUrl.startsWith('/') ? pageUrl : '/' + pageUrl}`;
 const isVercelPreview = Astro.url.hostname.endsWith('vercel.app');
 
+// ─── GOOGLE ADSENSE ────────────────────────────────────────────────────────────
+// Publisher ID: keep in sync with public/ads.txt (google.com, pub-..., DIRECT, ...)
+const ADSENSE_CLIENT = process.env.PUBLIC_ADSENSE_CLIENT || 'ca-pub-1132201977628357';
+// Vercel sets VERCEL_ENV to "production" | "preview" | "development" (undefined when running locally).
+// Ad requests are only made on the live custom domain: loading AdSense from localhost or from
+// *.vercel.app preview URLs would create invalid-traffic signals and can slow down ads.txt verification.
+const vercelEnv = process.env.VERCEL_ENV;
+const showAdsense =
+	vercelEnv !== 'preview' &&
+	vercelEnv !== 'development' &&
+	(vercelEnv === 'production' || Astro.url.hostname === 'salarypitcher.com');
+
 const langKeys = Object.keys(languages) as Array<keyof typeof languages>;
 const langPrefix = `/${lang}`;
 const pathWithoutLang = pageUrl.startsWith(langPrefix) ? pageUrl.slice(langPrefix.length) || '/' : pageUrl;
@@ -37,6 +49,22 @@ const pathWithoutLang = pageUrl.startsWith(langPrefix) ? pageUrl.slice(langPrefi
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+
+		<!-- Google AdSense: verification meta tag + Auto ads loader (production domain only).
+		     Allowed by the Content-Security-Policy in vercel.json. -->
+		{
+			showAdsense && (
+				<>
+					<meta name="google-adsense-account" content={ADSENSE_CLIENT} />
+					<script
+						is:inline
+						async
+						src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+						crossorigin="anonymous"
+					/>
+				</>
+			)
+		}
 
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
